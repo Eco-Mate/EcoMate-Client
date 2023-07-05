@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/white_background">
+
+    <TextView
+        android:id="@+id/access_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이용에 대한 액세스 권한이 없어요."
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/acess_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="앱 설정에서 액세스 권한을 수정할 수 있어요.\n이동하시겠어요?"
+        android:textSize="12dp"
+        android:textColor="@color/gray_1"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/access_title"/>
+    <Button
+        android:id="@+id/access_setting_btn"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="설정하기"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:background="@drawable/primary_background"
+        android:layout_margin="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/acess_content"/>
+    <Button
+        android:id="@+id/access_cancel_btn"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="취소하기"
+        android:textColor="@color/gray_2"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:background="@drawable/gray_background"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/access_setting_btn"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
