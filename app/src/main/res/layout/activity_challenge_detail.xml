@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.challenge.ChallengeDetailActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/baseline_arrow_back_24"
+            app:title="App Title" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/challengeDetailLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar">
+
+        <ImageView
+            android:id="@+id/challengeDetailIv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            tools:src="@drawable/ic_launcher_background" />
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/challengeProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:progress="30"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:indicatorColor="@color/orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/challengeDetailLayout">
+
+    </com.google.android.material.progressindicator.LinearProgressIndicator>
+
+    <TextView
+        android:id="@+id/challengeProgressDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="10sp"
+
+        app:layout_constraintEnd_toEndOf="@id/challengeProgressBar"
+        app:layout_constraintTop_toBottomOf="@id/challengeProgressBar"
+        tools:text="30% 달성 (18회/60회)" />
+
+    <TextView
+        android:id="@+id/challengeContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/challengeProgressDes"
+        tools:text="배달 음식 용기, 아직도 플라스틱을 사용하시나요?\n용기내 챌린지는 식품이나 음료 포장 시 발생하는 플라스틱, 비닐봉지 등 일회용품 사용을 줄이자는 취지에서 다회용기, 물병, 천 주머니 등을 직접 챙겨가 담아오는 캠페인이다.'용기(勇氣)'를 내 '용기(容器)'를 가져가자는 의미를 담고 있다." />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/div"
+        android:backgroundTint="#D2D2D2"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="@id/challengeContent"
+        app:layout_constraintTop_toBottomOf="@id/challengeContent"
+        android:layout_height="10dp"/>
+    
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="#05000000"
+        app:cardCornerRadius="8dp"
+
+        app:layout_constraintStart_toStartOf="@id/challengeContent"
+        app:layout_constraintTop_toBottomOf="@id/div">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="반드시 확인해주세요! (인증관련)"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="주의사항에 대해 적어줍니다.\n주의사항에 대해 적어줍니다.\n주의사항에 대해 적어줍니다.\n주의사항에 대해 적어줍니다.\n" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/challengeDetailSelectBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/black"
+        android:text="도전하기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
