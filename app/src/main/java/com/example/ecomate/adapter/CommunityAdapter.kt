@@ -4,13 +4,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ecomate.databinding.PostItemBinding
+import com.example.ecomate.databinding.ItemPostBinding
 
-class CommunityViewHolder(val binding: PostItemBinding): RecyclerView.ViewHolder(binding.root)
+class CommunityViewHolder(val binding: ItemPostBinding): RecyclerView.ViewHolder(binding.root)
 
 class CommunityAdapter(val dataSet: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CommunityViewHolder(PostItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return CommunityViewHolder(ItemPostBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
