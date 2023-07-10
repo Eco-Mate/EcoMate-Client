@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/post_back_btn"
+            android:id="@+id/back_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/back_arrow"
@@ -31,7 +31,7 @@
             android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            app:layout_constraintStart_toEndOf="@id/post_back_btn"
+            app:layout_constraintStart_toEndOf="@id/back_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -55,7 +55,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
         <EditText
-            android:id="@+id/post_title_input"
+            android:id="@+id/post_title_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="제목 입력"
@@ -86,7 +86,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
         <EditText
-            android:id="@+id/post_challenge_input"
+            android:id="@+id/post_challenge_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="챌린지 입력"
@@ -125,7 +125,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <EditText
-            android:id="@+id/post_content_input"
+            android:id="@+id/post_content_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="내용 입력"

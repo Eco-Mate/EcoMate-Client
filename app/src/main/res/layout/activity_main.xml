@@ -26,26 +26,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="홈"
-            android:icon="@drawable/home"/>
+            android:icon="@drawable/home_menu"/>
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="커뮤니티"
-            android:icon="@drawable/community"/>
+            android:icon="@drawable/community_menu"/>
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="에코챗"
-            android:icon="@drawable/chat"/>
+            android:icon="@drawable/chat_menu"/>
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="에코맵"
-            android:icon="@drawable/map"/>
+            android:icon="@drawable/map_menu"/>
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내정보"
-            android:icon="@drawable/profile"/>
+            android:icon="@drawable/profile_menu"/>
     </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

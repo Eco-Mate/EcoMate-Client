@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     "커뮤니티" -> {
                         // 나중에 Back-end에서 데이터 받아올 부분
                         val dataSet = mutableListOf<String>()
-                        dataSet.add("돌연변이")
+                        dataSet.add("지구지킴이")
 
                         transaction.replace(R.id.tab_content, CommunityFragment(dataSet))
                     }

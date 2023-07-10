@@ -33,7 +33,7 @@ class CommunityFragment(val dataSet: MutableList<String>) : Fragment() {
 
         binding.moreOption.setOnClickListener{
             if (isOpened) {
-                binding.moreOption.setImageResource(R.drawable.more_white)
+                binding.moreOption.setImageResource(R.drawable.white_more)
                 optionSearchAniIn.start()
                 optionAddAniIn.start()
             } else {

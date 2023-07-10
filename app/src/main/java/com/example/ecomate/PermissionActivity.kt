@@ -1,4 +1,4 @@
-package com.example.ecomate.fragment
+package com.example.ecomate
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Button
-        android:id="@+id/signup_back_btn"
+        android:id="@+id/back_btn"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:background="@drawable/back_arrow"
@@ -50,7 +50,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/star"/>
+                android:background="@drawable/red_star"/>
         </LinearLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/signup_id_input"
@@ -116,7 +116,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/star"/>
+                android:background="@drawable/red_star"/>
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -137,7 +137,7 @@
             android:background="@drawable/gray_background_2">
 
             <EditText
-                android:id="@+id/signup_password_editText_1"
+                android:id="@+id/signup_password_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="비밀번호"
@@ -162,7 +162,7 @@
             android:background="@drawable/gray_background_2">
 
             <EditText
-                android:id="@+id/signup_password_editText_2"
+                android:id="@+id/signup_password_check_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="비밀번호 확인"
@@ -202,7 +202,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/star"/>
+                android:background="@drawable/red_star"/>
         </LinearLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/signup_nickname_input"
@@ -275,7 +275,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/star"/>
+                android:background="@drawable/red_star"/>
         </LinearLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/signup_email_input"
