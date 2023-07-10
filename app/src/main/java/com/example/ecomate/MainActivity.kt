@@ -3,14 +3,12 @@ package com.example.ecomate
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.ecomate.databinding.ActivityMainBinding
 import com.example.ecomate.fragment.ChatFragment
 import com.example.ecomate.fragment.CommunityFragment
 import com.example.ecomate.fragment.HomeFragment
 import com.example.ecomate.fragment.MapFragment
-import com.example.ecomate.fragment.ProfileFragment
+import com.example.ecomate.fragment.MyProfileFragment
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
@@ -37,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     "에코챗" -> transaction.replace(R.id.tab_content, ChatFragment())
                     "에코맵" -> transaction.replace(R.id.tab_content, MapFragment())
-                    "내정보" -> transaction.replace(R.id.tab_content, ProfileFragment())
+                    "내정보" -> transaction.replace(R.id.tab_content, MyProfileFragment())
                 }
                 transaction.commit()
             }
