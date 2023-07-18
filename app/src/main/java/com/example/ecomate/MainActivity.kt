@@ -9,6 +9,7 @@ import com.example.ecomate.fragment.CommunityFragment
 import com.example.ecomate.fragment.HomeFragment
 import com.example.ecomate.fragment.MapFragment
 import com.example.ecomate.fragment.MyProfileFragment
+import com.example.ecomate.ui.challenge.HomeFragment
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +26,9 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val transaction = supportFragmentManager.beginTransaction()
                 when(tab?.text) {
-                    "홈" -> transaction.replace(R.id.tab_content, HomeFragment())
+                    "홈" -> transaction.replace(R.id.tab_content,
+                        com.example.ecomate.ui.challenge.HomeFragment()
+                    )
                     "커뮤니티" -> {
                         // 나중에 Back-end에서 데이터 받아올 부분
                         val dataSet = mutableListOf<String>()
