@@ -1,4 +1,4 @@
-package com.example.ecomate.ui.challenge
+package com.example.ecomate.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.ecomate.adapter.ChallengeAdapter
+import com.example.ecomate.ui.adapter.ChallengeAdapter
 import com.example.ecomate.databinding.FragmentHomeBinding
+import com.example.ecomate.ui.challenge.ChallengeDetailActivity
 import com.example.ecomate.viewmodel.ChallengeViewModel
 
 class HomeFragment : Fragment() {

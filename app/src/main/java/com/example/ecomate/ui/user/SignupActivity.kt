@@ -1,13 +1,13 @@
-package com.example.ecomate
+package com.example.ecomate.ui.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.ecomate.databinding.ActivityLoginBinding
+import com.example.ecomate.databinding.ActivitySignupBinding
 
-class LoginActivity : AppCompatActivity() {
+class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityLoginBinding.inflate(layoutInflater)
+        val binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
     }

@@ -1,4 +1,4 @@
-package com.example.ecomate.adapter
+package com.example.ecomate.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

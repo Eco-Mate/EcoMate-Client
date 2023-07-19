@@ -1,4 +1,4 @@
-package com.example.ecomate.fragment
+package com.example.ecomate.ui.community
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecomate.R
-import com.example.ecomate.adapter.CommunityAdapter
 import com.example.ecomate.databinding.FragmentCommunityBinding
+import com.example.ecomate.ui.adapter.CommunityAdapter
 
 class CommunityFragment(val dataSet: MutableList<String>) : Fragment() {
     lateinit var binding: FragmentCommunityBinding

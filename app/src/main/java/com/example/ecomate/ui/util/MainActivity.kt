@@ -1,14 +1,15 @@
-package com.example.ecomate
+package com.example.ecomate.ui.util
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.ecomate.R
 import com.example.ecomate.databinding.ActivityMainBinding
-import com.example.ecomate.fragment.ChatFragment
-import com.example.ecomate.fragment.CommunityFragment
-import com.example.ecomate.fragment.MapFragment
-import com.example.ecomate.fragment.MyProfileFragment
-import com.example.ecomate.ui.challenge.HomeFragment
+import com.example.ecomate.ui.chat.ChatFragment
+import com.example.ecomate.ui.community.CommunityFragment
+import com.example.ecomate.ui.map.MapFragment
+import com.example.ecomate.ui.myprofile.MyProfileFragment
+import com.example.ecomate.ui.home.HomeFragment
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
@@ -25,8 +26,9 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val transaction = supportFragmentManager.beginTransaction()
                 when(tab?.text) {
-                    "홈" -> transaction.replace(R.id.tab_content,
-                        com.example.ecomate.ui.challenge.HomeFragment()
+                    "홈" -> transaction.replace(
+                        R.id.tab_content,
+                        HomeFragment()
                     )
                     "커뮤니티" -> {
                         // 나중에 Back-end에서 데이터 받아올 부분

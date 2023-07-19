@@ -1,4 +1,4 @@
-package com.example.ecomate.fragment
+package com.example.ecomate.ui.chat
 
 import android.os.Bundle
 import android.view.LayoutInflater
