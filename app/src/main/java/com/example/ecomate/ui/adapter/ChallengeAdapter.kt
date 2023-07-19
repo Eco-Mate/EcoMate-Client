@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ecomate.databinding.ItemChanllengeBinding
+import com.example.ecomate.databinding.ItemChallengeBinding
 import com.example.ecomate.model.Challenge
 
 class ChallengeAdapter :
     ListAdapter<Challenge, ChallengeAdapter.ChallengeViewHolder>(ChallengeDiffCallback()) {
-    lateinit var binding: ItemChanllengeBinding
+    lateinit var binding: ItemChallengeBinding
 
-    inner class ChallengeViewHolder(private val binding: ItemChanllengeBinding) :
+    inner class ChallengeViewHolder(private val binding: ItemChallengeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(challenge: Challenge) {
             binding.apply {
@@ -27,7 +27,7 @@ class ChallengeAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeViewHolder {
         binding =
-            ItemChanllengeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemChallengeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ChallengeViewHolder(binding)
     }
 
