@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/baseline_arrow_back_24"
-            tools:title="챌린지 등록" />
+            app:title="@string/edit_challenge" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
@@ -40,7 +40,7 @@
         android:layout_margin="10dp"
         android:textSize="14sp"
         android:background="@drawable/round_tv"
-        android:hint="챌린지 이름을 적어주세요"
+        android:hint="@string/hint_challenge_title"
         android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/editIv" />
 
@@ -52,7 +52,7 @@
         android:gravity="top"
         android:textSize="14sp"
         android:background="@drawable/round_tv"
-        android:hint="챌린지 내용을 적어주세요"
+        android:hint="@string/hint_challenge_content"
         android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/editTitle" />
 
@@ -73,7 +73,7 @@
         android:gravity="top"
         android:textSize="14sp"
         android:background="@drawable/round_tv"
-        android:hint="주의 사항을 적어주세요"
+        android:hint="@string/hint_challenge_warning"
         android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/div" />
 
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:backgroundTint="@color/black"
-        android:text="도전하기"
+        android:text="@string/edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
