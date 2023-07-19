@@ -63,7 +63,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/challengeAllRv"
+                android:id="@+id/challengeProgressRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -109,8 +109,8 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/challengeAllRv"
-                app:layout_constraintTop_toBottomOf="@id/challengeAllRv">
+                app:layout_constraintStart_toStartOf="@id/challengeProgressRv"
+                app:layout_constraintTop_toBottomOf="@id/challengeProgressRv">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/challengeProgressRv"
+                android:id="@+id/challengeAllRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -146,8 +146,8 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/challengeProgressRv"
-                app:layout_constraintTop_toBottomOf="@id/challengeProgressRv">
+                app:layout_constraintStart_toStartOf="@id/challengeAllRv"
+                app:layout_constraintTop_toBottomOf="@id/challengeAllRv">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -187,7 +187,5 @@
         android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintMarginBottom="16dp"
-        app:layout_constraintMarginEnd="16dp"
         app:tint="@null" />
 </androidx.constraintlayout.widget.ConstraintLayout>

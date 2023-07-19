@@ -6,7 +6,6 @@ import android.util.Log
 import com.example.ecomate.databinding.ActivityMainBinding
 import com.example.ecomate.fragment.ChatFragment
 import com.example.ecomate.fragment.CommunityFragment
-import com.example.ecomate.fragment.HomeFragment
 import com.example.ecomate.fragment.MapFragment
 import com.example.ecomate.fragment.MyProfileFragment
 import com.example.ecomate.ui.challenge.HomeFragment
