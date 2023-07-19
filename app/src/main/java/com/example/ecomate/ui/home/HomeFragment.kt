@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.ecomate.ApplicationClass.Companion.CHALLENGE_ID
 import com.example.ecomate.databinding.FragmentHomeBinding
 import com.example.ecomate.ui.adapter.HomeChallengeAllAdapter
 import com.example.ecomate.ui.challenge.ChallengeActivity
@@ -48,7 +49,7 @@ class HomeFragment : Fragment() {
             object : HomeChallengeAllAdapter.DetailHomeChallengeListener {
                 override fun onClick(challengeId: Int) {
                     val intent = Intent(activity, ChallengeDetailActivity::class.java)
-                    intent.putExtra("challengeId", challengeId)
+                    intent.putExtra(CHALLENGE_ID, challengeId)
                     startActivity(intent)
                 }
             }

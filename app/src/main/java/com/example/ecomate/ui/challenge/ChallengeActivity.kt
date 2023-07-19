@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ecomate.ApplicationClass.Companion.CHALLENGE_ID
+import com.example.ecomate.R
 import com.example.ecomate.databinding.ActivityChallengeBinding
 import com.example.ecomate.ui.adapter.ChallengeAdapter
 import com.example.ecomate.viewmodel.HomeViewModel
@@ -30,7 +32,7 @@ class ChallengeActivity : AppCompatActivity() {
                         this@ChallengeActivity,
                         ChallengeDetailActivity::class.java
                     )
-                    intent.putExtra("challengeId", challengeId)
+                    intent.putExtra(CHALLENGE_ID, challengeId)
                     startActivity(intent)
                 }
             }
@@ -46,8 +48,6 @@ class ChallengeActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }
-        binding.toolbar.title = "전체 챌린지"
-
-
+        binding.toolbar.title = resources.getString(R.string.all_challenge)
     }
 }

@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ecomate.R
 import com.example.ecomate.databinding.ItemChallengeAllBinding
 import com.example.ecomate.model.Challenge
 
 class HomeChallengeAllAdapter :
-    ListAdapter<Challenge, HomeChallengeAllAdapter.HomeChallengeViewHolder>(HomeChallengeDiffCallback()) {
+    ListAdapter<Challenge, HomeChallengeAllAdapter.HomeChallengeViewHolder>(
+        HomeChallengeDiffCallback()
+    ) {
     private lateinit var binding: ItemChallengeAllBinding
 
     inner class HomeChallengeViewHolder(private val binding: ItemChallengeAllBinding) :
@@ -17,7 +20,10 @@ class HomeChallengeAllAdapter :
         fun bind(challenge: Challenge) {
             binding.apply {
                 challengeAllTitle.text = challenge.challengeTitle
-                challengeAllPeople.text = "${challenge.goalCnt}명 도전 중"
+                challengeAllPeople.text = String.format(
+                    root.context.resources.getString(R.string.trying),
+                    challenge.goalCnt
+                )
                 root.setOnClickListener {
                     detailHomeChallengeListener.onClick(challengeId = challenge.challengeId)
                 }
