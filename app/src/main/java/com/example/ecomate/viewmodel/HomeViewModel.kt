@@ -8,7 +8,7 @@ import com.example.ecomate.model.Challenge
 import com.example.ecomate.network.RetrofitUtil
 import kotlinx.coroutines.launch
 
-class ChallengeViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
     private val _challengeList = MutableLiveData<List<Challenge>>()
     val challengeList: LiveData<List<Challenge>>
         get() = _challengeList
@@ -19,7 +19,7 @@ class ChallengeViewModel : ViewModel() {
 
     private fun getAllChallenge() {
         viewModelScope.launch {
-            _challengeList.value = RetrofitUtil.challengeApi.getAllChallenges()
+            _challengeList.value = RetrofitUtil.challengeApi.getAllChallenges().response
         }
     }
 }

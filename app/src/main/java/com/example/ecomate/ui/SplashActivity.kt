@@ -1,4 +1,4 @@
-package com.example.ecomate.ui.util
+package com.example.ecomate.ui
 
 import android.content.Intent
 import android.os.Bundle

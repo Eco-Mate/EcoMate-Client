@@ -15,10 +15,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.util.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false"/>
         <activity
-            android:name=".ui.util.SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/Splash"
             android:exported="true">
             <intent-filter>
