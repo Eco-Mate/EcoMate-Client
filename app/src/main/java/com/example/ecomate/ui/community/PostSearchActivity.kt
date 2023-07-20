@@ -1,4 +1,4 @@
-package com.example.ecomate
+package com.example.ecomate.ui.community
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

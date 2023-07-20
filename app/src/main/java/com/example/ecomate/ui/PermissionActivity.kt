@@ -1,13 +1,13 @@
-package com.example.ecomate
+package com.example.ecomate.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.ecomate.databinding.ActivityLoginBinding
+import com.example.ecomate.databinding.ActivityPermissionBinding
 
-class LoginActivity : AppCompatActivity() {
+class PermissionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityLoginBinding.inflate(layoutInflater)
+        val binding = ActivityPermissionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
     }

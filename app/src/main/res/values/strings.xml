@@ -2,4 +2,15 @@
     <string name="app_name">EcoMate</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="all_challenge">전체 챌린지</string>
+    <string name="trying">%d명 도전 중</string>
+    <string name="try_challenge">도전하기</string>
+    <string name="edit_challenge">챌린지 등록</string>
+    <string name="hint_challenge_title">챌린지 이름을 적어주세요</string>
+    <string name="hint_challenge_content">챌린지 내용을 적어주세요</string>
+    <string name="hint_challenge_warning">주의 사항을 적어주세요</string>
+    <string name="edit">등록</string>
+    <string name="finish_challenge_msg">완료한 챌린지 보러 가기 ≫</string>
+    <string name="progress_challenge_msg">진행 중 챌린지</string>
+
 </resources>
