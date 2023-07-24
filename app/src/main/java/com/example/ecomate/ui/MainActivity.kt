@@ -30,13 +30,7 @@ class MainActivity : AppCompatActivity() {
                         R.id.tab_content,
                         HomeFragment()
                     )
-                    "커뮤니티" -> {
-                        // 나중에 Back-end에서 데이터 받아올 부분
-                        val dataSet = mutableListOf<String>()
-                        dataSet.add("지구지킴이")
-
-                        transaction.replace(R.id.tab_content, CommunityFragment(dataSet))
-                    }
+                    "커뮤니티" -> transaction.replace(R.id.tab_content, CommunityFragment())
                     "에코챗" -> transaction.replace(R.id.tab_content, ChatFragment())
                     "에코맵" -> transaction.replace(R.id.tab_content, MapFragment())
                     "내정보" -> transaction.replace(R.id.tab_content, MyProfileFragment())
