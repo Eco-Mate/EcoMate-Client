@@ -36,6 +36,15 @@
         <activity
             android:name=".ui.challenge.ChallengeActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.community.PostSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.community.PostAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.community.PostDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
