@@ -2,8 +2,9 @@ package com.example.ecomate.network
 
 import com.example.ecomate.model.BoardList
 import retrofit2.http.GET
+import retrofit2.http.Query
 
-interface PostApi {
+interface BoardApi {
     @GET("v1/board")
-    suspend fun getAllPosts(): BoardList
+    suspend fun getAllBoards(): BoardList
 }

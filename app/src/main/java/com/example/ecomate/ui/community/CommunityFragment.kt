@@ -9,15 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ecomate.ApplicationClass.Companion.BOARD_ID
+import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.R
 import com.example.ecomate.databinding.FragmentCommunityBinding
 import com.example.ecomate.model.Board
 import com.example.ecomate.ui.adapter.CommunityBoardAllAdapter
 import com.example.ecomate.viewmodel.CommunityViewModel
+import java.io.Serializable
 
 class CommunityFragment : Fragment() {
     lateinit var binding: FragmentCommunityBinding
@@ -41,32 +41,33 @@ class CommunityFragment : Fragment() {
 
     private fun setUi() {
         // FloatingActionButton 컨트롤
-        val optionAddAniOut = ObjectAnimator.ofFloat(binding.optionAdd, "translationY", -300f).setDuration(500)
-        val optionAddAniIn = ObjectAnimator.ofFloat(binding.optionAdd, "translationY", 0f).setDuration(500)
+        val boardAddAniOut = ObjectAnimator.ofFloat(binding.boardAdd, "translationY", -300f).setDuration(500)
+        val boardAddAniIn = ObjectAnimator.ofFloat(binding.boardAdd, "translationY", 0f).setDuration(500)
 
-        val optionSearchAniOut = ObjectAnimator.ofFloat(binding.optionSearch, "translationY", -150f).setDuration(500)
-        val optionSearchAniIn = ObjectAnimator.ofFloat(binding.optionSearch, "translationY", 0f).setDuration(500)
+        val boardSearchAniOut = ObjectAnimator.ofFloat(binding.boardSearch, "translationY", -150f).setDuration(500)
+        val boardSearchAniIn = ObjectAnimator.ofFloat(binding.boardSearch, "translationY", 0f).setDuration(500)
 
-        binding.moreOption.setOnClickListener{
-            if (isOpened) {
-                binding.moreOption.setImageResource(R.drawable.white_more)
-                optionSearchAniIn.start()
-                optionAddAniIn.start()
-            } else {
-                binding.moreOption.setImageResource(R.drawable.down_arrow)
-                optionSearchAniOut.start()
-                optionAddAniOut.start()
+        binding.apply {
+            moreOption.setOnClickListener {
+                if (isOpened) {
+                    binding.moreOption.setImageResource(R.drawable.white_more)
+                    boardSearchAniIn.start()
+                    boardAddAniIn.start()
+                } else {
+                    binding.moreOption.setImageResource(R.drawable.white_down_arrow)
+                    boardSearchAniOut.start()
+                    boardAddAniOut.start()
+                }
+                isOpened = !isOpened
             }
-            isOpened = !isOpened
-        }
 
-        // FloatingActionButton 클릭 이벤트
-        binding.optionSearch.setOnClickListener {
-            startActivity(Intent(activity, PostSearchActivity::class.java))
-        }
+            boardAdd.setOnClickListener {
+                startActivity(Intent(activity, BoardAddActivity::class.java))
+            }
+            boardSearch.setOnClickListener {
+                startActivity(Intent(activity, BoardSearchActivity::class.java))
+            }
 
-        binding.optionAdd.setOnClickListener {
-            startActivity(Intent(activity, PostAddActivity::class.java))
         }
     }
 
@@ -75,22 +76,22 @@ class CommunityFragment : Fragment() {
             val communityBoardAllAdapter = CommunityBoardAllAdapter(it)
             communityBoardAllAdapter.detailBoardListener =
                 object : CommunityBoardAllAdapter.DetailBoardListener {
-                    override fun onClick(boardId: Int) {
-                        val intent = Intent(activity, PostDetailActivity::class.java)
-                        intent.putExtra(BOARD_ID, boardId)
+                    override fun onClick(board: Board) {
+                        val intent = Intent(activity, BoardDetailActivity::class.java)
+                        intent.putExtra(BOARD_ITEM, board)
                         startActivity(intent)
                     }
                 }
 
-            binding.recyclerView.layoutManager = LinearLayoutManager(view.context)
-
-            binding.recyclerView.adapter = communityBoardAllAdapter
-
-            binding.recyclerView.addItemDecoration(
-                DividerItemDecoration(
-                    view.context,
-                    LinearLayoutManager.VERTICAL)
-            )
+            binding.boardRv.apply {
+                layoutManager = LinearLayoutManager(view.context)
+                adapter = communityBoardAllAdapter
+                addItemDecoration(
+                    DividerItemDecoration(
+                        view.context,
+                        LinearLayoutManager.VERTICAL)
+                )
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ class ApplicationClass : Application() {
 
     companion object {
         const val CHALLENGE_ID = "challengeId"
-        const val BOARD_ID = "boardId"
+        const val BOARD_ITEM = "boardItem"
         const val SERVER_URL = "http://15.164.103.242:8081/api/"
         lateinit var retrofit: Retrofit
 

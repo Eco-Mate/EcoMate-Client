@@ -6,7 +6,7 @@
     android:layout_margin="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/profile"
+        android:id="@+id/profile_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -17,7 +17,7 @@
             android:id="@+id/profile_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/profile_image_1"
+            android:src="@drawable/profile_image_1"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
             app:layout_constraintStart_toEndOf="@id/profile_img"
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
-            android:id="@+id/upload_date"
+            android:id="@+id/board_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2022.05.28"
@@ -46,7 +46,7 @@
             app:layout_constraintStart_toEndOf="@id/profile_img"
             app:layout_constraintTop_toBottomOf="@id/profile_nickname" />
         <Button
-            android:id="@+id/post_setting"
+            android:id="@+id/profile_more"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/black_more"
@@ -57,16 +57,16 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/post_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/post_img_ex"
+        android:id="@+id/board_img"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:src="@drawable/post_img_ex"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile"/>
+        app:layout_constraintTop_toBottomOf="@id/profile_box"/>
     <TextView
-        android:id="@+id/post_content"
+        android:id="@+id/board_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="비건 음식점을 처음으로 가봤다."
@@ -83,6 +83,6 @@
         android:layout_marginBottom="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/post_img"
+        app:layout_constraintTop_toBottomOf="@id/board_img"
         app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
