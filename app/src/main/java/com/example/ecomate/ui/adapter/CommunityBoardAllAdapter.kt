@@ -1,40 +1,45 @@
 package com.example.ecomate.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ecomate.databinding.ItemPostBinding
+import com.bumptech.glide.Glide
+import com.example.ecomate.databinding.ItemBoardBinding
 import com.example.ecomate.model.Board
 
-class CommunityBoardViewHolder(val binding: ItemPostBinding): RecyclerView.ViewHolder(binding.root)
+class CommunityBoardViewHolder(val binding: ItemBoardBinding): RecyclerView.ViewHolder(binding.root)
 
 class CommunityBoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private lateinit var binding: ItemPostBinding
+    private lateinit var binding: ItemBoardBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ItemBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CommunityBoardViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d("RecyclerView", "onBindViewHolder(): $position")
-        binding.postContent.text = dataSet[position].boardContent
-
-        binding.root.setOnClickListener {
-            detailBoardListener.onClick(boardId = dataSet[position].boardId)
+        binding.apply {
+            profileNickname.text = dataSet[position].nickname
+            boardDate.text = dataSet[position].createdDate.substring(0,4) +
+                    "." + dataSet[position].createdDate.substring(5,7) +
+                    "." + dataSet[position].createdDate.substring(8,10)
+            Glide.with(holder.itemView)
+                .load(dataSet[position].image)
+                .into(boardImg)
+            boardContent.text = dataSet[position].boardContent
+            root.setOnClickListener {
+                detailBoardListener.onClick(item = dataSet[position])
+            }
         }
+
     }
 
     override fun getItemCount(): Int {
-        Log.d("RecyclerView", "init data size: ${dataSet.size}")
         return dataSet.size
     }
 
     interface DetailBoardListener {
-        fun onClick(boardId: Int)
+        fun onClick(item: Board)
     }
 
     lateinit var detailBoardListener: DetailBoardListener

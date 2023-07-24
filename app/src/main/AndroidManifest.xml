@@ -37,13 +37,13 @@
             android:name=".ui.challenge.ChallengeActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.community.PostSearchActivity"
+            android:name=".ui.community.BoardSearchActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.community.PostAddActivity"
+            android:name=".ui.community.BoardAddActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.community.PostDetailActivity"
+            android:name=".ui.community.BoardDetailActivity"
             android:exported="false" />
     </application>
 

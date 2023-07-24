@@ -1,6 +1,5 @@
 package com.example.ecomate.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,8 +19,7 @@ class CommunityViewModel : ViewModel() {
 
     private fun getAllBoard() {
         viewModelScope.launch {
-            _boardList.value = RetrofitUtil.postApi.getAllPosts().response["boardDtoList"]
-//            Log.d("RestAPI", RetrofitUtil.postApi.getAllPosts().response["boardDtoList"].toString())
+            _boardList.value = RetrofitUtil.boardApi.getAllBoards().response["boardDtoList"]
         }
     }
 }

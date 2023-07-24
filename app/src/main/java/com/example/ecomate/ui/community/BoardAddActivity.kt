@@ -2,13 +2,13 @@ package com.example.ecomate.ui.community
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.ecomate.databinding.ActivityPostDetailBinding
+import com.example.ecomate.databinding.ActivityBoardAddBinding
 
-class PostDetailActivity : AppCompatActivity() {
-    lateinit var binding: ActivityPostDetailBinding
+class BoardAddActivity : AppCompatActivity() {
+    lateinit var binding: ActivityBoardAddBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPostDetailBinding.inflate(layoutInflater)
+        val binding = ActivityBoardAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
     }
