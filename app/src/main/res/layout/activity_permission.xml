@@ -249,7 +249,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/permission_button"
+        android:id="@+id/permission_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="확인"

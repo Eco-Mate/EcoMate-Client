@@ -14,9 +14,8 @@ import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.R
 import com.example.ecomate.databinding.FragmentCommunityBinding
 import com.example.ecomate.model.Board
-import com.example.ecomate.ui.adapter.CommunityBoardAllAdapter
+import com.example.ecomate.ui.adapter.BoardAllAdapter
 import com.example.ecomate.viewmodel.CommunityViewModel
-import java.io.Serializable
 
 class CommunityFragment : Fragment() {
     lateinit var binding: FragmentCommunityBinding
@@ -72,9 +71,9 @@ class CommunityFragment : Fragment() {
 
     private fun setAdapter(view: View) {
         communityViewModel.boardList.observe(viewLifecycleOwner) {
-            val communityBoardAllAdapter = CommunityBoardAllAdapter(it)
-            communityBoardAllAdapter.detailBoardListener =
-                object : CommunityBoardAllAdapter.DetailBoardListener {
+            val boardAllAdapter = BoardAllAdapter(it)
+            boardAllAdapter.detailBoardListener =
+                object : BoardAllAdapter.DetailBoardListener {
                     override fun onClick(board: Board) {
                         val intent = Intent(activity, BoardDetailActivity::class.java)
                         intent.putExtra(BOARD_ITEM, board)
@@ -84,7 +83,7 @@ class CommunityFragment : Fragment() {
 
             binding.boardRv.apply {
                 layoutManager = LinearLayoutManager(view.context)
-                adapter = communityBoardAllAdapter
+                adapter = boardAllAdapter
                 addItemDecoration(
                     DividerItemDecoration(
                         view.context,

@@ -30,16 +30,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/sub_1"
+                android:id="@+id/box_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/underborder_background"
                 android:paddingBottom="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title">
+                app:layout_constraintTop_toTopOf="parent">
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/profile_info"
+                    android:id="@+id/profile_box"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
@@ -47,7 +47,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
                     <ImageView
-                        android:id="@+id/profile_image"
+                        android:id="@+id/profile_img"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/profile_image_1"
@@ -64,16 +64,16 @@
                         android:textSize="16dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
-                        app:layout_constraintStart_toEndOf="@id/profile_image"
+                        app:layout_constraintStart_toEndOf="@id/profile_img"
                         app:layout_constraintTop_toTopOf="parent" />
                     <TextView
-                        android:id="@+id/myprofile_state"
+                        android:id="@+id/profile_state"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="상태메세지"
                         android:textSize="12dp"
                         android:layout_marginStart="20dp"
-                        app:layout_constraintStart_toEndOf="@id/profile_image"
+                        app:layout_constraintStart_toEndOf="@id/profile_img"
                         app:layout_constraintTop_toBottomOf="@id/profile_nickname"
                         app:layout_constraintBottom_toBottomOf="parent"/>
                     <TextView
@@ -104,7 +104,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/point"
+                    android:id="@+id/point_box"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -113,7 +113,7 @@
                     android:background="@drawable/yellow_background"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/profile_info">
+                    app:layout_constraintTop_toBottomOf="@id/profile_box">
 
                     <TextView
                         android:id="@+id/point_level"
@@ -162,14 +162,14 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/sub_2"
+                android:id="@+id/box_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sub_1">
+                app:layout_constraintTop_toBottomOf="@id/box_1">
                 <TextView
                     android:id="@+id/challenge_mark"
                     android:layout_width="wrap_content"
@@ -265,16 +265,16 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/sub_3"
+                android:id="@+id/box_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sub_2">
+                app:layout_constraintTop_toBottomOf="@id/box_2">
                 <TextView
-                    android:id="@+id/post_mark"
+                    android:id="@+id/board_mark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="내 게시물"
@@ -285,17 +285,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
                 <TextView
-                    android:id="@+id/post_num"
+                    android:id="@+id/board_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4건"
                     android:textStyle="bold"
                     android:textSize="12dp"
                     android:layout_margin="20dp"
-                    app:layout_constraintStart_toEndOf="@id/post_mark"
+                    app:layout_constraintStart_toEndOf="@id/board_mark"
                     app:layout_constraintTop_toTopOf="parent"/>
                 <Button
-                    android:id="@+id/post_btn"
+                    android:id="@+id/board_btn"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:background="@drawable/right_arrow"
@@ -303,22 +303,22 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/posts"
+                    android:id="@+id/boards"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/post_mark">
+                    app:layout_constraintTop_toBottomOf="@id/board_mark">
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/post_1"
+                        android:id="@+id/board_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/post_2"
+                        app:layout_constraintEnd_toStartOf="@id/board_2"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent">
                         <ImageView
-                            android:id="@+id/post_1_image"
+                            android:id="@+id/board_1_image"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:src="@drawable/challenge_ex_2"
@@ -327,8 +327,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
                         <TextView
-                            android:id="@+id/post_1_title"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/board_1_title"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="대중교통 챌린지를 하는 중"
                             android:textSize="12dp"
@@ -339,18 +339,18 @@
                             android:layout_marginTop="5dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/post_1_image"/>
+                            app:layout_constraintTop_toBottomOf="@id/board_1_image"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/post_2"
+                        android:id="@+id/board_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/post_1"
-                        app:layout_constraintEnd_toStartOf="@id/post_3"
+                        app:layout_constraintStart_toEndOf="@id/board_1"
+                        app:layout_constraintEnd_toStartOf="@id/board_3"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent">
                         <ImageView
-                            android:id="@+id/post_2_image"
+                            android:id="@+id/board_2_image"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:src="@drawable/challenge_ex_1"
@@ -359,8 +359,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
                         <TextView
-                            android:id="@+id/post_2_title"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/board_2_title"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="용기내 챌린지를 하는 중"
                             android:textSize="12dp"
@@ -371,18 +371,18 @@
                             android:layout_marginTop="5dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/post_2_image"/>
+                            app:layout_constraintTop_toBottomOf="@id/board_2_image"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/post_3"
+                        android:id="@+id/board_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/post_2"
+                        app:layout_constraintStart_toEndOf="@id/board_2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent">
                         <ImageView
-                            android:id="@+id/post_3_image"
+                            android:id="@+id/board_3_image"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:src="@drawable/challenge_ex_3"
@@ -391,8 +391,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
                         <TextView
-                            android:id="@+id/post_3_title"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/board_3_title"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="쓰레기 줍기 챌린지를 하는 중"
                             android:textSize="12dp"
@@ -403,21 +403,21 @@
                             android:layout_marginTop="5dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/post_3_image"/>
+                            app:layout_constraintTop_toBottomOf="@id/board_3_image"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/sub_4"
+                android:id="@+id/box_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sub_3">
+                app:layout_constraintTop_toBottomOf="@id/box_3">
                 <TextView
-                    android:id="@+id/save_post_mark"
+                    android:id="@+id/save_board_mark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="저장한 게시물 보기"
@@ -428,7 +428,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
                 <Button
-                    android:id="@+id/save_post_btn"
+                    android:id="@+id/save_board_btn"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:background="@drawable/right_arrow"
@@ -437,19 +437,19 @@
                     app:layout_constraintTop_toTopOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/sub_5"
+                android:id="@+id/box_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sub_4">
+                app:layout_constraintTop_toBottomOf="@id/box_4">
                 <TextView
-                    android:id="@+id/save_ecomarket_mark"
+                    android:id="@+id/save_echoshop_mark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="저장한 게시물 보기"
+                    android:text="저장한 에코 매장"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="14dp"
@@ -457,7 +457,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
                 <Button
-                    android:id="@+id/save_ecomarket_btn"
+                    android:id="@+id/save_echoshop_btn"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:background="@drawable/right_arrow"
@@ -466,14 +466,14 @@
                     app:layout_constraintTop_toTopOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/sub_6"
+                android:id="@+id/box_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sub_5">
+                app:layout_constraintTop_toBottomOf="@id/box_5">
                 <TextView
                     android:id="@+id/edit_profile_mark"
                     android:layout_width="wrap_content"
@@ -495,13 +495,13 @@
                     app:layout_constraintTop_toTopOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/sub_7"
+                android:id="@+id/box_7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sub_6">
+                app:layout_constraintTop_toBottomOf="@id/box_6">
                 <TextView
                     android:id="@+id/opensource_license_mark"
                     android:layout_width="wrap_content"
@@ -523,14 +523,14 @@
                     app:layout_constraintTop_toTopOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/sub_8"
+                android:id="@+id/box_8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sub_7">
+                app:layout_constraintTop_toBottomOf="@id/box_7">
                 <TextView
                     android:id="@+id/app_version_mark"
                     android:layout_width="wrap_content"
@@ -554,18 +554,27 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <TextView
-                android:id="@+id/logout_btn"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/box_9"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="로그아웃"
-                android:textSize="14dp"
-                android:textStyle="bold"
-                android:textColor="@color/red"
-                android:layout_margin="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sub_8"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/box_8"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/logout_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="로그아웃"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/red"
+                    android:layout_margin="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
