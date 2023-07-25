@@ -45,11 +45,12 @@
         <TextView
             android:id="@+id/auto_login_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="자동 로그인"
             android:textColor="@color/black"
             android:textSize="10dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:gravity="center"/>
         <CheckBox
             android:id="@+id/auto_login_checkBox"
             android:layout_width="wrap_content"
