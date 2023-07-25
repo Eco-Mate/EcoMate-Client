@@ -24,7 +24,7 @@ class BoardAddActivity : AppCompatActivity() {
                 finish()
             }
             boardImageBtn.setOnClickListener {
-                TODO("Not yet implemented")
+
             }
             boardAddBtn.setOnClickListener {
                 item = Board(
