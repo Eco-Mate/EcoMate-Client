@@ -21,8 +21,7 @@ class BoardCommentAdapter(val dataSet: List<Comment>): RecyclerView.Adapter<Recy
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         binding.apply {
             profileNickname.text = dataSet[position].nickname
-            commentDate.text = SimpleDateFormat("yyyy.MM.dd").format(dataSet[position].createdDate)
-            commentContent.text = dataSet[position].commentContent
+            commentContent.text = dataSet[position].content
         }
     }
 

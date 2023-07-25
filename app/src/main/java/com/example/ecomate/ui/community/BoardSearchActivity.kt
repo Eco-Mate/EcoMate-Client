@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.ecomate.ApplicationClass.Companion.BOARD_ID
 import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.databinding.ActivityBoardSearchBinding
 import com.example.ecomate.model.Board
@@ -27,10 +28,11 @@ class BoardSearchActivity : AppCompatActivity() {
             val boardSearchAdapter = BoardSearchAdapter(it)
             boardSearchAdapter.detailBoardListener =
                 object : BoardSearchAdapter.DetailBoardListener {
-                    override fun onClick(board: Board) {
+                    override fun onClick(boardId: Int, board: Board) {
                         val intent = Intent(
                             this@BoardSearchActivity,
                             BoardDetailActivity::class.java)
+                        intent.putExtra(BOARD_ID, boardId)
                         intent.putExtra(BOARD_ITEM, board)
                         startActivity(intent)
                     }

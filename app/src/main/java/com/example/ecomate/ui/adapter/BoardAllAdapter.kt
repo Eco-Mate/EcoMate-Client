@@ -28,7 +28,7 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
                 .into(boardImg)
             boardContent.text = dataSet[position].boardContent
             root.setOnClickListener {
-                detailBoardListener.onClick(item = dataSet[position])
+                detailBoardListener.onClick(boardId = dataSet[position].boardId, board = dataSet[position])
             }
         }
 
@@ -39,7 +39,7 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
     }
 
     interface DetailBoardListener {
-        fun onClick(item: Board)
+        fun onClick(boardId: Int, board: Board)
     }
 
     lateinit var detailBoardListener: DetailBoardListener
