@@ -76,7 +76,7 @@
                 android:id="@+id/camera_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="실시간 촬영을 통해 산행을 기록하기 위해 필요합니다."
+                android:text="실시간 촬영으로 챌린지 인증을 하기 위해 필요합니다."
                 android:textSize="12dp"
                 android:textColor="@color/gray_1"
                 android:layout_marginLeft="10dp"
@@ -130,7 +130,7 @@
                 android:id="@+id/storage_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="산행 기록을 위해 촬영한 사진이 저장됩니다."
+                android:text="챌린지 인증, 게시물 포스팅, 사진 공유 등을 위해 \n사진이 필요합니다."
                 android:textSize="12dp"
                 android:textColor="@color/gray_1"
                 android:layout_marginLeft="10dp"
@@ -184,66 +184,12 @@
                 android:id="@+id/location_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="사용자의 행동을 추적하고, 산행 인증을 위한 필수 정보로 활용됩니다."
+                android:text="사용자의 위치를 기반으로 에코 매장 검색에 활용됩니다."
                 android:textSize="12dp"
                 android:textColor="@color/gray_1"
                 android:layout_marginLeft="10dp"
                 app:layout_constraintStart_toEndOf="@id/location_icon"
                 app:layout_constraintTop_toBottomOf="@id/location_title"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/call"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/location">
-
-            <ImageView
-                android:id="@+id/call_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/call"
-                android:layout_margin="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-            <TextView
-                android:id="@+id/call_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="전화"
-                android:textStyle="bold"
-                android:textSize="14dp"
-                android:textColor="@color/black"
-                android:layout_marginLeft="10dp"
-                app:layout_constraintStart_toEndOf="@id/call_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/call_content"/>
-            <TextView
-                android:id="@+id/call_selection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(선택)"
-                android:textStyle="bold"
-                android:textSize="12dp"
-                android:textColor="@color/gray_1"
-                android:layout_marginLeft="5dp"
-                app:layout_constraintStart_toEndOf="@id/call_title"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/call_content"/>
-            <TextView
-                android:id="@+id/call_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="산행 기록을 위해 촬영한 사진이 저장됩니다."
-                android:textSize="12dp"
-                android:textColor="@color/gray_1"
-                android:layout_marginLeft="10dp"
-                app:layout_constraintStart_toEndOf="@id/call_icon"
-                app:layout_constraintTop_toBottomOf="@id/call_title"
                 app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
