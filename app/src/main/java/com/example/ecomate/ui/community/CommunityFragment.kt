@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecomate.ApplicationClass.Companion.BOARD_ID
 import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.R
 import com.example.ecomate.databinding.FragmentCommunityBinding
@@ -75,8 +76,9 @@ class CommunityFragment : Fragment() {
             val boardAllAdapter = BoardAllAdapter(it)
             boardAllAdapter.detailBoardListener =
                 object : BoardAllAdapter.DetailBoardListener {
-                    override fun onClick(board: Board) {
+                    override fun onClick(boardId: Int, board: Board) {
                         val intent = Intent(activity, BoardDetailActivity::class.java)
+                        intent.putExtra(BOARD_ID, boardId)
                         intent.putExtra(BOARD_ITEM, board)
                         startActivity(intent)
                     }

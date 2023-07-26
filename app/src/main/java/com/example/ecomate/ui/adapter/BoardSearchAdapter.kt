@@ -23,7 +23,7 @@ class BoardSearchAdapter(val dataSet: List<Board>): RecyclerView.Adapter<Recycle
                 .load(dataSet[position].image)
                 .into(boardImage)
             root.setOnClickListener {
-                detailBoardListener.onClick(board = dataSet[position])
+                detailBoardListener.onClick(boardId = dataSet[position].boardId, board = dataSet[position])
             }
         }
     }
@@ -33,7 +33,7 @@ class BoardSearchAdapter(val dataSet: List<Board>): RecyclerView.Adapter<Recycle
     }
 
     interface DetailBoardListener {
-        fun onClick(board: Board)
+        fun onClick(boardId: Int, board: Board)
     }
 
     lateinit var detailBoardListener: DetailBoardListener

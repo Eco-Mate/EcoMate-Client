@@ -30,27 +30,7 @@ class SaveEchoshopsActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        communityViewModel.boardList.observe(this) {
-            val boardAllAdapter = BoardAllAdapter(it)
-            boardAllAdapter.detailBoardListener =
-                object : BoardAllAdapter.DetailBoardListener {
-                    override fun onClick(board: Board) {
-                        val intent = Intent(this@SaveEchoshopsActivity, BoardDetailActivity::class.java)
-                        intent.putExtra(ApplicationClass.BOARD_ITEM, board)
-                        startActivity(intent)
-                    }
-                }
 
-            binding.saveEchoshopRv.apply {
-                layoutManager = LinearLayoutManager(this.context)
-                adapter = boardAllAdapter
-                addItemDecoration(
-                    DividerItemDecoration(
-                        this.context,
-                        LinearLayoutManager.VERTICAL)
-                )
-            }
-        }
     }
 
     private fun setUi() {

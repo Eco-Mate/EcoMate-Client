@@ -5,12 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.ecomate.databinding.FragmentMyprofileBinding
 import com.example.ecomate.ui.user.LoginActivity
+import com.example.ecomate.viewmodel.CommunityViewModel
 
 class MyProfileFragment : Fragment() {
     lateinit var binding: FragmentMyprofileBinding
+    private val communityViewModel: CommunityViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,6 +53,24 @@ class MyProfileFragment : Fragment() {
             }
 
             // 내 게시물
+            communityViewModel.boardList.observe(viewLifecycleOwner) {
+                boardNum.text = it.size.toString() + "건"
+                // 게시물 1
+                Glide.with(this@MyProfileFragment)
+                    .load(it[0].image)
+                    .into(board1Image)
+                board1Title.text = it[0].boardTitle
+                // 게시물 2
+                Glide.with(this@MyProfileFragment)
+                    .load(it[1].image)
+                    .into(board2Image)
+                board2Title.text = it[1].boardTitle
+                // 게시물 3
+                Glide.with(this@MyProfileFragment)
+                    .load(it[2].image)
+                    .into(board3Image)
+                board3Title.text = it[2].boardTitle
+            }
             boardBtn.setOnClickListener {
                 startActivity(Intent(activity,MyBoardsActivity::class.java))
             }

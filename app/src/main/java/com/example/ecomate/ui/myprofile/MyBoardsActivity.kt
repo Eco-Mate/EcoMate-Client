@@ -32,8 +32,9 @@ class MyBoardsActivity : AppCompatActivity() {
             val boardAllAdapter = BoardAllAdapter(it)
             boardAllAdapter.detailBoardListener =
                 object : BoardAllAdapter.DetailBoardListener {
-                    override fun onClick(board: Board) {
+                    override fun onClick(boardId: Int, board: Board) {
                         val intent = Intent(this@MyBoardsActivity, BoardDetailActivity::class.java)
+                        intent.putExtra(ApplicationClass.BOARD_ID, boardId)
                         intent.putExtra(ApplicationClass.BOARD_ITEM, board)
                         startActivity(intent)
                     }
