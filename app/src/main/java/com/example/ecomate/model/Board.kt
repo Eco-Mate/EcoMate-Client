@@ -4,7 +4,9 @@ import java.io.Serializable
 
 data class Board(
     val boardId: Int,
+    val userId: Int,
     val nickname: String,
+    val profileImage: String,
     val challengeTitle: String,
     val boardTitle: String,
     val boardContent: String,

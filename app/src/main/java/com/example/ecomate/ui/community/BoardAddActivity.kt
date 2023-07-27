@@ -27,15 +27,15 @@ class BoardAddActivity : AppCompatActivity() {
 
             }
             boardAddBtn.setOnClickListener {
-                item = Board(
-                    0,
-                    "HJTN",
-                    boardChallengeEditText.text.toString(),
-                    boardTitleEditText.text.toString(),
-                    boardContentEditText.text.toString(),
-                    "",
-                    0,
-                    SimpleDateFormat("yyyy.MM.dd").format(System.currentTimeMillis()))
+//                item = Board(
+//                    0,
+//                    "HJTN",
+//                    boardChallengeEditText.text.toString(),
+//                    boardTitleEditText.text.toString(),
+//                    boardContentEditText.text.toString(),
+//                    "",
+//                    0,
+//                    SimpleDateFormat("yyyy.MM.dd").format(System.currentTimeMillis()))
                 finish()
             }
         }

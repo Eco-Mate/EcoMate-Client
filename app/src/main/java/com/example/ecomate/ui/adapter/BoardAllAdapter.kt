@@ -1,5 +1,6 @@
 package com.example.ecomate.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,11 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         binding.apply {
+            if (dataSet[position].profileImage != null) {
+                Glide.with(holder.itemView)
+                    .load(dataSet[position].profileImage)
+                    .into(profileImg)
+            }
             profileNickname.text = dataSet[position].nickname
             boardDate.text = dataSet[position].createdDate.substring(0,4) +
                     "." + dataSet[position].createdDate.substring(5,7) +
