@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".ApplicationClass"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EcoMate"
         android:usesCleartextTraffic="true"
@@ -28,6 +39,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.PermissionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user.SignupActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.challenge.EditChallengeActivity"
             android:exported="false" />
         <activity
@@ -44,6 +64,21 @@
             android:exported="false" />
         <activity
             android:name=".ui.community.BoardDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myprofile.FollowInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myprofile.MyBoardsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myprofile.SaveBoardsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myprofile.SaveEchoshopsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myprofile.EditProfileActivity"
             android:exported="false" />
     </application>
 

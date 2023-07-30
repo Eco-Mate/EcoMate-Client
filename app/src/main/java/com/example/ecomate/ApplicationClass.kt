@@ -15,6 +15,7 @@ class ApplicationClass : Application() {
         const val CHALLENGE_ID = "challengeId"
         const val BOARD_ITEM = "boardItem"
         const val USER_ID = "1"
+        const val BOARD_ID = "boardId"
         const val SERVER_URL = "http://15.164.103.242:8081/api/"
         lateinit var retrofit: Retrofit
 
