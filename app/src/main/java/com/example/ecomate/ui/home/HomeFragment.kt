@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.example.ecomate.ApplicationClass.Companion.CHALLENGE_ID
 import com.example.ecomate.databinding.FragmentHomeBinding
 import com.example.ecomate.ui.adapter.HomeChallengeAllAdapter
+import com.example.ecomate.ui.adapter.MyProgressChallengeAllAdapter
 import com.example.ecomate.ui.challenge.ChallengeActivity
 import com.example.ecomate.ui.challenge.ChallengeDetailActivity
 import com.example.ecomate.ui.challenge.EditChallengeActivity
@@ -57,7 +58,21 @@ class HomeFragment : Fragment() {
 
         homeViewModel.challengeList.observe(viewLifecycleOwner) {
             homeChallengeAllAdapter.submitList(it)
+        }
 
+        val myProgressChallengeAllAdapter = MyProgressChallengeAllAdapter()
+        myProgressChallengeAllAdapter.detailMyProgressChallengeListener =
+            object : MyProgressChallengeAllAdapter.DetailMyProgressChallengeListener {
+                override fun onClick(challengeId: Int) {
+                    val intent = Intent(activity, ChallengeDetailActivity::class.java)
+                    intent.putExtra(CHALLENGE_ID, challengeId)
+                    startActivity(intent)
+                }
+            }
+        binding.challengeProgressRv.adapter = myProgressChallengeAllAdapter
+
+        homeViewModel.progressMyChallengeList.observe(viewLifecycleOwner) {
+            myProgressChallengeAllAdapter.submitList(it)
         }
     }
 }

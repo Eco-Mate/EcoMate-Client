@@ -81,38 +81,38 @@
         app:layout_constraintTop_toBottomOf="@id/challengeContent"
         android:layout_height="10dp"/>
     
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:backgroundTint="#05000000"
-        app:cardCornerRadius="8dp"
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:backgroundTint="#05000000"-->
+<!--        app:cardCornerRadius="8dp"-->
 
-        app:layout_constraintStart_toStartOf="@id/challengeContent"
-        app:layout_constraintTop_toBottomOf="@id/div">
+<!--        app:layout_constraintStart_toStartOf="@id/challengeContent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/div">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:orientation="vertical">-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="반드시 확인해주세요! (인증관련)"
-                android:textSize="16sp" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="반드시 확인해주세요! (인증관련)"-->
+<!--                android:textSize="16sp" />-->
 
-            <TextView
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                tools:text="주의사항에 대해 적어줍니다.\n주의사항에 대해 적어줍니다.\n주의사항에 대해 적어줍니다.\n주의사항에 대해 적어줍니다.\n" />
+<!--            <TextView-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="12sp"-->
+<!--                tools:text="주의사항에 대해 적어줍니다.\n주의사항에 대해 적어줍니다.\n주의사항에 대해 적어줍니다.\n주의사항에 대해 적어줍니다.\n" />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
-    </androidx.cardview.widget.CardView>
+<!--    </androidx.cardview.widget.CardView>-->
 
     <Button
         android:id="@+id/challengeDetailSelectBtn"
