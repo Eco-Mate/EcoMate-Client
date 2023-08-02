@@ -60,19 +60,19 @@ class HomeFragment : Fragment() {
             homeChallengeAllAdapter.submitList(it)
         }
 
-//        val myProgressChallengeAllAdapter = MyProgressChallengeAllAdapter()
-//        myProgressChallengeAllAdapter.detailMyProgressChallengeListener =
-//            object : MyProgressChallengeAllAdapter.DetailMyProgressChallengeListener {
-//                override fun onClick(challengeId: Int) {
-//                    val intent = Intent(activity, ChallengeDetailActivity::class.java)
-//                    intent.putExtra(CHALLENGE_ID, challengeId)
-//                    startActivity(intent)
-//                }
-//            }
-//        binding.challengeProgressRv.adapter = myProgressChallengeAllAdapter
-//
-//        homeViewModel.progressMyChallengeList.observe(viewLifecycleOwner) {
-//            myProgressChallengeAllAdapter.submitList(it)
-//        }
+        val myProgressChallengeAllAdapter = MyProgressChallengeAllAdapter()
+        myProgressChallengeAllAdapter.detailMyProgressChallengeListener =
+            object : MyProgressChallengeAllAdapter.DetailMyProgressChallengeListener {
+                override fun onClick(challengeId: Int) {
+                    val intent = Intent(activity, ChallengeDetailActivity::class.java)
+                    intent.putExtra(CHALLENGE_ID, challengeId)
+                    startActivity(intent)
+                }
+            }
+        binding.challengeProgressRv.adapter = myProgressChallengeAllAdapter
+
+        homeViewModel.progressMyChallengeList.observe(viewLifecycleOwner) {
+            myProgressChallengeAllAdapter.submitList(it)
+        }
     }
 }

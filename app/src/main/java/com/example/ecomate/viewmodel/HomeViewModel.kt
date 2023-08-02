@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecomate.ApplicationClass.Companion.USER_ID
 import com.example.ecomate.model.Challenge
 import com.example.ecomate.model.MyChallenge
 import com.example.ecomate.network.RetrofitUtil
@@ -21,7 +20,7 @@ class HomeViewModel : ViewModel() {
 
     init {
         getAllChallenge()
-        //getProgressMyChallenge()
+        getProgressMyChallenge()
     }
 
     private fun getAllChallenge() {
@@ -33,7 +32,7 @@ class HomeViewModel : ViewModel() {
     private fun getProgressMyChallenge() {
         viewModelScope.launch {
             _progressMyChallengeList.value =
-                RetrofitUtil.challengeApi.getAllProceedingChallenge(USER_ID).response
+                RetrofitUtil.challengeApi.getAllProceedingChallenge().response
         }
     }
 }

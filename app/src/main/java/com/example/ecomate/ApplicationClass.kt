@@ -15,7 +15,6 @@ class ApplicationClass : Application() {
     companion object {
         const val CHALLENGE_ID = "challengeId"
         const val BOARD_ITEM = "boardItem"
-        const val USER_ID = 1
         const val BOARD_ID = "boardId"
         const val ACCESS_TOKEN = "accessToken"
         const val REFRESH_TOKEN = "refreshToken"
