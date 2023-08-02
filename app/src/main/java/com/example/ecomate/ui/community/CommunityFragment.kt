@@ -15,6 +15,7 @@ import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.R
 import com.example.ecomate.databinding.FragmentCommunityBinding
 import com.example.ecomate.model.Board
+import com.example.ecomate.model.Chat
 import com.example.ecomate.ui.adapter.BoardAllAdapter
 import com.example.ecomate.viewmodel.CommunityViewModel
 
