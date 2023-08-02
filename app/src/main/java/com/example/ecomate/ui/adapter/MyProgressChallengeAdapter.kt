@@ -19,14 +19,17 @@ class MyProgressChallengeAllAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(myChallenge: MyChallenge) {
             binding.apply {
-
+                challengeProgressTitle.text = myChallenge.challengeTitle
+                root.setOnClickListener {
+                    detailMyProgressChallengeListener.onClick(challengeId = myChallenge.challengeId)
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): MyProgressChallengeViewHolder {
         binding =
             ItemChallengeProgressBinding.inflate(LayoutInflater.from(parent.context), parent, false)
