@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.example.ecomate.ApplicationClass
+import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.databinding.FragmentMyprofileBinding
+import com.example.ecomate.ui.user.LoginActivity
 import com.example.ecomate.viewmodel.CommunityViewModel
 
 class MyProfileFragment : Fragment() {
@@ -108,6 +111,8 @@ class MyProfileFragment : Fragment() {
 
             // 로그아웃
             box9.setOnClickListener {
+                sharedPreferencesUtil.deleteToken()
+                startActivity(Intent(activity,LoginActivity::class.java))
                 activity?.finish()
             }
         }

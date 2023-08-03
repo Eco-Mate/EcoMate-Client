@@ -19,7 +19,7 @@ class ChatAdapter(val dataSet: List<Chat>): RecyclerView.Adapter<RecyclerView.Vi
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         binding.apply {
             chatRoomName.text = dataSet[position].name
-            members.text = dataSet[position].members.toString().substring(1,dataSet[position].members.size)
+            members.text = dataSet[position].members.toString().substring(1,dataSet[position].members.toString().length-1)
             chatMore.setOnClickListener {
 
             }
