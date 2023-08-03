@@ -103,31 +103,20 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/edit_nickname_input"
+                <EditText
+                    android:id="@+id/edit_nickname_editText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:hint="지구지킴이"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/gray_background_2"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_nickname_title"
-                    android:background="@drawable/gray_background_2">
-
-                    <EditText
-                        android:id="@+id/edit_nickname_editText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:hint="지구지킴이"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:background="@android:color/transparent"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toBottomOf="@id/edit_nickname_title"/>
                 <TextView
                     android:id="@+id/edit_nickname_warn_1"
                     android:layout_width="wrap_content"
@@ -138,7 +127,7 @@
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_nickname_input"/>
+                    app:layout_constraintTop_toBottomOf="@id/edit_nickname_editText"/>
                 <TextView
                     android:id="@+id/edit_nickname_warn_2"
                     android:layout_width="wrap_content"
@@ -149,7 +138,7 @@
                     android:textSize="12dp"
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toEndOf="@id/edit_nickname_warn_1"
-                    app:layout_constraintTop_toBottomOf="@id/edit_nickname_input"/>
+                    app:layout_constraintTop_toBottomOf="@id/edit_nickname_editText"/>
                 <Button
                     android:id="@+id/edit_nickname_btn"
                     android:layout_width="wrap_content"
@@ -161,7 +150,7 @@
                     android:background="@drawable/primary_background"
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_nickname_input"
+                    app:layout_constraintTop_toBottomOf="@id/edit_nickname_editText"
                     app:layout_constraintBottom_toBottomOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -181,31 +170,21 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/current_password_input"
+                <EditText
+                    android:id="@+id/current_password_editText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:hint="현재 비밀번호"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:inputType="textPassword"
+                    android:background="@drawable/gray_background_2"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/current_password_title"
-                    android:background="@drawable/gray_background_2">
-
-                    <EditText
-                        android:id="@+id/current_password_editText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:hint="현재 비밀번호"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:background="@android:color/transparent"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toBottomOf="@id/current_password_title"/>
                 <TextView
                     android:id="@+id/edit_password_title"
                     android:layout_width="wrap_content"
@@ -215,7 +194,7 @@
                     android:textStyle="bold"
                     android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/current_password_input"/>
+                    app:layout_constraintTop_toBottomOf="@id/current_password_editText"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -224,57 +203,37 @@
                     android:textStyle="bold"
                     android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/current_password_input"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/edit_password_input_1"
+                    app:layout_constraintTop_toBottomOf="@id/current_password_editText"/>
+                <EditText
+                    android:id="@+id/edit_password_editText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:hint="새 비밀번호"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:inputType="textPassword"
+                    android:background="@drawable/gray_background_2"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_password_title"
-                    android:background="@drawable/gray_background_2">
-
-                    <EditText
-                        android:id="@+id/edit_password_editText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:hint="새 비밀번호"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:background="@android:color/transparent"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/edit_password_input_2"
+                    app:layout_constraintTop_toBottomOf="@id/edit_password_title"/>
+                <EditText
+                    android:id="@+id/edit_password_check_editText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:hint="새 비밀번호 확인"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:inputType="textPassword"
+                    android:background="@drawable/gray_background_2"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_password_input_1"
-                    android:background="@drawable/gray_background_2">
-
-                    <EditText
-                        android:id="@+id/edit_password_check_editText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:hint="새 비밀번호 확인"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:background="@android:color/transparent"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toBottomOf="@id/edit_password_editText"/>
                 <Button
                     android:id="@+id/edit_password_btn"
                     android:layout_width="wrap_content"
@@ -286,7 +245,7 @@
                     android:background="@drawable/primary_background"
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_password_input_2"
+                    app:layout_constraintTop_toBottomOf="@id/edit_password_check_editText"
                     app:layout_constraintBottom_toBottomOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -306,31 +265,21 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/edit_email_input"
+                <EditText
+                    android:id="@+id/edit_email_editText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:hint="abcdefghijk@naver.com"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/gray_background_2"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/edit_email_title"
-                    android:background="@drawable/gray_background_2">
-
-                    <EditText
-                        android:id="@+id/edit_email_editText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:hint="abcdefghijk@naver.com"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:background="@android:color/transparent"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintBottom_toBottomOf="parent"/>
                 <Button
                     android:id="@+id/edit_email_btn"
                     android:layout_width="wrap_content"
@@ -342,7 +291,7 @@
                     android:background="@drawable/primary_background"
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_email_input"
+                    app:layout_constraintTop_toBottomOf="@id/edit_email_editText"
                     app:layout_constraintBottom_toBottomOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -362,31 +311,20 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/edit_state_input"
+                <EditText
+                    android:id="@+id/edit_state_editText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:hint="상태 메세지를 입력하세요..."
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/gray_background_2"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_state_title"
-                    android:background="@drawable/gray_background_2">
-
-                    <EditText
-                        android:id="@+id/edit_state_editText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:hint="상태 메세지를 입력하세요..."
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:background="@android:color/transparent"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toBottomOf="@id/edit_state_title"/>
                 <Button
                     android:id="@+id/edit_state_btn"
                     android:layout_width="wrap_content"
@@ -399,7 +337,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_state_input"
+                    app:layout_constraintTop_toBottomOf="@id/edit_state_editText"
                     app:layout_constraintBottom_toBottomOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

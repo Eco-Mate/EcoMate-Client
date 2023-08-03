@@ -80,6 +80,9 @@
         <activity
             android:name=".ui.myprofile.EditProfileActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.chat.ChatDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

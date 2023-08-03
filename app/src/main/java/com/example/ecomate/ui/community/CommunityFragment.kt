@@ -16,6 +16,7 @@ import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.R
 import com.example.ecomate.databinding.FragmentCommunityBinding
 import com.example.ecomate.model.Board
+import com.example.ecomate.model.Chat
 import com.example.ecomate.ui.adapter.BoardAllAdapter
 import com.example.ecomate.viewmodel.CommunityViewModel
 
@@ -41,10 +42,10 @@ class CommunityFragment : Fragment() {
 
     private fun setUi() {
         // FloatingActionButton 컨트롤
-        val boardAddAniOut = ObjectAnimator.ofFloat(binding.boardAdd, "translationY", -300f).setDuration(500)
+        val boardAddAniOut = ObjectAnimator.ofFloat(binding.boardAdd, "translationY", -400f).setDuration(500)
         val boardAddAniIn = ObjectAnimator.ofFloat(binding.boardAdd, "translationY", 0f).setDuration(500)
 
-        val boardSearchAniOut = ObjectAnimator.ofFloat(binding.boardSearch, "translationY", -150f).setDuration(500)
+        val boardSearchAniOut = ObjectAnimator.ofFloat(binding.boardSearch, "translationY", -200f).setDuration(500)
         val boardSearchAniIn = ObjectAnimator.ofFloat(binding.boardSearch, "translationY", 0f).setDuration(500)
 
         binding.apply {

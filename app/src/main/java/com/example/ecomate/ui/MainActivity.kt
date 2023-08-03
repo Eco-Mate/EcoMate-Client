@@ -13,38 +13,38 @@ import com.example.ecomate.ui.home.HomeFragment
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUi()
+    }
 
-        val tabLayout = binding.tabs
-
+    private fun setUi() {
         supportFragmentManager.beginTransaction().add(R.id.tab_content, HomeFragment()).commit()
-
-        tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                val transaction = supportFragmentManager.beginTransaction()
-                when(tab?.text) {
-                    "홈" -> transaction.replace(
-                        R.id.tab_content,
-                        HomeFragment()
-                    )
-                    "커뮤니티" -> transaction.replace(R.id.tab_content, CommunityFragment())
-                    "에코챗" -> transaction.replace(R.id.tab_content, ChatFragment())
-                    "에코맵" -> transaction.replace(R.id.tab_content, MapFragment())
-                    "내정보" -> transaction.replace(R.id.tab_content, MyProfileFragment())
+        binding.apply {
+            tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    val transaction = supportFragmentManager.beginTransaction()
+                    when(tab?.text) {
+                        "홈" -> transaction.replace(R.id.tab_content, HomeFragment())
+                        "커뮤니티" -> transaction.replace(R.id.tab_content, CommunityFragment())
+                        "에코챗" -> transaction.replace(R.id.tab_content, ChatFragment())
+                        "에코맵" -> transaction.replace(R.id.tab_content, MapFragment())
+                        "내정보" -> transaction.replace(R.id.tab_content, MyProfileFragment())
+                    }
+                    transaction.commit()
                 }
-                transaction.commit()
-            }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                Log.d("TabButton", "onTabUnselected...")
-            }
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                    Log.d("TabButton", "onTabUnselected...")
+                }
 
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                Log.d("TabButton", "onTabReselected...")
-            }
-        })
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                    Log.d("TabButton", "onTabReselected...")
+                }
+            })
+        }
     }
 }
