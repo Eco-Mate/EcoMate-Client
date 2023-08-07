@@ -1,10 +1,16 @@
 package com.example.ecomate.ui.adapter
 
+import android.os.Build
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.ecomate.R
 import com.example.ecomate.databinding.ItemBoardBinding
 import com.example.ecomate.model.Board
 
@@ -18,7 +24,10 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
         return BoardViewHolder(binding)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+
         binding.apply {
             if (dataSet[position].profileImage != null && dataSet[position].profileImage != "") {
                 Glide.with(holder.itemView)
@@ -30,7 +39,18 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
                     "." + dataSet[position].createdDate.substring(5,7) +
                     "." + dataSet[position].createdDate.substring(8,10)
             profileMore.setOnClickListener {
-
+                val popUp = PopupMenu(this.root.context,  it)
+                popUp.menuInflater.inflate(R.menu.board_menu, popUp.menu)
+                popUp.setOnMenuItemClickListener {item ->
+                    when(item.itemId) {
+                        R.id.profile_info -> Toast.makeText(this.root.context,"프로필 정보 이동",Toast.LENGTH_SHORT).show()
+                        R.id.board_move -> detailBoardListener.onClick(boardId = dataSet[position].boardId, board = dataSet[position])
+                        R.id.board_save -> Toast.makeText(this.root.context,"게시글 저장",Toast.LENGTH_SHORT).show()
+                    }
+                    false
+                }
+                popUp.setForceShowIcon(true)
+                popUp.show()
             }
             Glide.with(holder.itemView)
                 .load(dataSet[position].image)

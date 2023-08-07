@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profile_info"
+        android:title="프로필 정보"
+        android:icon="@drawable/profile_image_1" />
+    <item
+        android:id="@+id/board_move"
+        android:title="게시글 이동"
+        android:icon="@drawable/board_move"/>
+    <item
+        android:id="@+id/board_save"
+        android:title="게시글 저장"
+        android:icon="@drawable/black_plus"/>
+</menu>

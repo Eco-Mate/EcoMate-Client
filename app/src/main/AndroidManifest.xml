@@ -24,6 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcoMate"
         android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
         <activity
             android:name=".ui.MainActivity"
