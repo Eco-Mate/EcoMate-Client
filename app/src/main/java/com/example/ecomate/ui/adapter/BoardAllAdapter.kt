@@ -1,8 +1,6 @@
 package com.example.ecomate.ui.adapter
 
 import android.os.Build
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
