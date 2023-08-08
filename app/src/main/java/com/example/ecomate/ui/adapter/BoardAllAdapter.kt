@@ -2,8 +2,6 @@ package com.example.ecomate.ui.adapter
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
