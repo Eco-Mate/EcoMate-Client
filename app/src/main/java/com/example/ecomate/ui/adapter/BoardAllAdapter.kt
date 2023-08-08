@@ -1,7 +1,9 @@
 package com.example.ecomate.ui.adapter
 
+import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -37,18 +39,7 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
                     "." + dataSet[position].createdDate.substring(5,7) +
                     "." + dataSet[position].createdDate.substring(8,10)
             profileMore.setOnClickListener {
-                val popUp = PopupMenu(this.root.context,  it)
-                popUp.menuInflater.inflate(R.menu.board_menu, popUp.menu)
-                popUp.setOnMenuItemClickListener {item ->
-                    when(item.itemId) {
-                        R.id.profile_info -> Toast.makeText(this.root.context,"프로필 정보 이동",Toast.LENGTH_SHORT).show()
-                        R.id.board_move -> detailBoardListener.onClick(boardId = dataSet[position].boardId, board = dataSet[position])
-                        R.id.board_save -> Toast.makeText(this.root.context,"게시글 저장",Toast.LENGTH_SHORT).show()
-                    }
-                    false
-                }
-                popUp.setForceShowIcon(true)
-                popUp.show()
+                setPopUpMenu(this.root.context, it, dataSet[position])
             }
             Glide.with(holder.itemView)
                 .load(dataSet[position].image)
@@ -70,4 +61,20 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
     }
 
     lateinit var detailBoardListener: DetailBoardListener
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun setPopUpMenu(context: Context, view: View, board: Board) {
+        val popUp = PopupMenu(context, view)
+        popUp.menuInflater.inflate(R.menu.board_menu, popUp.menu)
+        popUp.setOnMenuItemClickListener {item ->
+            when(item.itemId) {
+                R.id.profile_info -> Toast.makeText(context,"프로필 정보 이동",Toast.LENGTH_SHORT).show()
+                R.id.board_move -> detailBoardListener.onClick(boardId = board.boardId, board = board)
+                R.id.board_save -> Toast.makeText(context,"게시글 저장",Toast.LENGTH_SHORT).show()
+            }
+            false
+        }
+        popUp.setForceShowIcon(true)
+        popUp.show()
+    }
 }

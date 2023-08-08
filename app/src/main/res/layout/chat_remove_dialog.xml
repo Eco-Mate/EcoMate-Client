@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/primary_border_background">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="채팅방 나가기"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/title_underborder"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/primary_background"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"/>
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="지구지키기 방범대를 나가시겠습니까?"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_underborder"/>
+    <TextView
+        android:id="@+id/wraning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 나가기를 하면 대화내용이 모두 삭제되고 채팅목록에서도 삭제됩니다."
+        android:textSize="12dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"/>
+    <Button
+        android:id="@+id/check_btn"
+        android:layout_width="40dp"
+        android:layout_height="24dp"
+        android:text="확인"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:background="@drawable/primary_background"
+        android:layout_margin="15dp"
+        app:layout_constraintEnd_toStartOf="@id/cancel_btn"
+        app:layout_constraintTop_toBottomOf="@id/wraning"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <Button
+        android:id="@+id/cancel_btn"
+        android:layout_width="40dp"
+        android:layout_height="24dp"
+        android:text="취소"
+        android:textColor="@color/gray_2"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:background="@drawable/gray_background_1"
+        android:layout_margin="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wraning"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
