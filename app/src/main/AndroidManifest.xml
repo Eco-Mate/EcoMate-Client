@@ -84,6 +84,9 @@
         <activity
             android:name=".ui.chat.ChatDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.chat.ChatAddActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

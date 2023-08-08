@@ -2,25 +2,29 @@ package com.example.ecomate.ui.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecomate.databinding.ActivityChatAddBinding
 import com.example.ecomate.databinding.ActivityChatDetailBinding
 
-class ChatDetailActivity : AppCompatActivity() {
-    lateinit var binding: ActivityChatDetailBinding
+class ChatAddActivity : AppCompatActivity() {
+    lateinit var binding: ActivityChatAddBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChatDetailBinding.inflate(layoutInflater)
+        binding = ActivityChatAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setAdapter()
         setUi()
     }
 
     private fun setAdapter() {
-        binding.chatRv.apply {
-            layoutManager = LinearLayoutManager(this.context)
-
+        binding.followingRv.apply {
+            layoutManager = LinearLayoutManager(this@ChatAddActivity)
+//            adapter =
+        }
+        binding.addedRv.apply {
+            layoutManager = LinearLayoutManager(this@ChatAddActivity)
+//            adapter =
         }
     }
     private fun setUi() {
@@ -28,15 +32,11 @@ class ChatDetailActivity : AppCompatActivity() {
             backBtn.setOnClickListener {
                 finish()
             }
-            chatInfoBtn.setOnClickListener {
-                if (!drawer.isDrawerOpen(Gravity.RIGHT)) {
-                    drawer.openDrawer(Gravity.RIGHT)
-                } else {
-                    drawer.closeDrawer(Gravity.RIGHT)
-                }
-            }
-            chatSendBtn.setOnClickListener {
+            searchBtn.setOnClickListener {
 
+            }
+            chatCreateBtn.setOnClickListener {
+                finish()
             }
         }
     }

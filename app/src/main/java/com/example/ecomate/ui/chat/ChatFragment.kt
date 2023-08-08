@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecomate.databinding.FragmentChatBinding
-import com.example.ecomate.databinding.FragmentCommunityBinding
-import com.example.ecomate.databinding.FragmentHomeBinding
 import com.example.ecomate.model.Chat
-import com.example.ecomate.model.User
 import com.example.ecomate.ui.adapter.ChatAdapter
 
 class ChatFragment : Fragment() {
@@ -21,6 +18,7 @@ class ChatFragment : Fragment() {
         Chat(1,"","지구지키기 방범대 2번 방", mutableListOf("짱구","철구","유수","훈리","맹이")),
         Chat(2,"","지구지키기 방범대 3번 방", mutableListOf("짱이","철구","유구","훈수","맹리")),
     )
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,7 +53,7 @@ class ChatFragment : Fragment() {
     private fun setUi() {
         binding.apply {
             chatAdd.setOnClickListener {
-
+                startActivity(Intent(activity,ChatAddActivity::class.java))
             }
         }
     }
