@@ -77,9 +77,8 @@ class CommunityFragment : Fragment() {
             val boardAllAdapter = BoardAllAdapter(it)
             boardAllAdapter.detailBoardListener =
                 object : BoardAllAdapter.DetailBoardListener {
-                    override fun onClick(boardId: Int, board: Board) {
+                    override fun onClick(board: Board) {
                         val intent = Intent(activity, BoardDetailActivity::class.java)
-                        intent.putExtra(BOARD_ID, boardId)
                         intent.putExtra(BOARD_ITEM, board)
                         startActivity(intent)
                     }

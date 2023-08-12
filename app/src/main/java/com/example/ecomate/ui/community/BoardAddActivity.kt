@@ -1,15 +1,12 @@
 package com.example.ecomate.ui.community
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.FileUtils
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.widget.PopupMenu
@@ -17,15 +14,11 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.ecomate.databinding.ActivityBoardAddBinding
-import com.example.ecomate.model.BoardBody
-import com.example.ecomate.ui.user.LoginActivity
 import com.example.ecomate.viewmodel.BoardAddViewModel
 import com.example.ecomate.viewmodel.HomeViewModel
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

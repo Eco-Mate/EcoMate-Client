@@ -46,7 +46,7 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
                 .into(boardImg)
             boardContent.text = dataSet[position].boardContent
             root.setOnClickListener {
-                detailBoardListener.onClick(boardId = dataSet[position].boardId, board = dataSet[position])
+                detailBoardListener.onClick(board = dataSet[position])
             }
         }
 
@@ -57,7 +57,7 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
     }
 
     interface DetailBoardListener {
-        fun onClick(boardId: Int, board: Board)
+        fun onClick(board: Board)
     }
 
     lateinit var detailBoardListener: DetailBoardListener
@@ -69,7 +69,7 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
         popUp.setOnMenuItemClickListener {item ->
             when(item.itemId) {
                 R.id.profile_info -> Toast.makeText(context,"프로필 정보 이동",Toast.LENGTH_SHORT).show()
-                R.id.board_move -> detailBoardListener.onClick(boardId = board.boardId, board = board)
+                R.id.board_move -> detailBoardListener.onClick(board = board)
                 R.id.board_save -> Toast.makeText(context,"게시글 저장",Toast.LENGTH_SHORT).show()
             }
             false
