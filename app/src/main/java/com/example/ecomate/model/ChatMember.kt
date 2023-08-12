@@ -2,9 +2,8 @@ package com.example.ecomate.model
 
 import java.io.Serializable
 
-data class Chat(
-    val chatId: Int,
+data class ChatMember(
+    val memberId: Int,
     val image: String,
-    val name: String,
-    val members: List<ChatMember>,
+    val name: String
 ) : Serializable

@@ -33,12 +33,19 @@ class ChatAdapter(val dataSet: List<Chat>): RecyclerView.Adapter<RecyclerView.Vi
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         binding.apply {
             chatRoomName.text = dataSet[position].name
-            members.text = dataSet[position].members.toString().substring(1,dataSet[position].members.toString().length-1)
+            var chatMembers = ""
+            dataSet[position].members.forEach {
+                chatMembers = chatMembers + it.name + ", "
+            }
+            members.text = chatMembers
             chatMore.setOnClickListener {
                 setPopUpMenu(this.root.context, it)
             }
             root.setOnClickListener {
-                detailChatListener.onClick(chatId = dataSet[position].chatId)
+                detailChatListener.onClick(
+                    chatId = dataSet[position].chatId,
+                    chatInfo = dataSet[position]
+                )
             }
         }
 
@@ -49,7 +56,7 @@ class ChatAdapter(val dataSet: List<Chat>): RecyclerView.Adapter<RecyclerView.Vi
     }
 
     interface DetailChatListener {
-        fun onClick(chatId: Int)
+        fun onClick(chatId: Int, chatInfo: Chat)
     }
 
     lateinit var detailChatListener: DetailChatListener
