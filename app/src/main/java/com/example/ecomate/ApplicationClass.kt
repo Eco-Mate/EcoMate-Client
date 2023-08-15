@@ -15,7 +15,7 @@ class ApplicationClass : Application() {
     companion object {
         const val CHALLENGE_ID = "challengeId"
         const val BOARD_ITEM = "boardItem"
-        const val BOARD_ID = "boardId"
+        const val CHAT_ITEM = "chatItem"
         const val ACCESS_TOKEN = "accessToken"
         const val REFRESH_TOKEN = "refreshToken"
         const val SERVER_URL = "http://15.164.103.242:8081/api/"

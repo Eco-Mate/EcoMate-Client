@@ -3,6 +3,7 @@ package com.example.ecomate.ui.myprofile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecomate.databinding.ActivityFollowInfoBinding
 import com.example.ecomate.model.User
@@ -11,6 +12,7 @@ import com.google.android.material.tabs.TabLayout
 
 class FollowInfoActivity : AppCompatActivity() {
     lateinit var binding: ActivityFollowInfoBinding
+    private val followInfoAdapter = FollowInfoAdapter()
     var followerList: List<User> = mutableListOf(
         User(0,"follower_user_1",""),
         User(1,"follower_user_2",""),
@@ -30,10 +32,18 @@ class FollowInfoActivity : AppCompatActivity() {
         setUi()
     }
     private fun setAdapter() {
+        followInfoAdapter.detailFollowInfoListener =
+            object : FollowInfoAdapter.DetailFollowInfoListener {
+                override fun onClick(userId: Int) {
+                    Toast.makeText(this@FollowInfoActivity, "$userId Clicked!", Toast.LENGTH_SHORT).show()
+                }
+            }
         binding.userRv.apply {
             layoutManager = LinearLayoutManager(this.context)
-            adapter = FollowInfoAdapter(followerList)
+            adapter = followInfoAdapter
         }
+
+        followInfoAdapter.submitList(followerList)
     }
     private fun setUi() {
         binding.apply {
@@ -47,8 +57,8 @@ class FollowInfoActivity : AppCompatActivity() {
             tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when(tab?.text) {
-                        "팔로워" -> binding.userRv.adapter = FollowInfoAdapter(followerList)
-                        "팔로잉" -> binding.userRv.adapter = FollowInfoAdapter(followingList)
+                        "팔로워" -> followInfoAdapter.submitList(followerList)
+                        "팔로잉" -> followInfoAdapter.submitList(followingList)
                     }
                 }
 

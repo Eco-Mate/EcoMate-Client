@@ -3,7 +3,6 @@ package com.example.ecomate.ui.community
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ecomate.ApplicationClass.Companion.BOARD_ID
 import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.R
 import com.example.ecomate.databinding.FragmentCommunityBinding
 import com.example.ecomate.model.Board
-import com.example.ecomate.model.Chat
 import com.example.ecomate.ui.adapter.BoardAllAdapter
 import com.example.ecomate.viewmodel.CommunityViewModel
 
@@ -24,7 +21,6 @@ class CommunityFragment : Fragment() {
     lateinit var binding: FragmentCommunityBinding
     private val communityViewModel: CommunityViewModel by viewModels()
     var isOpened = false
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,11 +38,15 @@ class CommunityFragment : Fragment() {
 
     private fun setUi() {
         // FloatingActionButton 컨트롤
-        val boardAddAniOut = ObjectAnimator.ofFloat(binding.boardAdd, "translationY", -400f).setDuration(500)
-        val boardAddAniIn = ObjectAnimator.ofFloat(binding.boardAdd, "translationY", 0f).setDuration(500)
+        val boardAddAniOut =
+            ObjectAnimator.ofFloat(binding.boardAdd, "translationY", -400f).setDuration(500)
+        val boardAddAniIn =
+            ObjectAnimator.ofFloat(binding.boardAdd, "translationY", 0f).setDuration(500)
 
-        val boardSearchAniOut = ObjectAnimator.ofFloat(binding.boardSearch, "translationY", -200f).setDuration(500)
-        val boardSearchAniIn = ObjectAnimator.ofFloat(binding.boardSearch, "translationY", 0f).setDuration(500)
+        val boardSearchAniOut =
+            ObjectAnimator.ofFloat(binding.boardSearch, "translationY", -200f).setDuration(500)
+        val boardSearchAniIn =
+            ObjectAnimator.ofFloat(binding.boardSearch, "translationY", 0f).setDuration(500)
 
         binding.apply {
             moreOption.setOnClickListener {
@@ -73,26 +73,28 @@ class CommunityFragment : Fragment() {
     }
 
     private fun setAdapter(view: View) {
-        communityViewModel.boardList.observe(viewLifecycleOwner) {
-            val boardAllAdapter = BoardAllAdapter(it)
-            boardAllAdapter.detailBoardListener =
-                object : BoardAllAdapter.DetailBoardListener {
-                    override fun onClick(board: Board) {
-                        val intent = Intent(activity, BoardDetailActivity::class.java)
-                        intent.putExtra(BOARD_ITEM, board)
-                        startActivity(intent)
-                    }
+        val boardAllAdapter = BoardAllAdapter()
+        boardAllAdapter.detailBoardListener =
+            object : BoardAllAdapter.DetailBoardListener {
+                override fun onClick(board: Board) {
+                    val intent = Intent(activity, BoardDetailActivity::class.java)
+                    intent.putExtra(BOARD_ITEM, board)
+                    startActivity(intent)
                 }
-
-            binding.boardRv.apply {
-                layoutManager = LinearLayoutManager(view.context)
-                adapter = boardAllAdapter
-                addItemDecoration(
-                    DividerItemDecoration(
-                        view.context,
-                        LinearLayoutManager.VERTICAL)
-                )
             }
+        binding.boardRv.apply {
+            layoutManager = LinearLayoutManager(view.context)
+            adapter = boardAllAdapter
+            addItemDecoration(
+                DividerItemDecoration(
+                    view.context,
+                    LinearLayoutManager.VERTICAL
+                )
+            )
+        }
+
+        communityViewModel.boardList.observe(viewLifecycleOwner) {
+            boardAllAdapter.submitList(it)
         }
     }
 }

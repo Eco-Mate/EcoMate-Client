@@ -29,26 +29,27 @@ class SaveBoardsActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        communityViewModel.boardList.observe(this) {
-            val boardAllAdapter = BoardAllAdapter(it)
-            boardAllAdapter.detailBoardListener =
-                object : BoardAllAdapter.DetailBoardListener {
-                    override fun onClick(board: Board) {
-                        val intent = Intent(this@SaveBoardsActivity, BoardDetailActivity::class.java)
-                        intent.putExtra(ApplicationClass.BOARD_ITEM, board)
-                        startActivity(intent)
-                    }
+        val boardAllAdapter = BoardAllAdapter()
+        boardAllAdapter.detailBoardListener =
+            object : BoardAllAdapter.DetailBoardListener {
+                override fun onClick(board: Board) {
+                    val intent = Intent(this@SaveBoardsActivity, BoardDetailActivity::class.java)
+                    intent.putExtra(ApplicationClass.BOARD_ITEM, board)
+                    startActivity(intent)
                 }
-
-            binding.saveBoardRv.apply {
-                layoutManager = LinearLayoutManager(this.context)
-                adapter = boardAllAdapter
-                addItemDecoration(
-                    DividerItemDecoration(
-                        this.context,
-                        LinearLayoutManager.VERTICAL)
-                )
             }
+
+        binding.saveBoardRv.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = boardAllAdapter
+            addItemDecoration(
+                DividerItemDecoration(
+                    this.context,
+                    LinearLayoutManager.VERTICAL)
+            )
+        }
+        communityViewModel.boardList.observe(this) {
+            boardAllAdapter.submitList(it)
         }
     }
 
@@ -57,7 +58,6 @@ class SaveBoardsActivity : AppCompatActivity() {
             backBtn.setOnClickListener {
                 finish()
             }
-
         }
     }
 }

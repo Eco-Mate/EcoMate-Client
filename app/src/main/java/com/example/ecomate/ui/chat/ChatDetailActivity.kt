@@ -6,26 +6,27 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecomate.ApplicationClass.Companion.CHAT_ITEM
 import com.example.ecomate.databinding.ActivityChatDetailBinding
 import com.example.ecomate.model.Chat
 import com.example.ecomate.ui.adapter.ChatMemberAdapter
 
 class ChatDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityChatDetailBinding
-    lateinit var chatInfo: Chat
+    lateinit var chatItem: Chat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        chatInfo = intent.getSerializableExtra("chatInfo") as Chat
+        chatItem = intent.getSerializableExtra(CHAT_ITEM) as Chat
         setAdapter()
         setUi()
     }
 
     private fun setAdapter() {
-        val chatMemberAdapter = ChatMemberAdapter(chatInfo.members)
+        val chatMemberAdapter = ChatMemberAdapter()
         chatMemberAdapter.detailMemberListener =
             object : ChatMemberAdapter.DetailMemberListener {
                 override fun onClick(memberId: Int) {
@@ -42,11 +43,13 @@ class ChatDetailActivity : AppCompatActivity() {
                 adapter = chatMemberAdapter
             }
         }
+
+        chatMemberAdapter.submitList(chatItem.members)
     }
     private fun setUi() {
         binding.apply {
-            toolbarTitle.text = chatInfo.name
-            roomName.text = chatInfo.name
+            toolbarTitle.text = chatItem.name
+            roomName.text = chatItem.name
             backBtn.setOnClickListener {
                 finish()
             }

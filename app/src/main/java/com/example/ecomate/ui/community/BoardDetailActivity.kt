@@ -6,6 +6,8 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.ecomate.ApplicationClass
+import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.R
 import com.example.ecomate.databinding.ActivityBoardDetailBinding
 import com.example.ecomate.model.Board
@@ -28,7 +30,7 @@ class BoardDetailActivity : AppCompatActivity() {
         binding = ActivityBoardDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        board = intent.getSerializableExtra("boardItem") as Board
+        board = intent.getSerializableExtra(BOARD_ITEM) as Board
         boardCommentViewModel.getBoardComment(board.boardId)
 
         setAdapter()
@@ -36,16 +38,19 @@ class BoardDetailActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
+        val boardCommentAdapter = BoardCommentAdapter()
+
+        binding.commentRv.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = boardCommentAdapter
+            addItemDecoration(
+                DividerItemDecoration(
+                    this.context,
+                    LinearLayoutManager.VERTICAL)
+            )
+        }
         boardCommentViewModel.boardComment.observe(this) {
-            binding.commentRv.apply {
-                layoutManager = LinearLayoutManager(this.context)
-                adapter = BoardCommentAdapter(it)
-                addItemDecoration(
-                    DividerItemDecoration(
-                        this.context,
-                        LinearLayoutManager.VERTICAL)
-                )
-            }
+            boardCommentAdapter.submitList(it)
         }
     }
     private fun setUi() {
@@ -53,11 +58,11 @@ class BoardDetailActivity : AppCompatActivity() {
             backBtn.setOnClickListener {
                 finish()
             }
-            Glide.with(this@BoardDetailActivity)
+            Glide.with(this.root)
                 .load(board.image)
                 .into(boardImage)
             if (board.profileImage != null && board.profileImage != "") {
-                Glide.with(this@BoardDetailActivity)
+                Glide.with(this.root)
                     .load(board.profileImage)
                     .into(profileImage)
             }
@@ -72,17 +77,21 @@ class BoardDetailActivity : AppCompatActivity() {
             }
             boardLikeBtn.setOnClickListener {
                 if (board.liked) {
-                    boardUnlikeViewModel.postBoardUnlike(BoardLike(board.boardId))
-                    boardUnlikeViewModel.boardUnlike.observe(this@BoardDetailActivity) {
-                        boardLikeNum.text = it.likeCnt.toString()
-                        board.liked = it.liked
+                    boardUnlikeViewModel.apply {
+                        postBoardUnlike(BoardLike(board.boardId))
+                        boardUnlike.observe(this@BoardDetailActivity) {
+                            boardLikeNum.text = it.likeCnt.toString()
+                            board.liked = it.liked
+                        }
                     }
                     boardLikeBtn.setImageResource(R.drawable.green_border_hart)
                 } else {
-                    boardLikeViewModel.postBoardLike(BoardLike(board.boardId))
-                    boardLikeViewModel.boardLike.observe(this@BoardDetailActivity) {
-                        boardLikeNum.text = it.likeCnt.toString()
-                        board.liked = it.liked
+                    boardLikeViewModel.apply {
+                        postBoardLike(BoardLike(board.boardId))
+                        boardLike.observe(this@BoardDetailActivity) {
+                            boardLikeNum.text = it.likeCnt.toString()
+                            board.liked = it.liked
+                        }
                     }
                     boardLikeBtn.setImageResource(R.drawable.green_hart)
                 }
