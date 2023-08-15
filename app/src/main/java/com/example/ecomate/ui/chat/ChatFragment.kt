@@ -7,16 +7,38 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecomate.ApplicationClass.Companion.CHAT_ITEM
 import com.example.ecomate.databinding.FragmentChatBinding
 import com.example.ecomate.model.Chat
+import com.example.ecomate.model.ChatMember
 import com.example.ecomate.ui.adapter.ChatAdapter
 
 class ChatFragment : Fragment() {
     lateinit var binding: FragmentChatBinding
     var chatList: List<Chat> = mutableListOf(
-        Chat(0,"","지구지키기 방범대 1번 방", mutableListOf("짱구","철수","유리","훈이","맹구")),
-        Chat(1,"","지구지키기 방범대 2번 방", mutableListOf("짱구","철구","유수","훈리","맹이")),
-        Chat(2,"","지구지키기 방범대 3번 방", mutableListOf("짱이","철구","유구","훈수","맹리")),
+        Chat(
+            0,
+            "",
+            "지구지키기 방범대 1번 방",
+            mutableListOf(
+                ChatMember(0,"","짱구"),
+                ChatMember(1,"","철수"),
+                ChatMember(2,"","유리"),
+                ChatMember(3,"","훈이"),
+                ChatMember(4,"","맹구"),
+            )),
+        Chat(
+            1,
+            "",
+            "지구지키기 방범대 2번 방",
+            mutableListOf(
+                ChatMember(0,"","짱구"),
+                ChatMember(1,"","철구"),
+                ChatMember(2,"","유수"),
+                ChatMember(3,"","훈리"),
+                ChatMember(4,"","맹이"),
+            )),
+
     )
 
     override fun onCreateView(
@@ -35,12 +57,12 @@ class ChatFragment : Fragment() {
     }
 
     private fun setAdapter(view: View) {
-        val chatAdapter = ChatAdapter(chatList)
+        val chatAdapter = ChatAdapter()
         chatAdapter.detailChatListener =
             object : ChatAdapter.DetailChatListener {
-                override fun onClick(chatId: Int) {
+                override fun onClick(chatItem: Chat) {
                     val intent = Intent(activity, ChatDetailActivity::class.java)
-                    intent.putExtra("chatId", chatId)
+                    intent.putExtra(CHAT_ITEM,chatItem)
                     startActivity(intent)
                 }
             }
@@ -49,6 +71,8 @@ class ChatFragment : Fragment() {
             layoutManager = LinearLayoutManager(view.context)
             adapter = chatAdapter
         }
+
+        chatAdapter.submitList(chatList)
     }
     private fun setUi() {
         binding.apply {

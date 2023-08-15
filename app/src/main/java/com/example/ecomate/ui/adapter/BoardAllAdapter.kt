@@ -8,56 +8,59 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ecomate.R
 import com.example.ecomate.databinding.ItemBoardBinding
 import com.example.ecomate.model.Board
 
-class BoardViewHolder(val binding: ItemBoardBinding): RecyclerView.ViewHolder(binding.root)
-
-class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BoardAllAdapter : ListAdapter<Board, BoardAllAdapter.BoardAllViewHolder>(
+    BoardAllDiffCallback()
+) {
     private lateinit var binding: ItemBoardBinding
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    inner class BoardAllViewHolder(private val binding: ItemBoardBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.Q)
+        fun setBind(board: Board) {
+            binding.apply {
+                if (board.profileImage != null && board.profileImage != "") {
+                    Glide.with(this.root)
+                        .load(board.profileImage)
+                        .into(profileImg)
+                }
+                profileNickname.text = board.nickname
+                boardDate.text = board.createdDate.substring(0, 4) +
+                        "." + board.createdDate.substring(5, 7) +
+                        "." + board.createdDate.substring(8, 10)
+                profileMore.setOnClickListener {
+                    setPopUpMenu(this.root.context, it, board)
+                }
+                Glide.with(this.root)
+                    .load(board.image)
+                    .into(boardImg)
+                boardContent.text = board.boardContent
+                root.setOnClickListener {
+                    detailBoardListener.onClick(board = board)
+                }
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardAllViewHolder {
         binding = ItemBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return BoardViewHolder(binding)
+        return BoardAllViewHolder(binding)
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-
-        binding.apply {
-            if (dataSet[position].profileImage != null && dataSet[position].profileImage != "") {
-                Glide.with(holder.itemView)
-                    .load(dataSet[position].profileImage)
-                    .into(profileImg)
-            }
-            profileNickname.text = dataSet[position].nickname
-            boardDate.text = dataSet[position].createdDate.substring(0,4) +
-                    "." + dataSet[position].createdDate.substring(5,7) +
-                    "." + dataSet[position].createdDate.substring(8,10)
-            profileMore.setOnClickListener {
-                setPopUpMenu(this.root.context, it, dataSet[position])
-            }
-            Glide.with(holder.itemView)
-                .load(dataSet[position].image)
-                .into(boardImg)
-            boardContent.text = dataSet[position].boardContent
-            root.setOnClickListener {
-                detailBoardListener.onClick(boardId = dataSet[position].boardId, board = dataSet[position])
-            }
-        }
-
-    }
-
-    override fun getItemCount(): Int {
-        return dataSet.size
+    override fun onBindViewHolder(holder: BoardAllViewHolder, position: Int) {
+        holder.setBind(getItem(position))
     }
 
     interface DetailBoardListener {
-        fun onClick(boardId: Int, board: Board)
+        fun onClick(board: Board)
     }
 
     lateinit var detailBoardListener: DetailBoardListener
@@ -66,15 +69,25 @@ class BoardAllAdapter(val dataSet: List<Board>): RecyclerView.Adapter<RecyclerVi
     private fun setPopUpMenu(context: Context, view: View, board: Board) {
         val popUp = PopupMenu(context, view)
         popUp.menuInflater.inflate(R.menu.board_menu, popUp.menu)
-        popUp.setOnMenuItemClickListener {item ->
-            when(item.itemId) {
-                R.id.profile_info -> Toast.makeText(context,"프로필 정보 이동",Toast.LENGTH_SHORT).show()
-                R.id.board_move -> detailBoardListener.onClick(boardId = board.boardId, board = board)
-                R.id.board_save -> Toast.makeText(context,"게시글 저장",Toast.LENGTH_SHORT).show()
+        popUp.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.profile_info -> Toast.makeText(context, "프로필 정보 이동", Toast.LENGTH_SHORT).show()
+                R.id.board_move -> detailBoardListener.onClick(board = board)
+                R.id.board_save -> Toast.makeText(context, "게시글 저장", Toast.LENGTH_SHORT).show()
             }
             false
         }
         popUp.setForceShowIcon(true)
         popUp.show()
+    }
+}
+
+class BoardAllDiffCallback : DiffUtil.ItemCallback<Board>() {
+    override fun areItemsTheSame(oldItem: Board, newItem: Board): Boolean {
+        return oldItem.boardId == newItem.boardId
+    }
+
+    override fun areContentsTheSame(oldItem: Board, newItem: Board): Boolean {
+        return oldItem == newItem
     }
 }

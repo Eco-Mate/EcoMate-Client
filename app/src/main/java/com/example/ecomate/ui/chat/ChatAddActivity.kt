@@ -35,7 +35,7 @@ class ChatAddActivity : AppCompatActivity() {
             searchBtn.setOnClickListener {
 
             }
-            chatCreateBtn.setOnClickListener {
+            chatAddBtn.setOnClickListener {
                 finish()
             }
         }

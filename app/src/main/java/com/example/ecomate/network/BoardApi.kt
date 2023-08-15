@@ -1,12 +1,13 @@
 package com.example.ecomate.network
 
 import com.example.ecomate.model.BoardAddResponse
-import com.example.ecomate.model.BoardBody
+import com.example.ecomate.model.BoardLike
+import com.example.ecomate.model.BoardLikeResponse
 import com.example.ecomate.model.BoardList
 import com.example.ecomate.model.CommentList
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -25,4 +26,10 @@ interface BoardApi {
     suspend fun postBoard(
         @PartMap data: HashMap<String, RequestBody>,
         @Part file: MultipartBody.Part): BoardAddResponse
+
+    @POST("v1/boards/like")
+    suspend fun postBoardLike(@Body boardLike: BoardLike): BoardLikeResponse
+
+    @POST("v1/boards/unlike")
+    suspend fun postBoardUnlike(@Body boardLike: BoardLike): BoardLikeResponse
 }
