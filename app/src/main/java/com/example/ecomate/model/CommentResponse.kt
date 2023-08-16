@@ -1,6 +1,6 @@
 package com.example.ecomate.model
 
-data class CommentList(
+data class CommentResponse(
     val message: String,
     val response: Map<String, List<Comment>>
 )
