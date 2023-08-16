@@ -13,14 +13,15 @@ import java.util.concurrent.TimeUnit
 class ApplicationClass : Application() {
 
     companion object {
-        const val CHALLENGE_ID = "challengeId"
-        const val BOARD_ITEM = "boardItem"
-        const val CHAT_ITEM = "chatItem"
-        const val ACCESS_TOKEN = "accessToken"
-        const val REFRESH_TOKEN = "refreshToken"
         const val SERVER_URL = "http://15.164.103.242:8081/api/"
         lateinit var retrofit: Retrofit
         lateinit var sharedPreferencesUtil: SharedPreferences
+        const val MEMBER_ID = "memberId"
+        const val ACCESS_TOKEN = "accessToken"
+        const val REFRESH_TOKEN = "refreshToken"
+        const val CHALLENGE_ID = "challengeId"
+        const val BOARD_ITEM = "boardItem"
+        const val CHAT_ITEM = "chatItem"
     }
 
     override fun onCreate() {

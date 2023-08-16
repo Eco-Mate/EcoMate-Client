@@ -17,8 +17,9 @@ class LogInViewModel : ViewModel() {
     fun logIn(name: String, password: String) {
         viewModelScope.launch {
             val data = RetrofitUtil.logInApi.login(LogInBody(name, password))
-            sharedPreferencesUtil.addAccessToken(data.response.accessToken)
-            sharedPreferencesUtil.addRefreshToken(data.response.refreshToken)
+            sharedPreferencesUtil.setMemberId(data.response.memberId)
+            sharedPreferencesUtil.setAccessToken(data.response.accessToken)
+            sharedPreferencesUtil.setRefreshToken(data.response.refreshToken)
             _token.value = data.response.memberId
         }
     }

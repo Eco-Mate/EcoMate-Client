@@ -1,7 +1,7 @@
 package com.example.ecomate.model
 
 data class TokenInfo(
-    val accessToken: String,
     val memberId: Int,
+    val accessToken: String,
     val refreshToken: String
 )
