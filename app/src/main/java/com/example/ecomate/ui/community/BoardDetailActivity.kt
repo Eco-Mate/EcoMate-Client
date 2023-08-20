@@ -14,24 +14,16 @@ import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.R
 import com.example.ecomate.databinding.ActivityBoardDetailBinding
 import com.example.ecomate.model.Board
-import com.example.ecomate.model.BoardLike
+import com.example.ecomate.model.BoardLikeBody
 import com.example.ecomate.model.Comment
-import com.example.ecomate.model.CommentPost
+import com.example.ecomate.model.CommentPostBody
 import com.example.ecomate.ui.adapter.BoardCommentAdapter
-import com.example.ecomate.viewmodel.BoardCommentViewModel
-import com.example.ecomate.viewmodel.BoardDeleteCommentViewModel
-import com.example.ecomate.viewmodel.BoardLikeViewModel
-import com.example.ecomate.viewmodel.BoardPostCommentViewModel
-import com.example.ecomate.viewmodel.BoardUnlikeViewModel
+import com.example.ecomate.viewmodel.BoardDetailViewModel
 
 class BoardDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityBoardDetailBinding
     lateinit var board: Board
-    private val boardCommentViewModel: BoardCommentViewModel by viewModels()
-    private val boardLikeViewModel: BoardLikeViewModel by viewModels()
-    private val boardUnlikeViewModel: BoardUnlikeViewModel by viewModels()
-    private val boardPostCommentViewModel: BoardPostCommentViewModel by viewModels()
-    private val boardDeleteCommentViewModel: BoardDeleteCommentViewModel by viewModels()
+    private val boardDetailViewModel: BoardDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +31,7 @@ class BoardDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         board = intent.getSerializableExtra(BOARD_ITEM) as Board
-        boardCommentViewModel.getBoardComment(board.boardId)
+        boardDetailViewModel.getComments(board.boardId)
 
         setAdapter()
         setUi()
@@ -51,7 +43,7 @@ class BoardDetailActivity : AppCompatActivity() {
             object : BoardCommentAdapter.DetailCommentListener {
                 override fun onClick(comment: Comment) {
                     if (sharedPreferencesUtil.getMemberId() == comment.memberId) {
-                        boardDeleteCommentViewModel.deleteComment(comment.commentId)
+                        boardDetailViewModel.deleteComment(comment.commentId)
                         Toast.makeText(this@BoardDetailActivity,"댓글이 삭제되었습니다.",Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -61,7 +53,7 @@ class BoardDetailActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this.context)
             adapter = boardCommentAdapter
         }
-        boardCommentViewModel.boardComment.observe(this) {
+        boardDetailViewModel.comments.observe(this) {
             boardCommentAdapter.submitList(it)
         }
     }
@@ -70,39 +62,34 @@ class BoardDetailActivity : AppCompatActivity() {
             backBtn.setOnClickListener {
                 finish()
             }
-            if (board.image != null && board.image != "") {
-                Glide.with(this.root)
-                    .load(board.image)
-                    .into(boardImage)
-            }
+            // 게시글 작성자의 프로필 데이터 설정
             if (board.profileImage != null && board.profileImage != "") {
                 Glide.with(this.root)
                     .load(board.profileImage)
                     .into(profileImage)
             }
             profileNickname.text = board.nickname
-            boardDate.text = board.createdDate.substring(0,4) +
-                    "." + board.createdDate.substring(5,7) +
-                    "." + board.createdDate.substring(8,10)
+            // 게시글 좋아요 버튼 이미지 설정
             if (board.liked) {
                 boardLikeBtn.setImageResource(R.drawable.green_hart)
             } else {
                 boardLikeBtn.setImageResource(R.drawable.green_border_hart)
             }
+            // 게시글 좋아요 버튼 컨트롤
             boardLikeBtn.setOnClickListener {
                 if (board.liked) {
-                    boardUnlikeViewModel.apply {
-                        postBoardUnlike(BoardLike(board.boardId))
-                        boardUnlike.observe(this@BoardDetailActivity) {
+                    boardDetailViewModel.apply {
+                        postUnlike(board.boardId)
+                        unlike.observe(this@BoardDetailActivity) {
                             boardLikeNum.text = it.likeCnt.toString()
                             board.liked = it.liked
                         }
                     }
                     boardLikeBtn.setImageResource(R.drawable.green_border_hart)
                 } else {
-                    boardLikeViewModel.apply {
-                        postBoardLike(BoardLike(board.boardId))
-                        boardLike.observe(this@BoardDetailActivity) {
+                    boardDetailViewModel.apply {
+                        postLike(board.boardId)
+                        like.observe(this@BoardDetailActivity) {
                             boardLikeNum.text = it.likeCnt.toString()
                             board.liked = it.liked
                         }
@@ -110,12 +97,25 @@ class BoardDetailActivity : AppCompatActivity() {
                     boardLikeBtn.setImageResource(R.drawable.green_hart)
                 }
             }
+            // 게시글 데이터 설정
+            if (board.image != null && board.image != "") {
+                Glide.with(this.root)
+                    .load(board.image)
+                    .into(boardImage)
+            }
+            boardDate.text = board.createdDate.substring(0,4) +
+                    "." + board.createdDate.substring(5,7) +
+                    "." + board.createdDate.substring(8,10)
             boardLikeNum.text = board.likeCnt.toString()
             boardChallengeTitle.text = board.challengeTitle
             boardTitle.text = board.boardTitle
             boardContent.text = board.boardContent
+            // 댓글 추가 컨트롤
             commentSendBtn.setOnClickListener {
-                boardPostCommentViewModel.postComment(CommentPost(board.boardId, commentEditText.text.toString()))
+                boardDetailViewModel.postComment(
+                    board.boardId,
+                    commentEditText.text.toString())
+
                 commentEditText.text.clear()
                 hideKeyboard(this@BoardDetailActivity)
             }

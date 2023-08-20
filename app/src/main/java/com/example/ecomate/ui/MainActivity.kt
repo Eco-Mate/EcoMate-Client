@@ -3,6 +3,7 @@ package com.example.ecomate.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.R
 import com.example.ecomate.databinding.ActivityMainBinding
 import com.example.ecomate.ui.chat.ChatFragment
@@ -21,13 +22,18 @@ class MainActivity : AppCompatActivity() {
         setUi()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        sharedPreferencesUtil.deleteToken()
+    }
+
     private fun setUi() {
         supportFragmentManager.beginTransaction().add(R.id.tab_content, HomeFragment()).commit()
-        binding.apply {
-            tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+        binding.tabs.addOnTabSelectedListener(
+            object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     val transaction = supportFragmentManager.beginTransaction()
-                    when(tab?.text) {
+                    when (tab?.text) {
                         "홈" -> transaction.replace(R.id.tab_content, HomeFragment())
                         "커뮤니티" -> transaction.replace(R.id.tab_content, CommunityFragment())
                         "에코챗" -> transaction.replace(R.id.tab_content, ChatFragment())
@@ -44,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onTabReselected(tab: TabLayout.Tab?) {
                     Log.d("TabButton", "onTabReselected...")
                 }
-            })
-        }
+            }
+        )
     }
 }

@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.widget.PopupMenu
@@ -19,14 +20,16 @@ import com.bumptech.glide.Glide
 import com.example.ecomate.databinding.ActivityBoardAddBinding
 import com.example.ecomate.viewmodel.BoardAddViewModel
 import com.example.ecomate.viewmodel.HomeViewModel
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
     lateinit var binding: ActivityBoardAddBinding
-    private val homeViewModel: HomeViewModel by viewModels()
     private val boardAddViewModel: BoardAddViewModel by viewModels()
 
     private val permissionList = arrayOf(
@@ -45,8 +48,9 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
     }
 
     private fun setUi() {
+        // 챌린지 팝업 메뉴 설정
         val popup = PopupMenu(binding.root.context, binding.challengeSelectBtn, Gravity.END)
-        homeViewModel.challengeList.observe(this@BoardAddActivity) { challengeList ->
+        boardAddViewModel.challenges.observe(this@BoardAddActivity) { challengeList ->
             challengeList.forEach {
                 popup.menu.add(0, it.challengeId, 0, it.challengeTitle)
             }
@@ -57,7 +61,9 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
             backBtn.setOnClickListener {
                 finish()
             }
+            // 게시글의 사진 선택 컨트롤
             boardImageBtn.setOnClickListener {
+                // 저장소 접근 관련 permission 확인
                 if (checkPermission()) {
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = "image/*"
@@ -66,14 +72,18 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
                     requestMultiplePermissions.launch(permissionList)
                 }
             }
+            // 게시글의 챌린지 종류 선택 컨트롤
             challengeBox.setOnClickListener {
                 popup.show()
             }
             challengeSelectBtn.setOnClickListener {
                 popup.show()
             }
+            // 게시글 작성 버튼 컨트롤
             boardAddBtn.setOnClickListener {
-                postBoard(boardTitleEditText.text.toString(), boardContentEditText.text.toString())
+                postBoard(
+                    boardTitleEditText.text.toString(),
+                    boardContentEditText.text.toString())
                 finish()
             }
         }
@@ -130,16 +140,17 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
 
         // 이미지 파일 MultipartBody.Part로 변환
         val imageFile = File(path!!)
-        val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
+        val requestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
         val file = MultipartBody.Part.createFormData("file", imageFile.name, requestBody)
 
-        val data: HashMap<String, RequestBody> = HashMap()
-        val challengeId = RequestBody.create("text/plain".toMediaTypeOrNull(), challenge_id.toString())
-        val boardTitle = RequestBody.create("text/plain".toMediaTypeOrNull(), title)
-        val boardContent = RequestBody.create("text/plain".toMediaTypeOrNull(), content)
-        data.put("challengeId",challengeId)
-        data.put("boardTitle", boardTitle)
-        data.put("boardContent", boardContent)
-        boardAddViewModel.postBoard(data, file)
+        // 게시글 추가 정보 RequestBody로 변환
+        val createDto: HashMap<String, RequestBody> = HashMap()
+        val challengeId = challenge_id.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val boardTitle = title.toRequestBody("text/plain".toMediaTypeOrNull())
+        val boardContent = content.toRequestBody("text/plain".toMediaTypeOrNull())
+        createDto["challengeId"] = challengeId
+        createDto["boardTitle"] = boardTitle
+        createDto["boardContent"] = boardContent
+        boardAddViewModel.postBoard(createDto, file)
     }
 }

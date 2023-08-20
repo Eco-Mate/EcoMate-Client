@@ -8,7 +8,7 @@ import com.example.ecomate.model.Board
 import com.example.ecomate.network.RetrofitUtil
 import kotlinx.coroutines.launch
 
-class CommunityViewModel : ViewModel() {
+class SavedBoardsViewModel : ViewModel() {
     private val _boards = MutableLiveData<List<Board>>()
     val boards: LiveData<List<Board>>
         get() = _boards

@@ -73,10 +73,10 @@
             android:name=".ui.myprofile.MyBoardsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.myprofile.SaveBoardsActivity"
+            android:name=".ui.myprofile.SavedBoardsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.myprofile.SaveEchoshopsActivity"
+            android:name=".ui.myprofile.SavedEchoshopsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.myprofile.EditProfileActivity"

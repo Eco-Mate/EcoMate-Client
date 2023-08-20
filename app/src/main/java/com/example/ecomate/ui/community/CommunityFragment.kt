@@ -37,7 +37,7 @@ class CommunityFragment : Fragment() {
     }
 
     private fun setUi() {
-        // FloatingActionButton 컨트롤
+        // FloatingActionButton 이벤트 설정
         val boardAddAniOut =
             ObjectAnimator.ofFloat(binding.boardAdd, "translationY", -400f).setDuration(500)
         val boardAddAniIn =
@@ -50,6 +50,7 @@ class CommunityFragment : Fragment() {
 
         binding.apply {
             moreOption.setOnClickListener {
+                // FloatingActionButton 컨트롤
                 if (isOpened) {
                     binding.moreOption.setImageResource(R.drawable.white_more)
                     boardSearchAniIn.start()
@@ -62,9 +63,11 @@ class CommunityFragment : Fragment() {
                 isOpened = !isOpened
             }
 
+            // 게시글 추가 버튼 컨트롤
             boardAdd.setOnClickListener {
                 startActivity(Intent(activity, BoardAddActivity::class.java))
             }
+            // 게시글 검색 버튼 컨트롤
             boardSearch.setOnClickListener {
                 startActivity(Intent(activity, BoardSearchActivity::class.java))
             }
@@ -93,7 +96,7 @@ class CommunityFragment : Fragment() {
             )
         }
 
-        communityViewModel.boardList.observe(viewLifecycleOwner) {
+        communityViewModel.boards.observe(viewLifecycleOwner) {
             boardAllAdapter.submitList(it)
         }
     }

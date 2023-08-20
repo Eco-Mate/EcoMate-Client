@@ -4,5 +4,5 @@ import java.io.Serializable
 
 data class BoardLikeResponse(
     val message: String,
-    val  response: BoardLikeBody,
+    val  response: BoardLike,
 ) : Serializable
