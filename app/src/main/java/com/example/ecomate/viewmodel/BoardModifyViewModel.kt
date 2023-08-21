@@ -5,13 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ecomate.model.BoardPutBody
 import com.example.ecomate.model.Challenge
 import com.example.ecomate.network.RetrofitUtil
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
-class BoardAddViewModel : ViewModel() {
+class BoardModifyViewModel : ViewModel() {
     private val _challenges = MutableLiveData<List<Challenge>>()
     val challenges: LiveData<List<Challenge>>
         get() = _challenges
@@ -26,9 +27,9 @@ class BoardAddViewModel : ViewModel() {
         }
     }
 
-    fun postBoard(createDto: HashMap<String, RequestBody>, file: MultipartBody.Part) {
+    fun putBoard(boardId: Int, boardTitle: String, boardContent: String) {
         viewModelScope.launch {
-            RetrofitUtil.boardApi.postBoard(createDto, file)
+            RetrofitUtil.boardApi.putBoard(boardId, BoardPutBody(boardTitle, boardContent))
         }
     }
 }

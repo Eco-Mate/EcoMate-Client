@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import com.example.ecomate.ApplicationClass
 import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.databinding.FragmentMyprofileBinding
 import com.example.ecomate.ui.user.LoginActivity
-import com.example.ecomate.viewmodel.CommunityViewModel
+import com.example.ecomate.viewmodel.MyProfileViewModel
 
 class MyProfileFragment : Fragment() {
     lateinit var binding: FragmentMyprofileBinding
-    private val communityViewModel: CommunityViewModel by viewModels()
+    private val myProfileViewModel: MyProfileViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,7 +57,7 @@ class MyProfileFragment : Fragment() {
             }
 
             // 내 게시물
-            communityViewModel.boardList.observe(viewLifecycleOwner) {
+            myProfileViewModel.boards.observe(viewLifecycleOwner) {
                 boardNum.text = it.size.toString() + "건"
                 // 게시물 1
                 Glide.with(this@MyProfileFragment)
@@ -82,18 +81,18 @@ class MyProfileFragment : Fragment() {
 
             // 저장한 게시물
             box4.setOnClickListener {
-                startActivity(Intent(activity,SaveBoardsActivity::class.java))
+                startActivity(Intent(activity,SavedBoardsActivity::class.java))
             }
             saveBoardBtn.setOnClickListener {
-                startActivity(Intent(activity,SaveBoardsActivity::class.java))
+                startActivity(Intent(activity,SavedBoardsActivity::class.java))
             }
 
             // 저장한 에코 매장
             box5.setOnClickListener {
-                startActivity(Intent(activity,SaveEchoshopsActivity::class.java))
+                startActivity(Intent(activity,SavedEchoshopsActivity::class.java))
             }
             saveEchoshopBtn.setOnClickListener {
-                startActivity(Intent(activity,SaveEchoshopsActivity::class.java))
+                startActivity(Intent(activity,SavedEchoshopsActivity::class.java))
             }
 
             // 포리필 편집

@@ -9,11 +9,11 @@ import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.databinding.ActivityBoardSearchBinding
 import com.example.ecomate.model.Board
 import com.example.ecomate.ui.adapter.BoardSearchAdapter
-import com.example.ecomate.viewmodel.CommunityViewModel
+import com.example.ecomate.viewmodel.BoardSearchViewModel
 
 class BoardSearchActivity : AppCompatActivity() {
     lateinit var binding: ActivityBoardSearchBinding
-    private val communityViewModel: CommunityViewModel by viewModels()
+    private val boardSearchViewModel: BoardSearchViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBoardSearchBinding.inflate(layoutInflater)
@@ -40,7 +40,7 @@ class BoardSearchActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(context, 3)
             adapter = boardSearchAdapter
         }
-        communityViewModel.boardList.observe(this) {
+        boardSearchViewModel.boards.observe(this) {
             boardSearchAdapter.submitList(it)
         }
     }

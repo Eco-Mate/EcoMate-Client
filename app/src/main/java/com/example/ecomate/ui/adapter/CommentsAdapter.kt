@@ -1,7 +1,6 @@
 package com.example.ecomate.ui.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,16 +13,15 @@ import com.bumptech.glide.Glide
 import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.R
 import com.example.ecomate.databinding.ItemCommentBinding
-import com.example.ecomate.model.Board
 import com.example.ecomate.model.Comment
 
-class BoardCommentAdapter :
-    ListAdapter<Comment, BoardCommentAdapter.BoardCommentViewHolder>(
+class CommentsAdapter :
+    ListAdapter<Comment, CommentsAdapter.CommentsViewHolder>(
     BoardCommentDiffCallback()
 ) {
     private lateinit var binding: ItemCommentBinding
 
-    inner class BoardCommentViewHolder(private val binding: ItemCommentBinding) :
+    inner class CommentsViewHolder(private val binding: ItemCommentBinding) :
     RecyclerView.ViewHolder(binding.root) {
         fun setBind(comment: Comment) {
             binding.apply {
@@ -43,12 +41,12 @@ class BoardCommentAdapter :
             }
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardCommentViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
         binding = ItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return BoardCommentViewHolder(binding)
+        return CommentsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: BoardCommentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
         holder.setBind(getItem(position))
     }
 

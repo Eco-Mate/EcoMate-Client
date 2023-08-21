@@ -8,7 +8,7 @@ import com.example.ecomate.model.Board
 import com.example.ecomate.network.RetrofitUtil
 import kotlinx.coroutines.launch
 
-class CommunityViewModel : ViewModel() {
+class BoardSearchViewModel : ViewModel() {
     private val _boards = MutableLiveData<List<Board>>()
     val boards: LiveData<List<Board>>
         get() = _boards
@@ -20,12 +20,6 @@ class CommunityViewModel : ViewModel() {
     private fun getBoards() {
         viewModelScope.launch {
             _boards.value = RetrofitUtil.boardApi.getBoards().response["boardDtoList"]
-        }
-    }
-
-    fun deleteBoard(boardId: Int) {
-        viewModelScope.launch {
-            RetrofitUtil.boardApi.deleteBoard(boardId)
         }
     }
 }
