@@ -24,6 +24,12 @@ class BoardDetailViewModel : ViewModel() {
     val like: LiveData<BoardLike>
         get() = _like
 
+    fun deleteBoard(boardId: Int) {
+        viewModelScope.launch {
+            RetrofitUtil.boardApi.deleteBoard(boardId)
+        }
+    }
+
     fun getComments(boardId: Int) {
         viewModelScope.launch {
             _comments.value = RetrofitUtil.boardApi.getComment(boardId).response["commentList"]

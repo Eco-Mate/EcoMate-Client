@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/profile_info"
-        android:title="프로필 정보"/>
-    <item
         android:id="@+id/board_move"
         android:title="게시글 이동"/>
     <item
-        android:id="@+id/board_save"
-        android:title="게시글 저장"/>
+        android:id="@+id/board_edit"
+        android:title="게시글 수정"/>
+    <item
+        android:id="@+id/board_delete"
+        android:title="게시글 삭제"/>
 </menu>

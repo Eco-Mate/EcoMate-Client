@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecomate.ApplicationClass
 import com.example.ecomate.databinding.ActivityMyBoardsBinding
 import com.example.ecomate.model.Board
-import com.example.ecomate.ui.adapter.BoardAllAdapter
+import com.example.ecomate.ui.adapter.BoardsAdapter
 import com.example.ecomate.ui.community.BoardDetailActivity
 import com.example.ecomate.viewmodel.MyBoardsViewModel
 
@@ -27,9 +27,9 @@ class MyBoardsActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        val boardAllAdapter = BoardAllAdapter()
-        boardAllAdapter.detailBoardListener =
-            object : BoardAllAdapter.DetailBoardListener {
+        val boardsAdapter = BoardsAdapter()
+        boardsAdapter.detailBoardListener =
+            object : BoardsAdapter.DetailBoardListener {
                 override fun onClick(board: Board) {
                     val intent = Intent(this@MyBoardsActivity, BoardDetailActivity::class.java)
                     intent.putExtra(ApplicationClass.BOARD_ITEM, board)
@@ -39,7 +39,7 @@ class MyBoardsActivity : AppCompatActivity() {
 
         binding.boardsRv.apply {
             layoutManager = LinearLayoutManager(this.context)
-            adapter = boardAllAdapter
+            adapter = boardsAdapter
             addItemDecoration(
                 DividerItemDecoration(
                     this.context,
@@ -48,7 +48,7 @@ class MyBoardsActivity : AppCompatActivity() {
             )
         }
         myBoardsViewModel.boards.observe(this) {
-            boardAllAdapter.submitList(it)
+            boardsAdapter.submitList(it)
         }
     }
 

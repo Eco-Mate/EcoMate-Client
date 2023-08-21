@@ -22,4 +22,10 @@ class CommunityViewModel : ViewModel() {
             _boards.value = RetrofitUtil.boardApi.getBoards().response["boardDtoList"]
         }
     }
+
+    fun deleteBoard(boardId: Int) {
+        viewModelScope.launch {
+            RetrofitUtil.boardApi.deleteBoard(boardId)
+        }
+    }
 }

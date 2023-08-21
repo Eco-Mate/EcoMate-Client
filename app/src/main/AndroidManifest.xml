@@ -67,6 +67,9 @@
             android:name=".ui.community.BoardDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.community.BoardModifyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.myprofile.FollowInfoActivity"
             android:exported="false" />
         <activity

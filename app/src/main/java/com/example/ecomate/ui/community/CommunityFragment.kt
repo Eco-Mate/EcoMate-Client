@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,7 +15,7 @@ import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.R
 import com.example.ecomate.databinding.FragmentCommunityBinding
 import com.example.ecomate.model.Board
-import com.example.ecomate.ui.adapter.BoardAllAdapter
+import com.example.ecomate.ui.adapter.BoardsAdapter
 import com.example.ecomate.viewmodel.CommunityViewModel
 
 class CommunityFragment : Fragment() {
@@ -76,18 +77,34 @@ class CommunityFragment : Fragment() {
     }
 
     private fun setAdapter(view: View) {
-        val boardAllAdapter = BoardAllAdapter()
-        boardAllAdapter.detailBoardListener =
-            object : BoardAllAdapter.DetailBoardListener {
+        val boardsAdapter = BoardsAdapter()
+        boardsAdapter.detailBoardListener =
+            object : BoardsAdapter.DetailBoardListener {
                 override fun onClick(board: Board) {
                     val intent = Intent(activity, BoardDetailActivity::class.java)
                     intent.putExtra(BOARD_ITEM, board)
                     startActivity(intent)
                 }
             }
+        boardsAdapter.modifyBoardListener =
+            object : BoardsAdapter.ModifyBoardListener {
+                override fun onClick(board: Board) {
+                    val intent = Intent(activity, BoardModifyActivity::class.java)
+                    intent.putExtra(BOARD_ITEM, board)
+                    startActivity(intent)
+                }
+            }
+        boardsAdapter.deleteBoardListener =
+            object : BoardsAdapter.DeleteBoardListener {
+                override fun onClick(board: Board) {
+                    communityViewModel.deleteBoard(board.boardId)
+                    Toast.makeText(this@CommunityFragment.context, "게시글이 삭제되었습니다",Toast.LENGTH_SHORT).show()
+                }
+            }
+
         binding.boardRv.apply {
             layoutManager = LinearLayoutManager(view.context)
-            adapter = boardAllAdapter
+            adapter = boardsAdapter
             addItemDecoration(
                 DividerItemDecoration(
                     view.context,
@@ -97,7 +114,7 @@ class CommunityFragment : Fragment() {
         }
 
         communityViewModel.boards.observe(viewLifecycleOwner) {
-            boardAllAdapter.submitList(it)
+            boardsAdapter.submitList(it)
         }
     }
 }

@@ -12,16 +12,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.R
 import com.example.ecomate.databinding.ItemBoardBinding
 import com.example.ecomate.model.Board
 
-class BoardAllAdapter : ListAdapter<Board, BoardAllAdapter.BoardAllViewHolder>(
+class BoardsAdapter : ListAdapter<Board, BoardsAdapter.BoardsViewHolder>(
     BoardAllDiffCallback()
 ) {
     private lateinit var binding: ItemBoardBinding
 
-    inner class BoardAllViewHolder(private val binding: ItemBoardBinding) :
+    inner class BoardsViewHolder(private val binding: ItemBoardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.Q)
         fun setBind(board: Board) {
@@ -49,35 +50,54 @@ class BoardAllAdapter : ListAdapter<Board, BoardAllAdapter.BoardAllViewHolder>(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardAllViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardsViewHolder {
         binding = ItemBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return BoardAllViewHolder(binding)
+        return BoardsViewHolder(binding)
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
-    override fun onBindViewHolder(holder: BoardAllViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BoardsViewHolder, position: Int) {
         holder.setBind(getItem(position))
     }
 
     interface DetailBoardListener {
         fun onClick(board: Board)
     }
+    interface ModifyBoardListener {
+        fun onClick(board: Board)
+    }
+    interface DeleteBoardListener {
+        fun onClick(board: Board)
+    }
 
     lateinit var detailBoardListener: DetailBoardListener
+    lateinit var modifyBoardListener: ModifyBoardListener
+    lateinit var deleteBoardListener: DeleteBoardListener
 
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun setPopUpMenu(context: Context, view: View, board: Board) {
         val popUp = PopupMenu(context, view)
-        popUp.menuInflater.inflate(R.menu.board_menu, popUp.menu)
-        popUp.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.profile_info -> Toast.makeText(context, "프로필 정보 이동", Toast.LENGTH_SHORT).show()
-                R.id.board_move -> detailBoardListener.onClick(board = board)
-                R.id.board_save -> Toast.makeText(context, "게시글 저장", Toast.LENGTH_SHORT).show()
+        if (sharedPreferencesUtil.getMemberId() == board.memberId) {
+            popUp.menuInflater.inflate(R.menu.my_board_menu, popUp.menu)
+            popUp.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.board_move -> detailBoardListener.onClick(board = board)
+                    R.id.board_edit -> modifyBoardListener.onClick(board = board)
+                    R.id.board_delete -> deleteBoardListener.onClick(board = board)
+                }
+                false
             }
-            false
+        } else {
+            popUp.menuInflater.inflate(R.menu.board_menu, popUp.menu)
+            popUp.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.profile_info -> Toast.makeText(context, "프로필 정보 이동", Toast.LENGTH_SHORT).show()
+                    R.id.board_move -> detailBoardListener.onClick(board = board)
+                    R.id.board_save -> Toast.makeText(context, "게시글 저장", Toast.LENGTH_SHORT).show()
+                }
+                false
+            }
         }
-        popUp.setForceShowIcon(true)
         popUp.show()
     }
 }
