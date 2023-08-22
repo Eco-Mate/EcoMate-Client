@@ -16,6 +16,7 @@ import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -26,10 +27,13 @@ interface BoardApi {
     @GET("v1/boards")
     suspend fun getBoards(): BoardResponse
 
+    @GET("v1/boards/members")
+    suspend fun getMyBoards(): BoardResponse
+
     @Multipart
     @POST("v1/boards")
     suspend fun postBoard(
-        @PartMap createDto: HashMap<String, RequestBody>,
+        @PartMap data: HashMap<String, RequestBody>,
         @Part file: MultipartBody.Part
     ): BoardPostResponse
 

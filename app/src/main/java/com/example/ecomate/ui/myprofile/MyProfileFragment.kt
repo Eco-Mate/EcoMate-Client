@@ -57,23 +57,29 @@ class MyProfileFragment : Fragment() {
             }
 
             // 내 게시물
-            myProfileViewModel.boards.observe(viewLifecycleOwner) {
+            myProfileViewModel.myBoards.observe(viewLifecycleOwner) {
                 boardNum.text = it.size.toString() + "건"
                 // 게시물 1
-                Glide.with(this@MyProfileFragment)
-                    .load(it[0].image)
-                    .into(board1Image)
-                board1Title.text = it[0].boardTitle
+                if (it.size >= 1) {
+                    Glide.with(this@MyProfileFragment)
+                        .load(it[0].image)
+                        .into(board1Image)
+                    board1Title.text = it[0].boardTitle
+                }
                 // 게시물 2
-                Glide.with(this@MyProfileFragment)
-                    .load(it[1].image)
-                    .into(board2Image)
-                board2Title.text = it[1].boardTitle
+                if (it.size >= 2) {
+                    Glide.with(this@MyProfileFragment)
+                        .load(it[1].image)
+                        .into(board2Image)
+                    board2Title.text = it[1].boardTitle
+                }
                 // 게시물 3
-                Glide.with(this@MyProfileFragment)
-                    .load(it[2].image)
-                    .into(board3Image)
-                board3Title.text = it[2].boardTitle
+                if (it.size >= 3) {
+                    Glide.with(this@MyProfileFragment)
+                        .load(it[2].image)
+                        .into(board3Image)
+                    board3Title.text = it[2].boardTitle
+                }
             }
             boardBtn.setOnClickListener {
                 startActivity(Intent(activity,MyBoardsActivity::class.java))

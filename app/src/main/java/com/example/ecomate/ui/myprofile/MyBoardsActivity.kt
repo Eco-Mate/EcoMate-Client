@@ -47,7 +47,7 @@ class MyBoardsActivity : AppCompatActivity() {
                 )
             )
         }
-        myBoardsViewModel.boards.observe(this) {
+        myBoardsViewModel.myBoards.observe(this) {
             boardsAdapter.submitList(it)
         }
     }

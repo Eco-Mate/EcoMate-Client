@@ -9,17 +9,17 @@ import com.example.ecomate.network.RetrofitUtil
 import kotlinx.coroutines.launch
 
 class MyProfileViewModel : ViewModel() {
-    private val _boards = MutableLiveData<List<Board>>()
-    val boards: LiveData<List<Board>>
-        get() = _boards
+    private val _myBoards = MutableLiveData<List<Board>>()
+    val myBoards: LiveData<List<Board>>
+        get() = _myBoards
 
     init {
-        getBoards()
+        getMyBoards()
     }
 
-    private fun getBoards() {
+    private fun getMyBoards() {
         viewModelScope.launch {
-            _boards.value = RetrofitUtil.boardApi.getBoards().response["boardDtoList"]
+            _myBoards.value = RetrofitUtil.boardApi.getMyBoards().response["boardDtoList"]
         }
     }
 }
