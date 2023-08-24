@@ -6,6 +6,7 @@ data class Challenge(
     val challengeTitle: String,
     val createdDate: String,
     val description: String,
-    val goalCnt: Int?,
-    val treePoint: Int,
+    val goalCnt: Int,
+    val image: String,
+    val treePoint: Int
 )

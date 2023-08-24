@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ecomate.R
 import com.example.ecomate.databinding.ItemChallengeAllBinding
 import com.example.ecomate.model.Challenge
+import com.example.ecomate.ui.util.Util.loadImg
 
 class HomeChallengeAllAdapter :
     ListAdapter<Challenge, HomeChallengeAllAdapter.HomeChallengeViewHolder>(
@@ -27,6 +28,7 @@ class HomeChallengeAllAdapter :
                 root.setOnClickListener {
                     detailHomeChallengeListener.onClick(challengeId = challenge.challengeId)
                 }
+                loadImg(binding.root.context, challenge.image, binding.challengeAllIv)
             }
         }
     }

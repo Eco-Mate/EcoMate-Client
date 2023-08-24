@@ -18,12 +18,12 @@ class EditChallengeActivity : AppCompatActivity() {
 
         binding.apply {
             postChallengeBtn.setOnClickListener {
-                editChallengeViewModel.postChallenge(
-                    Challenge(
-                        true, -1,
-                        editTitle.text.toString(), "", editContent.text.toString(), 3, 30
-                    )
-                )
+//                editChallengeViewModel.postChallenge(
+//                    Challenge(
+//                        true, -1,
+//                        editTitle.text.toString(), "", editContent.text.toString(), 3, 30
+//                    )
+//                )
                 finish()
             }
             toolbar.setNavigationOnClickListener {

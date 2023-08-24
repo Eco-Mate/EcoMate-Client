@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecomate.databinding.ItemChallengeBinding
 import com.example.ecomate.model.Challenge
+import com.example.ecomate.ui.util.Util.loadImg
 
 class ChallengeAdapter :
     ListAdapter<Challenge, ChallengeAdapter.ChallengeViewHolder>(ChallengeDiffCallback()) {
@@ -21,6 +22,7 @@ class ChallengeAdapter :
                 root.setOnClickListener {
                     detailChallengeListener.onClick(challengeId = challenge.challengeId)
                 }
+                loadImg(binding.root.context, challenge.image, binding.challengeIv)
             }
         }
     }
