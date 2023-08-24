@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.ecomate.ApplicationClass.Companion.CHALLENGE_ID
+import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.databinding.FragmentHomeBinding
 import com.example.ecomate.ui.adapter.HomeChallengeAllAdapter
 import com.example.ecomate.ui.adapter.MyProgressChallengeAllAdapter
@@ -35,8 +36,17 @@ class HomeFragment : Fragment() {
         setUi()
     }
 
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.getAllChallenge()
+        homeViewModel.getProgressMyChallenge()
+        homeViewModel.getFinishMyChallenge()
+    }
+
     private fun setUi() {
-        binding.challengeEditBtn.visibility = View.GONE
+        if (sharedPreferencesUtil.getMemberId() == 10) {//관리자
+            binding.challengeEditBtn.visibility = View.VISIBLE
+        }
 
         homeViewModel.finishMyChallengeCount.observe(viewLifecycleOwner) {
             binding.challengeCompleteTv.text =
@@ -49,7 +59,7 @@ class HomeFragment : Fragment() {
         binding.challengeALlLayout.setOnClickListener {
             startActivity(Intent(activity, ChallengeActivity::class.java))
         }
-        binding.challengeCompleteBtn.setOnClickListener{
+        binding.challengeCompleteBtn.setOnClickListener {
             startActivity(Intent(activity, ChallengeActivity::class.java))
         }
     }

@@ -28,20 +28,20 @@ class HomeViewModel : ViewModel() {
         getFinishMyChallenge()
     }
 
-    private fun getAllChallenge() {
+    fun getAllChallenge() {
         viewModelScope.launch {
             _challengeList.value = RetrofitUtil.challengeApi.getAllChallenges().response
         }
     }
 
-    private fun getFinishMyChallenge() {
+    fun getFinishMyChallenge() {
         viewModelScope.launch {
             _finishMyChallengeCount.value =
                 RetrofitUtil.challengeApi.getFinishMyChallenge().response
         }
     }
 
-    private fun getProgressMyChallenge() {
+    fun getProgressMyChallenge() {
         viewModelScope.launch {
             _progressMyChallengeList.value =
                 RetrofitUtil.challengeApi.getAllProceedingChallenge().response
