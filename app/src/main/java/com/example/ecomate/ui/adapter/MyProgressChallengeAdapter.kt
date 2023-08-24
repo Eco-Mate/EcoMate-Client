@@ -23,6 +23,12 @@ class MyProgressChallengeAllAdapter :
                 root.setOnClickListener {
                     detailMyProgressChallengeListener.onClick(challengeId = myChallenge.challengeId)
                 }
+
+                challengeProgressBar.max = myChallenge.goalCnt
+                challengeProgressBar.progress = myChallenge.doneCnt
+
+                challengeProgressDes.text =
+                    "${myChallenge.doneCnt / myChallenge.goalCnt}% 달성 (${myChallenge.doneCnt}회/${myChallenge.goalCnt}회)"
             }
         }
     }
