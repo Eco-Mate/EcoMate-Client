@@ -14,6 +14,10 @@ class HomeViewModel : ViewModel() {
     val challengeList: LiveData<List<Challenge>>
         get() = _challengeList
 
+    private val _finishMyChallengeCount = MutableLiveData<Int>()
+    val finishMyChallengeCount: LiveData<Int>
+        get() = _finishMyChallengeCount
+
     private val _progressMyChallengeList = MutableLiveData<List<MyChallenge>>()
     val progressMyChallengeList: LiveData<List<MyChallenge>>
         get() = _progressMyChallengeList
@@ -21,11 +25,19 @@ class HomeViewModel : ViewModel() {
     init {
         getAllChallenge()
         getProgressMyChallenge()
+        getFinishMyChallenge()
     }
 
     private fun getAllChallenge() {
         viewModelScope.launch {
             _challengeList.value = RetrofitUtil.challengeApi.getAllChallenges().response
+        }
+    }
+
+    private fun getFinishMyChallenge() {
+        viewModelScope.launch {
+            _finishMyChallengeCount.value =
+                RetrofitUtil.challengeApi.getFinishMyChallenge().response
         }
     }
 

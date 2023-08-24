@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 class BoardPostCommentViewModel : ViewModel() {
     fun postComment(commentPost: CommentPost) {
         viewModelScope.launch {
-            RetrofitUtil.boardApi.postComment(commentPost)
+          //  RetrofitUtil.boardApi.postComment(commentPost)
         }
     }
 }

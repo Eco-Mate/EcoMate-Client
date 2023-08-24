@@ -3,6 +3,7 @@ package com.example.ecomate.network
 import com.example.ecomate.model.Challenge
 import com.example.ecomate.model.ChallengeDetailBody
 import com.example.ecomate.model.ChallengeListBody
+import com.example.ecomate.model.FinishMyChallengeCountResponse
 import com.example.ecomate.model.MyChallengeListBody
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -21,5 +22,8 @@ interface ChallengeApi {
 
     @GET("v1/myChallenges/member/proceeding")
     suspend fun getAllProceedingChallenge(): MyChallengeListBody
+
+    @GET("v1/myChallenges/member/finish/cnt")
+    suspend fun getFinishMyChallenge(): FinishMyChallengeCountResponse
 
 }

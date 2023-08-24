@@ -36,6 +36,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUi() {
+        binding.challengeCompleteTv.text =
+            "지금까지\\n${homeViewModel.finishMyChallengeCount.value}개의 챌린지를 완료했어요"
         binding.challengeEditBtn.setOnClickListener {
             startActivity(Intent(activity, EditChallengeActivity::class.java))
         }
