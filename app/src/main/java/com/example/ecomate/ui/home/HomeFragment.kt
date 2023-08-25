@@ -2,7 +2,6 @@ package com.example.ecomate.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,6 +92,13 @@ class HomeFragment : Fragment() {
         binding.challengeProgressRv.adapter = myProgressChallengeAllAdapter
 
         homeViewModel.progressMyChallengeList.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.challengeEmptyLayout.visibility = View.VISIBLE
+                binding.challengeProgressRv.visibility = View.INVISIBLE
+            } else {
+                binding.challengeEmptyLayout.visibility = View.INVISIBLE
+                binding.challengeProgressRv.visibility = View.VISIBLE
+            }
             myProgressChallengeAllAdapter.submitList(it)
         }
     }
