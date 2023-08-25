@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecomate.databinding.ActivityEditChallengeBinding
 import com.example.ecomate.model.ChallengeDto
+import com.example.ecomate.ui.LoadingDialog
 import com.example.ecomate.viewmodel.EditChallengeViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -39,14 +40,24 @@ class EditChallengeActivity : AppCompatActivity() {
                         editContent.text.toString(),
                         editGoalCnt.text.toString().toInt(),
                         editTreePoint.text.toString().toInt()
-                    ), uploadChallengeWithImage()
+                    ), uploadChallengeWithImage(),this@EditChallengeActivity
                 )
-                finish()
+                //finish()
             }
             toolbar.setNavigationOnClickListener {
                 finish()
             }
         }
+
+        val dialog = LoadingDialog(this)
+        editChallengeViewModel.isLoading.observe(this) {
+            if (editChallengeViewModel.isLoading.value!!) {
+                dialog.show()
+            } else if (!editChallengeViewModel.isLoading.value!!) {
+                dialog.dismiss()
+            }
+        }
+
     }
 
     private fun openGallery() {
