@@ -49,14 +49,15 @@
         tools:text="100% 달성" />
 
     <Button
-        app:layout_constraintTop_toTopOf="@id/challengeLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/reChallengeBtn"
+        android:layout_width="80dp"
+        android:layout_height="39dp"
         android:backgroundTint="@color/orange"
         android:text="재도전"
-        android:textSize="10sp"
         android:textColor="@color/white"
-        android:layout_width="80dp"
-        android:layout_height="40dp"/>
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/challengeLayout" />
 
     <View
         android:background="@android:color/darker_gray"

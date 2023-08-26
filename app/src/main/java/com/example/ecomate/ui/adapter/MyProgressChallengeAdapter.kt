@@ -6,23 +6,29 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecomate.databinding.ItemChallengeProgressBinding
-import com.example.ecomate.model.MyChallenge
+import com.example.ecomate.model.MyDetailChallenge
 
 
 class MyProgressChallengeAllAdapter :
-    ListAdapter<MyChallenge, MyProgressChallengeAllAdapter.MyProgressChallengeViewHolder>(
+    ListAdapter<MyDetailChallenge, MyProgressChallengeAllAdapter.MyProgressChallengeViewHolder>(
         MyProgressChallengeDiffCallback()
     ) {
     private lateinit var binding: ItemChallengeProgressBinding
 
     inner class MyProgressChallengeViewHolder(private val binding: ItemChallengeProgressBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(myChallenge: MyChallenge) {
+        fun bind(myChallenge: MyDetailChallenge) {
             binding.apply {
                 challengeProgressTitle.text = myChallenge.challengeTitle
                 root.setOnClickListener {
-                    detailMyProgressChallengeListener.onClick(challengeId = myChallenge.challengeId)
+                    detailMyProgressChallengeListener.onClick(myChallenge.myChallengeId)
                 }
+
+                challengeProgressBar.max = myChallenge.goalCnt
+                challengeProgressBar.progress = myChallenge.doneCnt
+
+                challengeProgressDes.text =
+                    "${myChallenge.doneCnt / myChallenge.goalCnt}% 달성 (${myChallenge.doneCnt}회/${myChallenge.goalCnt}회)"
             }
         }
     }
@@ -41,19 +47,19 @@ class MyProgressChallengeAllAdapter :
     }
 
     interface DetailMyProgressChallengeListener {
-        fun onClick(challengeId: Int)
+        fun onClick(myChallengeId: Int)
 
     }
 
     lateinit var detailMyProgressChallengeListener: DetailMyProgressChallengeListener
 }
 
-class MyProgressChallengeDiffCallback : DiffUtil.ItemCallback<MyChallenge>() {
-    override fun areItemsTheSame(oldItem: MyChallenge, newItem: MyChallenge): Boolean {
+class MyProgressChallengeDiffCallback : DiffUtil.ItemCallback<MyDetailChallenge>() {
+    override fun areItemsTheSame(oldItem: MyDetailChallenge, newItem: MyDetailChallenge): Boolean {
         return oldItem.myChallengeId == newItem.myChallengeId
     }
 
-    override fun areContentsTheSame(oldItem: MyChallenge, newItem: MyChallenge): Boolean {
+    override fun areContentsTheSame(oldItem: MyDetailChallenge, newItem: MyDetailChallenge): Boolean {
         return newItem == oldItem
     }
 }
