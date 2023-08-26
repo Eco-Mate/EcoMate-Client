@@ -56,9 +56,6 @@ class HomeFragment : Fragment() {
         binding.challengeEditBtn.setOnClickListener {
             startActivity(Intent(activity, EditChallengeActivity::class.java))
         }
-        binding.challengeALlLayout.setOnClickListener {
-            startActivity(Intent(activity, ChallengeActivity::class.java))
-        }
         binding.challengeCompleteBtn.setOnClickListener {
             startActivity(Intent(activity, ChallengeActivity::class.java))
         }
@@ -83,9 +80,10 @@ class HomeFragment : Fragment() {
         val myProgressChallengeAllAdapter = MyProgressChallengeAllAdapter()
         myProgressChallengeAllAdapter.detailMyProgressChallengeListener =
             object : MyProgressChallengeAllAdapter.DetailMyProgressChallengeListener {
-                override fun onClick(challengeId: Int) {
+                override fun onClick(myChallengeId: Int) {
                     val intent = Intent(activity, ChallengeDetailActivity::class.java)
-                    intent.putExtra(CHALLENGE_ID, challengeId)
+                    intent.putExtra("mode", 2)
+                    intent.putExtra("myChallengeId", myChallengeId)
                     startActivity(intent)
                 }
             }

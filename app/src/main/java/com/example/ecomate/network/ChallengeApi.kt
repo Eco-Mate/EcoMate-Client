@@ -4,7 +4,8 @@ import com.example.ecomate.model.ChallengeDetailBody
 import com.example.ecomate.model.ChallengeDto
 import com.example.ecomate.model.ChallengeListBody
 import com.example.ecomate.model.FinishMyChallengeCountResponse
-import com.example.ecomate.model.MyChallengeListBody
+import com.example.ecomate.model.MyChallengeDetailResponse
+import com.example.ecomate.model.MyChallengeListResponse
 import okhttp3.MultipartBody
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -30,7 +31,7 @@ interface ChallengeApi {
     )
 
     @GET("v1/myChallenges/member/proceeding")
-    suspend fun getAllProceedingChallenge(): MyChallengeListBody
+    suspend fun getAllProceedingChallenge(): MyChallengeListResponse
 
     @GET("v1/myChallenges/member/finish/cnt")
     suspend fun getFinishMyChallenge(): FinishMyChallengeCountResponse
@@ -40,5 +41,17 @@ interface ChallengeApi {
 
     @DELETE("v1/challenges/{challengeId}")
     suspend fun deleteChallenge(@Path("challengeId") challengeId: Int)
+
+    @POST("v1/myChallenges/{challengeId}")
+    suspend fun tryChallenge(@Path("challengeId") challengeId: Int)
+
+    @GET("v1/myChallenges/{myChallengeId}")
+    suspend fun getMyChallenge(@Path("myChallengeId") myChallengeId: Int): MyChallengeDetailResponse
+
+    @DELETE("v1/myChallenges/{myChallengeId}")
+    suspend fun deleteMyChallenge(@Path("myChallengeId") myChallengeId: Int)
+
+    @GET("v1/myChallenges/member/finish")
+    suspend fun getMyFinishChallenge(): MyChallengeListResponse
 
 }

@@ -17,36 +17,69 @@ class ChallengeDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChallengeDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        detailChallengeViewModel.getDetailChallenge(intent.getIntExtra("challengeId", 0))
+
+
 
         setUI()
     }
 
     private fun setUI() {
-        detailChallengeViewModel.challengeDetail.observe(this) {
-            binding.apply {
-                toolbar.title = it.challengeTitle
-                challengeContent.text = it.description
-                loadImg(this@ChallengeDetailActivity, it.image, binding.challengeDetailIv)
-                challengeDetailInfoTv.text = "성공보상 : ${it.treePoint}\n 목표횟수 : ${it.goalCnt}"
+        val mode = intent.getIntExtra("mode", 0)
+        if (mode == 2) {//mychallegne
+            detailChallengeViewModel.getDetailMyChallenge(intent.getIntExtra("myChallengeId", 0))
+            detailChallengeViewModel.myChallengeDetail.observe(this) {
+                binding.apply {
+                    toolbar.title = it.challengeTitle
+                    challengeContent.text = it.description
+                    loadImg(this@ChallengeDetailActivity, it.image, binding.challengeDetailIv)
+                    challengeDetailInfoTv.text = "성공보상 : ${it.treePoint}\n 목표횟수 : ${it.goalCnt}"
 
-                if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 10) {
-                    binding.challengeDetailSelectBtn.text =
-                        if (it.activeYn) "비활성화하기" else "활성화하기"
-                    challengeDetailSelectBtn.setOnClickListener { view ->
-                        detailChallengeViewModel.updateActiveYn(!it.activeYn, it.challengeId)
-                        finish()
+                    binding.challengeDetailSelectBtn.text = "포기하기"
+                    binding.challengeDetailSelectBtn.setOnClickListener { view ->
+                        detailChallengeViewModel.deleteMyChallenge(
+                            it.myChallengeId,
+                            this@ChallengeDetailActivity
+                        )
                     }
                 }
-                binding.challengeDetailDelete.setOnClickListener { view ->
-                    detailChallengeViewModel.deleteChallenge(
-                        it.challengeId,
-                        this@ChallengeDetailActivity
-                    )
-                    //finish()
+            }
+
+        } else {
+            detailChallengeViewModel.getDetailChallenge(intent.getIntExtra("challengeId", 0))
+            detailChallengeViewModel.challengeDetail.observe(this) {
+                binding.apply {
+                    toolbar.title = it.challengeTitle
+                    challengeContent.text = it.description
+                    loadImg(this@ChallengeDetailActivity, it.image, binding.challengeDetailIv)
+                    challengeDetailInfoTv.text = "성공보상 : ${it.treePoint}\n 목표횟수 : ${it.goalCnt}"
+
+                    if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 10) {
+                        binding.challengeDetailSelectBtn.text =
+                            if (it.activeYn) "비활성화하기" else "활성화하기"
+                        challengeDetailSelectBtn.setOnClickListener { view ->
+                            detailChallengeViewModel.updateActiveYn(!it.activeYn, it.challengeId)
+                            finish()
+                        }
+                    } else {
+                        challengeDetailSelectBtn.setOnClickListener { view ->
+                            detailChallengeViewModel.tryChallenge(
+                                it.challengeId,
+                                this@ChallengeDetailActivity
+                            )
+                            //finish()
+                        }
+                    }
+                    binding.challengeDetailDelete.setOnClickListener { view ->
+                        detailChallengeViewModel.deleteChallenge(
+                            it.challengeId,
+                            this@ChallengeDetailActivity
+                        )
+                        //finish()
+                    }
                 }
             }
         }
+
 
         val dialog = LoadingDialog(this)
         detailChallengeViewModel.isLoading.observe(this) {
