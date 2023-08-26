@@ -7,20 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.ecomate.R
-import com.example.ecomate.databinding.AccessDialogBinding
 import com.example.ecomate.databinding.ChatEditDialogBinding
 import com.example.ecomate.databinding.ChatRemoveDialogBinding
 import com.example.ecomate.databinding.ItemChatBinding
-import com.example.ecomate.model.Chat
+import com.example.ecomate.model.ChatInfoItem
 
 class ChatAdapter :
-    ListAdapter<Chat, ChatAdapter.ChatViewHolder>(
+    ListAdapter<ChatInfoItem, ChatAdapter.ChatViewHolder>(
         ChatDiffCallback()
     ) {
     private lateinit var binding: ItemChatBinding
@@ -28,13 +25,13 @@ class ChatAdapter :
     private lateinit var chatEditDialog: Dialog
 
     inner class ChatViewHolder(private val binding: ItemChatBinding) :
-    RecyclerView.ViewHolder(binding.root) {
-        fun setBind(chat: Chat) {
+        RecyclerView.ViewHolder(binding.root) {
+        fun setBind(chat: ChatInfoItem) {
             binding.apply {
                 chatRoomName.text = chat.name
                 var chatMembers = ""
-                chat.members.forEach {
-                    chatMembers = chatMembers + it.name + ", "
+                chat.memberNicknameList.forEach {
+                    chatMembers = chatMembers + it + ", "
                 }
                 members.text = chatMembers
                 chatMore.setOnClickListener {
@@ -42,12 +39,13 @@ class ChatAdapter :
                 }
                 root.setOnClickListener {
                     detailChatListener.onClick(
-                        chatInfo = chat
+                        chat.roomId
                     )
                 }
             }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         binding = ItemChatBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         setChatRemoveDialog(parent)
@@ -60,7 +58,7 @@ class ChatAdapter :
     }
 
     interface DetailChatListener {
-        fun onClick(chatInfo: Chat)
+        fun onClick(roomId: Int)
     }
 
     lateinit var detailChatListener: DetailChatListener
@@ -113,12 +111,12 @@ class ChatAdapter :
     }
 }
 
-class ChatDiffCallback : DiffUtil.ItemCallback<Chat>() {
-    override fun areItemsTheSame(oldItem: Chat, newItem: Chat): Boolean {
-        return oldItem.chatId == newItem.chatId
+class ChatDiffCallback : DiffUtil.ItemCallback<ChatInfoItem>() {
+    override fun areItemsTheSame(oldItem: ChatInfoItem, newItem: ChatInfoItem): Boolean {
+        return oldItem.roomId == newItem.roomId
     }
 
-    override fun areContentsTheSame(oldItem: Chat, newItem: Chat): Boolean {
+    override fun areContentsTheSame(oldItem: ChatInfoItem, newItem: ChatInfoItem): Boolean {
         return oldItem == newItem
     }
 }
