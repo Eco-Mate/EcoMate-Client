@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecomate.model.BoardLikeBody
 import com.example.ecomate.model.BoardLike
+import com.example.ecomate.model.BoardSaveBody
 import com.example.ecomate.model.Comment
 import com.example.ecomate.model.CommentPostBody
 import com.example.ecomate.model.ProfileInfo
@@ -28,6 +29,10 @@ class BoardDetailViewModel : ViewModel() {
     private val _profileInfo = MutableLiveData<ProfileInfo>()
     val profileInfo: LiveData<ProfileInfo>
         get() = _profileInfo
+
+    private val _boardSaveState = MutableLiveData<Boolean>()
+    val boardSaveState: LiveData<Boolean>
+        get() = _boardSaveState
 
     fun deleteBoard(boardId: Int) {
         viewModelScope.launch {
@@ -68,6 +73,24 @@ class BoardDetailViewModel : ViewModel() {
     fun getUserProfile(memberId: Int) {
         viewModelScope.launch {
             _profileInfo.value = RetrofitUtil.memberApi.getUserProfile(memberId).response
+        }
+    }
+
+    fun getBoardSaveState(boardId: Int) {
+        viewModelScope.launch {
+            _boardSaveState.value = RetrofitUtil.boardApi.getBoardSaveState(boardId).response.saved
+        }
+    }
+
+    fun deleteBoardSave(boardId: Int) {
+        viewModelScope.launch {
+            _boardSaveState.value = RetrofitUtil.boardApi.deleteBoardSave(boardId).response.saved
+        }
+    }
+
+    fun postBoardSave(boardId: Int) {
+        viewModelScope.launch {
+            _boardSaveState.value = RetrofitUtil.boardApi.postBoardSave(BoardSaveBody(boardId)).response.saved
         }
     }
 }

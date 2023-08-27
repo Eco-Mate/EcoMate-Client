@@ -67,6 +67,10 @@ interface BoardApi {
     @POST("v1/boards/unlike")
     suspend fun postBoardUnlike(@Body boardLikeBody: BoardLikeBody): BoardLikeResponse
 
+    @GET("v1/board-saves/is-saved/{boardId}")
+    suspend fun getBoardSaveState(
+        @Path("boardId") boardId: Int
+    ): BoardSaveResponse
     @POST("v1/board-saves")
     suspend fun postBoardSave(@Body boardSaveBody: BoardSaveBody): BoardSaveResponse
 
