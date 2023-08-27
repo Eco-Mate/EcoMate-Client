@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/image_select"
+        android:title="프로필 사진 선택"/>
+    <item
         android:id="@+id/image_modify"
         android:title="프로필 사진 변경"/>
     <item

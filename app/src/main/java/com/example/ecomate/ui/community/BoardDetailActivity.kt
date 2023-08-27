@@ -29,6 +29,7 @@ class BoardDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityBoardDetailBinding
     lateinit var board: Board
     private val boardDetailViewModel: BoardDetailViewModel by viewModels()
+    var isSaved: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,10 @@ class BoardDetailActivity : AppCompatActivity() {
 
         board = intent.getSerializableExtra(BOARD_ITEM) as Board
         boardDetailViewModel.getComments(board.boardId)
+        boardDetailViewModel.getBoardSaveState(board.boardId)
+        boardDetailViewModel.boardSaveState.observe(this) {
+            isSaved = it
+        }
 
         setAdapter()
         setUi()
@@ -79,7 +84,24 @@ class BoardDetailActivity : AppCompatActivity() {
                     .into(profileImage)
             }
             profileNickname.text = board.nickname
-
+            // 게시글 저장 버튼 이미지 설정
+            if (isSaved) {
+                boardSaveBtn.setImageResource(R.drawable.star_click)
+            } else {
+                boardSaveBtn.setImageResource(R.drawable.star_unclick)
+            }
+            // 게시글 저장 버튼 컨트롤
+            boardSaveBtn.setOnClickListener {
+                if (isSaved) {
+                    boardSaveBtn.setImageResource(R.drawable.star_unclick)
+                    boardDetailViewModel.deleteBoardSave(board.boardId)
+                    isSaved = false
+                } else {
+                    boardSaveBtn.setImageResource(R.drawable.star_click)
+                    boardDetailViewModel.postBoardSave(board.boardId)
+                    isSaved = true
+                }
+            }
             // 게시글 좋아요 버튼 이미지 설정
             if (board.liked) {
                 boardLikeBtn.setImageResource(R.drawable.green_hart)
