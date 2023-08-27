@@ -39,7 +39,7 @@ class ChatAdapter :
                 }
                 root.setOnClickListener {
                     detailChatListener.onClick(
-                        chat.roomId
+                        chat
                     )
                 }
             }
@@ -58,7 +58,7 @@ class ChatAdapter :
     }
 
     interface DetailChatListener {
-        fun onClick(roomId: Int)
+        fun onClick(chatInfoItem: ChatInfoItem)
     }
 
     lateinit var detailChatListener: DetailChatListener

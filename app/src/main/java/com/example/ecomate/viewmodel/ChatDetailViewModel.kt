@@ -2,8 +2,14 @@ package com.example.ecomate.viewmodel
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.ecomate.ApplicationClass
+import com.example.ecomate.model.Chat
+import com.example.ecomate.network.RetrofitUtil
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import ua.naiksoftware.stomp.Stomp
 import ua.naiksoftware.stomp.StompClient
@@ -14,14 +20,23 @@ class ChatDetailViewModel : ViewModel() {
     val token = ApplicationClass.sharedPreferencesUtil.getAccessToken()
     lateinit var stompClient: StompClient
 
+    private val _chatDetail = MutableLiveData<List<Chat>>()
+    val chatDetail: LiveData<List<Chat>>
+        get() = _chatDetail
+
+    fun getChatDetail(roomId: Int) {
+        viewModelScope.launch {
+            _chatDetail.value = RetrofitUtil.chatApi.getChatDetail(roomId).response.chatList
+        }
+    }
+
     @SuppressLint("CheckResult")
     fun runStomp(roomId: Int) {
         stompClient =
             Stomp.over(
                 Stomp.ConnectionProvider.OKHTTP,
                 "ws://15.164.103.242:8081/api/ecomate-ws",
-
-                )
+            )
         val headerList = arrayListOf<StompHeader>()
         headerList.add(StompHeader("Authorization", token))
         stompClient.connect(headerList)

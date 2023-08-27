@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecomate.ApplicationClass.Companion.CHAT_ITEM
 import com.example.ecomate.databinding.FragmentChatBinding
 import com.example.ecomate.model.Chat
+import com.example.ecomate.model.ChatInfoItem
 import com.example.ecomate.ui.adapter.ChatAdapter
 import com.example.ecomate.viewmodel.ChatViewModel
 
@@ -62,9 +63,9 @@ class ChatFragment : Fragment() {
         val chatAdapter = ChatAdapter()
         chatAdapter.detailChatListener =
             object : ChatAdapter.DetailChatListener {
-                override fun onClick(roomId: Int) {
+                override fun onClick(chatInfoItem: ChatInfoItem) {
                     val intent = Intent(activity, ChatDetailActivity::class.java)
-                    intent.putExtra("roomId", roomId)
+                    intent.putExtra("chatInfoItem", chatInfoItem)
                     startActivity(intent)
                 }
             }
