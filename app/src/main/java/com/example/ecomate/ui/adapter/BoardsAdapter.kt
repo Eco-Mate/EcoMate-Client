@@ -69,10 +69,14 @@ class BoardsAdapter : ListAdapter<Board, BoardsAdapter.BoardsViewHolder>(
     interface DeleteBoardListener {
         fun onClick(board: Board)
     }
+    interface ProfileInfoListener {
+        fun onClick(board: Board)
+    }
 
     lateinit var detailBoardListener: DetailBoardListener
     lateinit var modifyBoardListener: ModifyBoardListener
     lateinit var deleteBoardListener: DeleteBoardListener
+    lateinit var profileInfoListener: ProfileInfoListener
 
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun setPopUpMenu(context: Context, view: View, board: Board) {
@@ -89,11 +93,11 @@ class BoardsAdapter : ListAdapter<Board, BoardsAdapter.BoardsViewHolder>(
             }
         } else {
             popUp.menuInflater.inflate(R.menu.board_menu, popUp.menu)
+            popUp.menu.removeItem(R.id.board_save)
             popUp.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
-                    R.id.profile_info -> Toast.makeText(context, "프로필 정보 이동", Toast.LENGTH_SHORT).show()
+                    R.id.profile_info -> profileInfoListener.onClick(board = board)
                     R.id.board_move -> detailBoardListener.onClick(board = board)
-                    R.id.board_save -> Toast.makeText(context, "게시글 저장", Toast.LENGTH_SHORT).show()
                 }
                 false
             }

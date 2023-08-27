@@ -7,6 +7,9 @@ import com.example.ecomate.model.BoardLikeResponse
 import com.example.ecomate.model.BoardPutBody
 import com.example.ecomate.model.BoardPutResponse
 import com.example.ecomate.model.BoardResponse
+import com.example.ecomate.model.BoardSaveBody
+import com.example.ecomate.model.BoardSaveDeleteResponse
+import com.example.ecomate.model.BoardSaveResponse
 import com.example.ecomate.model.CommentDeleteResponse
 import com.example.ecomate.model.CommentResponse
 import com.example.ecomate.model.CommentPostBody
@@ -16,6 +19,7 @@ import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -26,10 +30,16 @@ interface BoardApi {
     @GET("v1/boards")
     suspend fun getBoards(): BoardResponse
 
+    @GET("v1/boards/members")
+    suspend fun getMyBoards(): BoardResponse
+
+    @GET("v1/boards/save")
+    suspend fun getSaveBoards(): BoardResponse
+
     @Multipart
     @POST("v1/boards")
     suspend fun postBoard(
-        @PartMap createDto: HashMap<String, RequestBody>,
+        @PartMap data: HashMap<String, RequestBody>,
         @Part file: MultipartBody.Part
     ): BoardPostResponse
 
@@ -56,4 +66,15 @@ interface BoardApi {
 
     @POST("v1/boards/unlike")
     suspend fun postBoardUnlike(@Body boardLikeBody: BoardLikeBody): BoardLikeResponse
+
+    @POST("v1/board-saves")
+    suspend fun postBoardSave(@Body boardSaveBody: BoardSaveBody): BoardSaveResponse
+
+    @DELETE("v1/board-saves/{boardId}")
+    suspend fun deleteBoardSave(@Path("boardId") boardId: Int): BoardSaveDeleteResponse
+
+    @GET("v1/boards/members/{reqMemberId}")
+    suspend fun getUserBoards(
+        @Path("reqMemberId") reqMemberId: Int
+    ): BoardResponse
 }

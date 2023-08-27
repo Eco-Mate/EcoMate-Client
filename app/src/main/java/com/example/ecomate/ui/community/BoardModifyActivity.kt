@@ -70,8 +70,8 @@ class BoardModifyActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListen
             backBtn.setOnClickListener {
                 finish()
             }
-            boardTitleEditText.hint = board.boardTitle
-            boardContentEditText.hint = board.boardContent
+            boardTitleEditText.setText(board.boardTitle)
+            boardContentEditText.setText(board.boardContent)
             // 게시글의 사진 선택 컨트롤
             Glide.with(this.root.context)
                 .load(board.image)

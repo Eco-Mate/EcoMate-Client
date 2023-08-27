@@ -19,7 +19,7 @@ class SavedBoardsViewModel : ViewModel() {
 
     private fun getBoards() {
         viewModelScope.launch {
-            _boards.value = RetrofitUtil.boardApi.getBoards().response["boardDtoList"]
+            _boards.value = RetrofitUtil.boardApi.getSaveBoards().response["boardDtoList"]
         }
     }
 }
