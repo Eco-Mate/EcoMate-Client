@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.example.ecomate.ApplicationClass
 import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.databinding.FragmentMyprofileBinding
+import com.example.ecomate.model.Board
+import com.example.ecomate.ui.community.BoardDetailActivity
 import com.example.ecomate.ui.user.LoginActivity
 import com.example.ecomate.viewmodel.MyProfileViewModel
 
@@ -32,6 +35,17 @@ class MyProfileFragment : Fragment() {
 
     private fun setUi() {
         binding.apply {
+            myProfileViewModel.profileInfo.observe(viewLifecycleOwner) {
+                if (it.profileImage != null && it.profileImage != "") {
+                    Glide.with(this.root.context)
+                        .load(it.profileImage)
+                        .into(profileImg)
+                }
+                profileNickname.text = it.nickname
+                profileState.text = it.statusMessage
+                profileFollower.text = "${it.followerCnt}\n팔로워"
+                profileFollowing.text = "${it.followingCnt}\n팔로워"
+            }
             // 팔로워
             profileFollower.setOnClickListener {
                 var intent = Intent(activity, FollowInfoActivity::class.java)
@@ -57,23 +71,47 @@ class MyProfileFragment : Fragment() {
             }
 
             // 내 게시물
-            myProfileViewModel.boards.observe(viewLifecycleOwner) {
+            myProfileViewModel.myBoards.observe(viewLifecycleOwner) {
                 boardNum.text = it.size.toString() + "건"
                 // 게시물 1
-                Glide.with(this@MyProfileFragment)
-                    .load(it[0].image)
-                    .into(board1Image)
-                board1Title.text = it[0].boardTitle
+                if (it.size >= 1) {
+                    val board: Board = it[0]
+                    Glide.with(this@MyProfileFragment)
+                        .load(board.image)
+                        .into(board1Image)
+                    board1Title.text = board.boardTitle
+                    board1.setOnClickListener {
+                        val intent = Intent(activity, BoardDetailActivity::class.java)
+                        intent.putExtra(ApplicationClass.BOARD_ITEM, board)
+                        startActivity(intent)
+                    }
+                }
                 // 게시물 2
-                Glide.with(this@MyProfileFragment)
-                    .load(it[1].image)
-                    .into(board2Image)
-                board2Title.text = it[1].boardTitle
+                if (it.size >= 2) {
+                    val board: Board = it[1]
+                    Glide.with(this@MyProfileFragment)
+                        .load(board.image)
+                        .into(board2Image)
+                    board2Title.text = board.boardTitle
+                    board2.setOnClickListener {
+                        val intent = Intent(activity, BoardDetailActivity::class.java)
+                        intent.putExtra(ApplicationClass.BOARD_ITEM, board)
+                        startActivity(intent)
+                    }
+                }
                 // 게시물 3
-                Glide.with(this@MyProfileFragment)
-                    .load(it[2].image)
-                    .into(board3Image)
-                board3Title.text = it[2].boardTitle
+                if (it.size >= 3) {
+                    val board: Board = it[2]
+                    Glide.with(this@MyProfileFragment)
+                        .load(board.image)
+                        .into(board3Image)
+                    board3Title.text = board.boardTitle
+                    board3.setOnClickListener {
+                        val intent = Intent(activity, BoardDetailActivity::class.java)
+                        intent.putExtra(ApplicationClass.BOARD_ITEM, board)
+                        startActivity(intent)
+                    }
+                }
             }
             boardBtn.setOnClickListener {
                 startActivity(Intent(activity,MyBoardsActivity::class.java))

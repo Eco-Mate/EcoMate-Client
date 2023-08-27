@@ -8,6 +8,7 @@ import com.example.ecomate.model.BoardLikeBody
 import com.example.ecomate.model.BoardLike
 import com.example.ecomate.model.Comment
 import com.example.ecomate.model.CommentPostBody
+import com.example.ecomate.model.ProfileInfo
 import com.example.ecomate.network.RetrofitUtil
 import kotlinx.coroutines.launch
 
@@ -23,6 +24,10 @@ class BoardDetailViewModel : ViewModel() {
     private val _like = MutableLiveData<BoardLike>()
     val like: LiveData<BoardLike>
         get() = _like
+
+    private val _profileInfo = MutableLiveData<ProfileInfo>()
+    val profileInfo: LiveData<ProfileInfo>
+        get() = _profileInfo
 
     fun deleteBoard(boardId: Int) {
         viewModelScope.launch {
@@ -57,6 +62,12 @@ class BoardDetailViewModel : ViewModel() {
     fun postLike(boardId: Int) {
         viewModelScope.launch {
             _like.value = RetrofitUtil.boardApi.postBoardLike(BoardLikeBody(boardId)).response
+        }
+    }
+
+    fun getUserProfile(memberId: Int) {
+        viewModelScope.launch {
+            _profileInfo.value = RetrofitUtil.memberApi.getUserProfile(memberId).response
         }
     }
 }

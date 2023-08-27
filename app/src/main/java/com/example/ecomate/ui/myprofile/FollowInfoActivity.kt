@@ -4,30 +4,31 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecomate.databinding.ActivityFollowInfoBinding
 import com.example.ecomate.model.User
 import com.example.ecomate.ui.adapter.FollowInfoAdapter
+import com.example.ecomate.viewmodel.FollowInfoViewModel
+import com.example.ecomate.viewmodel.MyProfileViewModel
 import com.google.android.material.tabs.TabLayout
 
 class FollowInfoActivity : AppCompatActivity() {
     lateinit var binding: ActivityFollowInfoBinding
     private val followInfoAdapter = FollowInfoAdapter()
-    var followerList: List<User> = mutableListOf(
-        User(0,"follower_user_1",""),
-        User(1,"follower_user_2",""),
-        User(2,"follower_user_3","")
-    )
-    var followingList: List<User> = mutableListOf(
-        User(0,"following_user_1",""),
-        User(1,"following_user_2",""),
-        User(2,"following_user_3","")
-    )
+    lateinit var nickname: String
+    private val followInfoViewModel: FollowInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFollowInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        nickname = intent.getStringExtra("userNickname").toString()
+        followInfoViewModel.getFollowerUsers(nickname)
+        followInfoViewModel.getFollowingUsers(nickname)
+
         setAdapter()
         setUi()
     }
@@ -43,22 +44,32 @@ class FollowInfoActivity : AppCompatActivity() {
             adapter = followInfoAdapter
         }
 
-        followInfoAdapter.submitList(followerList)
+        followInfoViewModel.followerUsers.observe(this@FollowInfoActivity) {
+            followInfoAdapter.submitList(it)
+        }
     }
     private fun setUi() {
         binding.apply {
             backBtn.setOnClickListener {
                 finish()
             }
-            userNickname.text = intent.getStringExtra("userNickname")
+            userNickname.text = nickname
             searchBtn.setOnClickListener {
 
             }
             tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when(tab?.text) {
-                        "팔로워" -> followInfoAdapter.submitList(followerList)
-                        "팔로잉" -> followInfoAdapter.submitList(followingList)
+                        "팔로워" -> {
+                            followInfoViewModel.followerUsers.observe(this@FollowInfoActivity) {
+                                followInfoAdapter.submitList(it)
+                            }
+                        }
+                        "팔로잉" -> {
+                            followInfoViewModel.followingUsers.observe(this@FollowInfoActivity) {
+                                followInfoAdapter.submitList(it)
+                            }
+                        }
                     }
                 }
 

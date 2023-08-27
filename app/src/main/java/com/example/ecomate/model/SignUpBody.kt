@@ -4,5 +4,6 @@ data class SignUpBody(
     val name: String,
     val password: String,
     val nickname: String,
-    val email: String
+    val email: String,
+    val statusMessage: String,
 )

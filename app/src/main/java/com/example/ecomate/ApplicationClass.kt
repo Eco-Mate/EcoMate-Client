@@ -6,6 +6,7 @@ import com.example.ecomate.common.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -22,11 +23,13 @@ class ApplicationClass : Application() {
         const val CHALLENGE_ID = "challengeId"
         const val BOARD_ITEM = "boardItem"
         const val CHAT_ITEM = "chatItem"
+        const val USER_INFO = "userInfo"
     }
 
     override fun onCreate() {
         super.onCreate()
         sharedPreferencesUtil = SharedPreferences(applicationContext)
+        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         val okHttpClient = OkHttpClient.Builder()
             .readTimeout(5000, TimeUnit.MILLISECONDS)
             .connectTimeout(5000, TimeUnit.MILLISECONDS)
@@ -43,6 +46,7 @@ class ApplicationClass : Application() {
                 val request = requestBuilder.build()
                 chain.proceed(request)
             }
+            .addInterceptor(loggingInterceptor)
             .build()
         retrofit = Retrofit.Builder()
             .baseUrl(SERVER_URL)

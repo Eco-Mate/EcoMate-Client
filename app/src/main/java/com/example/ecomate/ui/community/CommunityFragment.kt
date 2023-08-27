@@ -12,10 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
+import com.example.ecomate.ApplicationClass.Companion.USER_INFO
 import com.example.ecomate.R
 import com.example.ecomate.databinding.FragmentCommunityBinding
 import com.example.ecomate.model.Board
 import com.example.ecomate.ui.adapter.BoardsAdapter
+import com.example.ecomate.ui.myprofile.UserProfileActivity
 import com.example.ecomate.viewmodel.CommunityViewModel
 
 class CommunityFragment : Fragment() {
@@ -99,6 +101,17 @@ class CommunityFragment : Fragment() {
                 override fun onClick(board: Board) {
                     communityViewModel.deleteBoard(board.boardId)
                     Toast.makeText(this@CommunityFragment.context, "게시글이 삭제되었습니다",Toast.LENGTH_SHORT).show()
+                }
+            }
+        boardsAdapter.profileInfoListener =
+            object : BoardsAdapter.ProfileInfoListener {
+                override fun onClick(board: Board) {
+                    communityViewModel.getUserProfile(board.memberId)
+                    communityViewModel.profileInfo.observe(viewLifecycleOwner) {
+                        val intent = Intent(activity, UserProfileActivity::class.java)
+                        intent.putExtra(USER_INFO, it)
+                        startActivity(intent)
+                    }
                 }
             }
 

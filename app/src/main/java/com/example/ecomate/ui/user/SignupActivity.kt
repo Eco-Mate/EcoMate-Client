@@ -33,11 +33,18 @@ class SignupActivity : AppCompatActivity() {
                         signupIdEditText.text.toString(),
                         signupPasswordEditText.text.toString(),
                         signupNicknameEditText.text.toString(),
-                        signupEmailEditText.text.toString()
+                        signupEmailEditText.text.toString(),
+                        signupStateEditText.text.toString()
                     )
                     Toast.makeText(this.root.context,"회원가입 성공!",Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this.root.context,"비밀번호가 틀립니다!",Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+
+    private fun checkPassword() {
+
     }
 }

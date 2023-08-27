@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
     <TextView
-        android:id="@+id/post_info"
+        android:id="@+id/post_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="대중교통 챌린지를 시작하게 되었는데 @#$!@#$!!@"
@@ -42,7 +42,7 @@
         android:textSize="12dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/post_info" />
+        app:layout_constraintTop_toBottomOf="@id/post_content" />
     <TextView
         android:id="@+id/post_like"
         android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
         android:id="@+id/post_image"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:background="@drawable/challenge_ex_2"
+        android:src="@drawable/challenge_ex_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

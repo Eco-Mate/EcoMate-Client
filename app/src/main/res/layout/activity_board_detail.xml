@@ -42,8 +42,8 @@
         app:layout_constraintTop_toBottomOf="@id/board_image">
         <ImageView
             android:id="@+id/profile_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:src="@drawable/profile_image_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -70,6 +70,16 @@
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toEndOf="@id/profile_image"
             app:layout_constraintTop_toBottomOf="@id/profile_nickname"/>
+        <ImageButton
+            android:id="@+id/board_save_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/star_click"
+            android:background="@android:color/transparent"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toStartOf="@id/board_like_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
         <ImageButton
             android:id="@+id/board_like_btn"
             android:layout_width="24dp"
