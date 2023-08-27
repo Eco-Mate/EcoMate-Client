@@ -36,6 +36,9 @@ interface BoardApi {
     @GET("v1/boards/save")
     suspend fun getSaveBoards(): BoardResponse
 
+    @GET("v1/boards/popular-posts")
+    suspend fun getPopularBoards(): BoardResponse
+
     @Multipart
     @POST("v1/boards")
     suspend fun postBoard(

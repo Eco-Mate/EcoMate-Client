@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ecomate.model.Board
 import com.example.ecomate.model.Challenge
 import com.example.ecomate.model.MyDetailChallenge
 import com.example.ecomate.network.RetrofitUtil
@@ -22,10 +23,15 @@ class HomeViewModel : ViewModel() {
     val progressMyChallengeList: LiveData<List<MyDetailChallenge>>
         get() = _progressMyChallengeList
 
+    private val _popularBoards = MutableLiveData<List<Board>>()
+    val popularBoards: LiveData<List<Board>>
+        get() = _popularBoards
+
     init {
         getAllChallenge()
         getProgressMyChallenge()
         getFinishMyChallenge()
+        getPopularBoards()
     }
 
     fun getAllChallenge() {
@@ -46,6 +52,12 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             _progressMyChallengeList.value =
                 RetrofitUtil.challengeApi.getAllProceedingChallenge().response.toMutableList()
+        }
+    }
+
+    fun getPopularBoards() {
+        viewModelScope.launch {
+            _popularBoards.value = RetrofitUtil.boardApi.getPopularBoards().response["boardDtoList"]
         }
     }
 }
