@@ -1,17 +1,17 @@
 package com.example.ecomate.ui.chat
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
-import android.widget.Toast
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecomate.databinding.ActivityChatDetailBinding
-import com.example.ecomate.ui.adapter.ChatMemberAdapter
+import com.example.ecomate.viewmodel.ChatDetailViewModel
 
 class ChatDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityChatDetailBinding
     var chatItem: Int = 0
+    val chatDetailViewModel : ChatDetailViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +20,27 @@ class ChatDetailActivity : AppCompatActivity() {
 
         chatItem = intent.getIntExtra("roomId", 0)
 
+        Log.e("chatItem",chatItem.toString())
+
+        chatDetailViewModel.runStomp(chatItem)
+
+
+        binding.chatSendBtn.setOnClickListener {
+            chatDetailViewModel.sendStomp(binding.chatEt.text.toString(),chatItem)
+        }
 
 //
 //        setAdapter()
 //        setUi()
     }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        chatDetailViewModel.stompClient.disconnect()
+    }
+
+
 
 //    private fun setAdapter() {
 //        val chatMemberAdapter = ChatMemberAdapter()
