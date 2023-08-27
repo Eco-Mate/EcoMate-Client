@@ -7,14 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.ApplicationClass.Companion.CHALLENGE_ID
 import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.databinding.FragmentHomeBinding
+import com.example.ecomate.model.Board
 import com.example.ecomate.ui.adapter.HomeChallengeAllAdapter
+import com.example.ecomate.ui.adapter.HomePopularBoardsAdapter
 import com.example.ecomate.ui.adapter.MyProgressChallengeAllAdapter
 import com.example.ecomate.ui.challenge.ChallengeActivity
 import com.example.ecomate.ui.challenge.ChallengeDetailActivity
 import com.example.ecomate.ui.challenge.EditChallengeActivity
+import com.example.ecomate.ui.community.BoardDetailActivity
 import com.example.ecomate.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -41,6 +46,7 @@ class HomeFragment : Fragment() {
         homeViewModel.getAllChallenge()
         homeViewModel.getProgressMyChallenge()
         homeViewModel.getFinishMyChallenge()
+        homeViewModel.getPopularBoards()
     }
 
     private fun setUi() {
@@ -98,6 +104,22 @@ class HomeFragment : Fragment() {
                 binding.challengeProgressRv.visibility = View.VISIBLE
             }
             myProgressChallengeAllAdapter.submitList(it)
+        }
+
+        val homePopularBoardsAdapter = HomePopularBoardsAdapter()
+        homePopularBoardsAdapter.detailHomeBoardListener =
+            object : HomePopularBoardsAdapter.DetailHomeBoardListener {
+                override fun onClick(board: Board) {
+                    val intent = Intent(activity, BoardDetailActivity::class.java)
+                    intent.putExtra(BOARD_ITEM, board)
+                    startActivity(intent)
+                }
+            }
+
+        binding.popularBoardsRv.adapter = homePopularBoardsAdapter
+
+        homeViewModel.popularBoards.observe(viewLifecycleOwner) {
+            homePopularBoardsAdapter.submitList(it)
         }
     }
 }
