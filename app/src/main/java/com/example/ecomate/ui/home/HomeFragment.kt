@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.ecomate.ApplicationClass.Companion.CHALLENGE_ID
+import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.databinding.FragmentHomeBinding
 import com.example.ecomate.ui.adapter.HomeChallengeAllAdapter
 import com.example.ecomate.ui.adapter.MyProgressChallengeAllAdapter
@@ -35,11 +36,27 @@ class HomeFragment : Fragment() {
         setUi()
     }
 
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.getAllChallenge()
+        homeViewModel.getProgressMyChallenge()
+        homeViewModel.getFinishMyChallenge()
+    }
+
     private fun setUi() {
+        if (sharedPreferencesUtil.getMemberId() == 10) {//관리자
+            binding.challengeEditBtn.visibility = View.VISIBLE
+        }
+
+        homeViewModel.finishMyChallengeCount.observe(viewLifecycleOwner) {
+            binding.challengeCompleteTv.text =
+                "지금까지\n${it}개의 챌린지를 완료했어요"
+        }
+
         binding.challengeEditBtn.setOnClickListener {
             startActivity(Intent(activity, EditChallengeActivity::class.java))
         }
-        binding.challengeALlLayout.setOnClickListener {
+        binding.challengeCompleteBtn.setOnClickListener {
             startActivity(Intent(activity, ChallengeActivity::class.java))
         }
     }
@@ -57,21 +74,29 @@ class HomeFragment : Fragment() {
         binding.challengeAllRv.adapter = homeChallengeAllAdapter
 
         homeViewModel.challengeList.observe(viewLifecycleOwner) {
-            homeChallengeAllAdapter.submitList(it)
+            homeChallengeAllAdapter.submitList(it.toMutableList())
         }
 
         val myProgressChallengeAllAdapter = MyProgressChallengeAllAdapter()
         myProgressChallengeAllAdapter.detailMyProgressChallengeListener =
             object : MyProgressChallengeAllAdapter.DetailMyProgressChallengeListener {
-                override fun onClick(challengeId: Int) {
+                override fun onClick(myChallengeId: Int) {
                     val intent = Intent(activity, ChallengeDetailActivity::class.java)
-                    intent.putExtra(CHALLENGE_ID, challengeId)
+                    intent.putExtra("mode", 2)
+                    intent.putExtra("myChallengeId", myChallengeId)
                     startActivity(intent)
                 }
             }
         binding.challengeProgressRv.adapter = myProgressChallengeAllAdapter
 
         homeViewModel.progressMyChallengeList.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.challengeEmptyLayout.visibility = View.VISIBLE
+                binding.challengeProgressRv.visibility = View.INVISIBLE
+            } else {
+                binding.challengeEmptyLayout.visibility = View.INVISIBLE
+                binding.challengeProgressRv.visibility = View.VISIBLE
+            }
             myProgressChallengeAllAdapter.submitList(it)
         }
     }

@@ -81,8 +81,9 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/cardview_dotte_border"
                 android:gravity="center"
+                android:padding="10dp"
                 android:orientation="vertical"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@id/challengeProgressLayout"
                 app:layout_constraintTop_toBottomOf="@id/challengeProgressLayout">
 
@@ -109,8 +110,8 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/challengeProgressRv"
-                app:layout_constraintTop_toBottomOf="@id/challengeProgressRv">
+                app:layout_constraintStart_toStartOf="@id/challengeEmptyLayout"
+                app:layout_constraintTop_toBottomOf="@id/challengeEmptyLayout">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -186,6 +187,7 @@
         android:backgroundTint="@color/primary"
         android:src="@drawable/baseline_add_24"
         android:tint="@color/white"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@null" />
