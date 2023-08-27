@@ -23,6 +23,7 @@ class ApplicationClass : Application() {
         const val CHALLENGE_ID = "challengeId"
         const val BOARD_ITEM = "boardItem"
         const val CHAT_ITEM = "chatItem"
+        const val USER_INFO = "userInfo"
     }
 
     override fun onCreate() {

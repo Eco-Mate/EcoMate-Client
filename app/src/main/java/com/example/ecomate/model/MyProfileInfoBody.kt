@@ -2,8 +2,8 @@ package com.example.ecomate.model
 
 import java.io.Serializable
 
-data class User(
-    val memberId: Int,
+data class MyProfileInfoBody(
     val nickname: String,
-    val image: String,
+    val email: String,
+    val statusMessage: String,
 ) : Serializable

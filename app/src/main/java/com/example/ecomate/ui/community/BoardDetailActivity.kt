@@ -13,13 +13,16 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.ecomate.ApplicationClass
 import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
+import com.example.ecomate.ApplicationClass.Companion.USER_INFO
 import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.R
 import com.example.ecomate.databinding.ActivityBoardDetailBinding
 import com.example.ecomate.model.Board
 import com.example.ecomate.model.Comment
 import com.example.ecomate.ui.adapter.CommentsAdapter
+import com.example.ecomate.ui.myprofile.UserProfileActivity
 import com.example.ecomate.viewmodel.BoardDetailViewModel
 
 class BoardDetailActivity : AppCompatActivity() {
@@ -76,6 +79,7 @@ class BoardDetailActivity : AppCompatActivity() {
                     .into(profileImage)
             }
             profileNickname.text = board.nickname
+
             // 게시글 좋아요 버튼 이미지 설정
             if (board.liked) {
                 boardLikeBtn.setImageResource(R.drawable.green_hart)
@@ -155,7 +159,14 @@ class BoardDetailActivity : AppCompatActivity() {
             popUp.menu.removeItem(R.id.board_move)
             popUp.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
-                    R.id.profile_info -> Toast.makeText(context, "프로필 정보 이동", Toast.LENGTH_SHORT).show()
+                    R.id.profile_info -> {
+                        boardDetailViewModel.getUserProfile(board.memberId)
+                        boardDetailViewModel.profileInfo.observe(this) {
+                            val intent = Intent(this, UserProfileActivity::class.java)
+                            intent.putExtra(USER_INFO, it)
+                            startActivity(intent)
+                        }
+                    }
                     R.id.board_save -> Toast.makeText(context, "게시글 저장", Toast.LENGTH_SHORT).show()
                 }
                 false

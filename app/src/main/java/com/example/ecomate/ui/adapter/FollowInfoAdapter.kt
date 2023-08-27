@@ -29,7 +29,7 @@ class FollowInfoAdapter :
 
                 }
                 root.setOnClickListener {
-                    detailFollowInfoListener.onClick(userId = user.userId)
+                    detailFollowInfoListener.onClick(userId = user.memberId)
                 }
             }
         }
@@ -52,7 +52,7 @@ class FollowInfoAdapter :
 
 class FollowInfoDiffCallback : DiffUtil.ItemCallback<User>() {
     override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
-        return oldItem.userId == newItem.userId
+        return oldItem.memberId == newItem.memberId
     }
 
     override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {

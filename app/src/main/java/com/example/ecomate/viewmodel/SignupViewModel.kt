@@ -19,10 +19,13 @@ class SignupViewModel : ViewModel() {
         name: String,
         password: String,
         nickname: String,
-        email: String
+        email: String,
+        statusMessage: String,
     ) {
         viewModelScope.launch {
-            _memberId.value = RetrofitUtil.logInApi.signup(SignUpBody(name,password,nickname,email)).response["memberId"]
+            _memberId.value = RetrofitUtil.logInApi.signup(
+                SignUpBody(name,password,nickname,email,statusMessage)
+            ).response["memberId"]
         }
     }
 }

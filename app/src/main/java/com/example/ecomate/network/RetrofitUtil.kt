@@ -7,5 +7,7 @@ class RetrofitUtil {
         val logInApi: LogInApi = ApplicationClass.retrofit.create(LogInApi::class.java)
         val challengeApi: ChallengeApi = ApplicationClass.retrofit.create(ChallengeApi::class.java)
         val boardApi: BoardApi = ApplicationClass.retrofit.create(BoardApi::class.java)
+        val memberApi: MemberApi = ApplicationClass.retrofit.create(MemberApi::class.java)
+        val followApi: FollowApi = ApplicationClass.retrofit.create(FollowApi::class.java)
     }
 }
