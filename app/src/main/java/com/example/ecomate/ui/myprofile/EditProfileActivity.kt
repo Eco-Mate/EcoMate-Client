@@ -8,6 +8,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -96,19 +97,14 @@ class EditProfileActivity : AppCompatActivity() {
         popUp.menuInflater.inflate(R.menu.profile_image_edit_menu, popUp.menu)
         popUp.setOnMenuItemClickListener { item ->
             when (item.itemId) {
+                R.id.image_select -> {
+                    val intent = Intent(Intent.ACTION_PICK)
+                    intent.type = "image/*"
+                    activityResult.launch(intent)
+                }
                 R.id.image_modify -> {
                     if (checkPermission()) {
-                        CoroutineScope(Dispatchers.Default).launch {
-                            launch {
-                                val intent = Intent(Intent.ACTION_PICK)
-                                intent.type = "image/*"
-                                activityResult.launch(intent)
-                            }.join()
-
-                            launch {
-                                postMyProfileImage()
-                            }
-                        }
+                        postMyProfileImage()
                     } else {
                         requestMultiplePermissions.launch(permissionList)
                     }

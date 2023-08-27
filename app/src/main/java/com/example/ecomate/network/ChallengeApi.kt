@@ -30,6 +30,8 @@ interface ChallengeApi {
         @Part file: MultipartBody.Part
     )
 
+//    @GET("v1/myChallenges/member/{memberId}/proceeding")
+
     @GET("v1/myChallenges/member/proceeding")
     suspend fun getAllProceedingChallenge(): MyChallengeListResponse
 
