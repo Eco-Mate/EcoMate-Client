@@ -42,6 +42,7 @@ class UserProfileActivity : AppCompatActivity() {
 
         profileInfo = intent.getSerializableExtra(USER_INFO) as ProfileInfo
         userProfileViewModel.getUserBoards(profileInfo.memberId)
+        userProfileViewModel.getUserProfile(profileInfo.memberId)
 
         setAdapter()
         setUi()
@@ -56,7 +57,7 @@ class UserProfileActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-        binding.postRv.apply {
+        binding.boardRv.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = userBoardsAdapter
         }
@@ -70,7 +71,25 @@ class UserProfileActivity : AppCompatActivity() {
             backBtn.setOnClickListener {
                 finish()
             }
-            userNickname.text = profileInfo.nickname
+            userProfileViewModel.profileInfo.observe(this@UserProfileActivity) {
+                // 사용자 프로필 설정
+                userNickname.text = it.nickname
+                if (it.profileImage != null && it.profileImage != "") {
+                    Glide.with(this.root.context)
+                        .load(it.profileImage)
+                        .into(userImage)
+                }
+                userState.text = it.statusMessage
+                userFollower.text = "${it.followerCnt}\n팔로워"
+                userFollowing.text = "${it.followingCnt}\n팔로잉"
+                // 사용자 트리포인트 설정
+                pointLevel.text = "Lv. ${it.level}"
+                pointProgressBar.progress = ((it.totalTreePoint/20.0)*100).toInt()
+                currentPoint.text = "(${it.totalTreePoint}/20)"
+                pointRest.text = "다음 레벨까지 ${(20-it.totalTreePoint)} 트리포인트 남았어요!"
+            }
+
+            // 팔로우 버튼 설정
             userProfileViewModel.getFollowState(profileInfo.nickname)
             userProfileViewModel.followState.observe(this@UserProfileActivity) {
                 followState = it
@@ -91,15 +110,12 @@ class UserProfileActivity : AppCompatActivity() {
                     followState = true
                 }
             }
-            if (profileInfo.profileImage != null && profileInfo.profileImage != "") {
-                Glide.with(this.root.context)
-                    .load(profileInfo.profileImage)
-                    .into(userImage)
+            // 사용자 참여 챌린지 설정
+
+            // 게시글 수 설정
+            userProfileViewModel.userBoards.observe(this@UserProfileActivity) {
+                boardNum.text = it.size.toString() + "건"
             }
-            userState.text = profileInfo.statusMessage
-//            userChallengeNum.text = "\n완료한 챌린지"
-            userFollower.text = "${profileInfo.followerCnt}\n팔로워"
-            userFollowing.text = "${profileInfo.followingCnt}\n팔로잉"
         }
     }
 }
