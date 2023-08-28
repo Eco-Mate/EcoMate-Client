@@ -113,7 +113,6 @@ class EditProfileActivity : AppCompatActivity() {
                 R.id.image_select -> openGallery()
 
                 R.id.image_modify -> editProfileViewModel.postMyProfileImage(postMyProfileImage())
-
                 R.id.image_remove -> {
                     binding.currentImg.setImageResource(R.drawable.profile_image_2)
                     editProfileViewModel.deleteMyProfileImage()
