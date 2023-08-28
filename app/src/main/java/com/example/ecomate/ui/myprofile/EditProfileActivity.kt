@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,11 +15,13 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.registerForActivityResult
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.ecomate.R
 import com.example.ecomate.databinding.ActivityEditProfileBinding
+import com.example.ecomate.ui.LoadingDialog
 import com.example.ecomate.viewmodel.EditProfileViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,16 +30,12 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import java.io.FileOutputStream
 
 class EditProfileActivity : AppCompatActivity() {
     lateinit var binding: ActivityEditProfileBinding
+    private lateinit var selectedImageUri: Uri
     private val editProfileViewModel: EditProfileViewModel by viewModels()
-
-    private val permissionList = arrayOf(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-    )
-    private lateinit var imageUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +47,18 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun setUi() {
         binding.apply {
+            backBtn.setOnClickListener {
+                finish()
+            }
             editProfileViewModel.profileInfo.observe(this@EditProfileActivity) {
+                if (it.profileImage != null && it.profileImage != "") {
+                    Glide.with(this.root.context)
+                        .load(it.profileImage)
+                        .into(currentImg)
+                }
                 editNicknameEditText.setText(it.nickname)
                 editEmailEditText.setText(it.email)
                 editStateEditText.setText(it.statusMessage)
-            }
-            backBtn.setOnClickListener {
-                finish()
             }
             editImgTitle.setOnClickListener {
                 setPopUpMenu(this.root.context, it)
@@ -90,6 +94,15 @@ class EditProfileActivity : AppCompatActivity() {
                 Toast.makeText(this.root.context,"상태메세지가 변경되었습니다.",Toast.LENGTH_SHORT).show()
             }
         }
+
+        val dialog = LoadingDialog(this)
+        editProfileViewModel.isLoading.observe(this) {
+            if (editProfileViewModel.isLoading.value!!) {
+                dialog.show()
+            } else if (!editProfileViewModel.isLoading.value!!) {
+                dialog.dismiss()
+            }
+        }
     }
 
     private fun setPopUpMenu(context: Context, view: View) {
@@ -97,18 +110,10 @@ class EditProfileActivity : AppCompatActivity() {
         popUp.menuInflater.inflate(R.menu.profile_image_edit_menu, popUp.menu)
         popUp.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.image_select -> {
-                    val intent = Intent(Intent.ACTION_PICK)
-                    intent.type = "image/*"
-                    activityResult.launch(intent)
-                }
-                R.id.image_modify -> {
-                    if (checkPermission()) {
-                        postMyProfileImage()
-                    } else {
-                        requestMultiplePermissions.launch(permissionList)
-                    }
-                }
+                R.id.image_select -> openGallery()
+
+                R.id.image_modify -> editProfileViewModel.postMyProfileImage(postMyProfileImage())
+
                 R.id.image_remove -> {
                     binding.currentImg.setImageResource(R.drawable.profile_image_2)
                     editProfileViewModel.deleteMyProfileImage()
@@ -119,51 +124,23 @@ class EditProfileActivity : AppCompatActivity() {
         popUp.show()
     }
 
-    private fun checkPermission(): Boolean {
-        var status = true
-        permissionList.forEach {
-            if (ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_DENIED) {
-                status = false
-            }
-        }
-
-        return status
+    private fun openGallery() {
+        galleryLauncher.launch("image/*")
     }
-
-    private val requestMultiplePermissions =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
-            results.forEach {
-                if (!it.value) {
-                    Toast.makeText(applicationContext, "${it.key} 권한 허용 필요", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-        }
-
-    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        if (it.resultCode == RESULT_OK && it.data != null) {
-            imageUri = it.data!!.data!!
-
-            // ImageButton 선택한 이미지 적용
-            Glide.with(this)
-                .load(imageUri)
-                .into(binding.currentImg)
+    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        if (uri != null) {
+            selectedImageUri = uri
+            binding.currentImg.setImageURI(selectedImageUri)
         }
     }
-    private fun postMyProfileImage() {
-        // Image File의 절대 경로 변환
-        var cursor = contentResolver.query(imageUri!!, null, null, null, null)
-        cursor?.moveToNext()
-        val path =
-            cursor?.getString(cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)!!)!!
-        cursor?.close()
+    private fun postMyProfileImage(): MultipartBody.Part {
+        val imageFile = File(cacheDir, "temp_image.jpg")
+        val outputStream = FileOutputStream(imageFile)
+        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedImageUri)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+        outputStream.close()
 
-        // 이미지 파일 MultipartBody.Part로 변환
-        val imageFile = File(path!!)
-        val requestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
-        val file = MultipartBody.Part.createFormData("file", imageFile.name, requestBody)
-        editProfileViewModel.postMyProfileImage(file)
+        val requestBody = imageFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData("file", imageFile.name, requestBody)
     }
 }

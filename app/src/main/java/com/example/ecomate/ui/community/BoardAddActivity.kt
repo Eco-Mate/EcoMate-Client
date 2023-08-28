@@ -3,6 +3,7 @@ package com.example.ecomate.ui.community
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,10 +14,13 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.registerForActivityResult
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.ecomate.databinding.ActivityBoardAddBinding
+import com.example.ecomate.model.BoardDto
+import com.example.ecomate.ui.LoadingDialog
 import com.example.ecomate.viewmodel.BoardAddViewModel
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.parse
@@ -27,16 +31,12 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.io.FileOutputStream
 
 class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
     lateinit var binding: ActivityBoardAddBinding
     private val boardAddViewModel: BoardAddViewModel by viewModels()
-
-    private val permissionList = arrayOf(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-    )
-    private lateinit var imageUri: Uri
+    private lateinit var selectedImageUri: Uri
     private var challenge_id: Int = 0
 
 
@@ -63,14 +63,7 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
             }
             // 게시글의 사진 선택 컨트롤
             boardImageBtn.setOnClickListener {
-                // 저장소 접근 관련 permission 확인
-                if (checkPermission()) {
-                    val intent = Intent(Intent.ACTION_PICK)
-                    intent.type = "image/*"
-                    activityResult.launch(intent)
-                } else {
-                    requestMultiplePermissions.launch(permissionList)
-                }
+                openGallery()
             }
             // 게시글의 챌린지 종류 선택 컨트롤
             challengeBox.setOnClickListener {
@@ -81,11 +74,22 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
             }
             // 게시글 작성 버튼 컨트롤
             boardAddBtn.setOnClickListener {
-                createBoard(
-                    boardTitleEditText.text.toString(),
-                    boardContentEditText.text.toString()
+                boardAddViewModel.postBoard(
+                    BoardDto(
+                        challenge_id,
+                        boardTitleEditText.text.toString(),
+                        boardContentEditText.text.toString()
+                    ), postBoardWithImage(), this@BoardAddActivity
                 )
-//                finish()
+            }
+        }
+
+        val dialog = LoadingDialog(this)
+        boardAddViewModel.isLoading.observe(this) {
+            if (boardAddViewModel.isLoading.value!!) {
+                dialog.show()
+            } else if (!boardAddViewModel.isLoading.value!!) {
+                dialog.dismiss()
             }
         }
     }
@@ -97,61 +101,24 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
         return item != null
     }
 
-    private fun checkPermission(): Boolean {
-        var status = true
-        permissionList.forEach {
-            if (ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_DENIED) {
-                status = false
-            }
-        }
-
-        return status
+    private fun openGallery() {
+        galleryLauncher.launch("image/*")
     }
-
-    private val requestMultiplePermissions =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
-            results.forEach {
-                if (!it.value) {
-                    Toast.makeText(applicationContext, "${it.key} 권한 허용 필요", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-        }
-
-    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        if (it.resultCode == RESULT_OK && it.data != null) {
-            imageUri = it.data!!.data!!
-
-            // ImageButton 선택한 이미지 적용
-            Glide.with(this)
-                .load(imageUri)
-                .into(binding.boardImageBtn)
+    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        uri: Uri? ->
+        if (uri != null) {
+            selectedImageUri = uri
+            binding.boardImageBtn.setImageURI(selectedImageUri)
         }
     }
+    private fun postBoardWithImage(): MultipartBody.Part {
+        val imageFile = File(cacheDir, "temp_image.jpg")
+        val outputStream = FileOutputStream(imageFile)
+        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedImageUri)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+        outputStream.close()
 
-    private fun createBoard(title: String, content: String) {
-        // Image File의 절대 경로 변환
-        var cursor = contentResolver.query(imageUri!!, null, null, null, null)
-        cursor?.moveToNext()
-        val path =
-            cursor?.getString(cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)!!)!!
-        cursor?.close()
-
-        // 이미지 파일 MultipartBody.Part로 변환
-        val imageFile = File(path!!)
-        val requestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
-        val file = MultipartBody.Part.createFormData("file", imageFile.name, requestBody)
-
-        // 게시글 추가 정보 RequestBody로 변환
-        val data: HashMap<String, RequestBody> = HashMap()
-        val challengeId = RequestBody.create("text/plain".toMediaTypeOrNull(), challenge_id.toString())
-        val boardTitle = RequestBody.create("text/plain".toMediaTypeOrNull(), title)
-        val boardContent = RequestBody.create("text/plain".toMediaTypeOrNull(), content)
-        data.put("challengeId", challengeId)
-        data.put("boardTitle", boardTitle)
-        data.put("boardContent", boardContent)
-        boardAddViewModel.postBoard(data, file)
+        val requestBody = imageFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData("file", imageFile.name, requestBody)
     }
 }

@@ -88,6 +88,9 @@
             android:name=".ui.myprofile.UserProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.myprofile.MyChallengesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.chat.ChatDetailActivity"
             android:exported="false" />
         <activity
