@@ -39,6 +39,10 @@ class BoardDetailActivity : AppCompatActivity() {
 
         board = intent.getSerializableExtra(BOARD_ITEM) as Board
         boardDetailViewModel.getComments(board.boardId)
+        boardDetailViewModel.getBoardSaveState(board.boardId)
+        boardDetailViewModel.boardSaveState.observe(this) {
+            isSaved = it
+        }
 
         setAdapter()
         setUi()
