@@ -39,6 +39,11 @@ class CommunityFragment : Fragment() {
         setAdapter(view)
     }
 
+    override fun onResume() {
+        super.onResume()
+        communityViewModel.getBoards()
+    }
+
     private fun setUi() {
         // FloatingActionButton 이벤트 설정
         val boardAddAniOut =

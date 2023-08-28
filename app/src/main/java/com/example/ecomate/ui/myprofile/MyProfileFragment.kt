@@ -2,6 +2,7 @@ package com.example.ecomate.ui.myprofile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,7 @@ class MyProfileFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMyprofileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,6 +37,7 @@ class MyProfileFragment : Fragment() {
     private fun setUi() {
         binding.apply {
             myProfileViewModel.profileInfo.observe(viewLifecycleOwner) {
+                // 내정보 설정
                 if (it.profileImage != null && it.profileImage != "") {
                     Glide.with(this.root.context)
                         .load(it.profileImage)
@@ -45,6 +47,11 @@ class MyProfileFragment : Fragment() {
                 profileState.text = it.statusMessage
                 profileFollower.text = "${it.followerCnt}\n팔로워"
                 profileFollowing.text = "${it.followingCnt}\n팔로워"
+                // 내 챌린지 포인트 설정
+                pointLevel.text = "Lv. ${it.level}"
+                pointProgressBar.progress = ((it.totalTreePoint/20.0)*100).toInt()
+                currentPoint.text = "(${it.totalTreePoint}/20)"
+                pointRest.text = "다음 레벨까지 ${(20-it.totalTreePoint)} 트리포인트 남았어요!"
             }
             // 팔로워
             profileFollower.setOnClickListener {
@@ -60,14 +67,20 @@ class MyProfileFragment : Fragment() {
                 startActivity(intent)
             }
 
-            // 챌린지 포인트
-            pointBox.setOnClickListener {
-
-            }
-
             // 내 챌린지
+            myProfileViewModel.myAllChallenges.observe(viewLifecycleOwner) {
+                challengeNum.text = it.size.toString() + "건"
+                if (it[0].image != null && it[0].image != "") {
+                    Glide.with(this.root.context)
+                        .load(it[0].image)
+                        .into(challengeImage)
+                }
+                challengeName.text = it[0].challengeTitle
+                challengeProgressBar.progress = (it[0].doneCnt/it[0].goalCnt)*100
+                challengeProgressCount.text = "${((it[0].doneCnt/it[0].goalCnt.toFloat())*100).toInt()}% 달성 (${it[0].doneCnt}회/${it[0].goalCnt}회)"
+            }
             challengeBtn.setOnClickListener {
-
+                startActivity(Intent(activity,MyChallengesActivity::class.java))
             }
 
             // 내 게시물

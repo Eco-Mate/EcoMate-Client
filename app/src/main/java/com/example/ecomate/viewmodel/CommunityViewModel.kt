@@ -22,7 +22,7 @@ class CommunityViewModel : ViewModel() {
         getBoards()
     }
 
-    private fun getBoards() {
+    fun getBoards() {
         viewModelScope.launch {
             _boards.value = RetrofitUtil.boardApi.getBoards().response["boardDtoList"]
         }

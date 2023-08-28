@@ -7,6 +7,8 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecomate.ApplicationClass
+import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
+import com.example.ecomate.ApplicationClass.Companion.USER_INFO
 import com.example.ecomate.databinding.ActivitySaveBoardsBinding
 import com.example.ecomate.model.Board
 import com.example.ecomate.ui.adapter.BoardsAdapter
@@ -32,8 +34,19 @@ class SavedBoardsActivity : AppCompatActivity() {
             object : BoardsAdapter.DetailBoardListener {
                 override fun onClick(board: Board) {
                     val intent = Intent(this@SavedBoardsActivity, BoardDetailActivity::class.java)
-                    intent.putExtra(ApplicationClass.BOARD_ITEM, board)
+                    intent.putExtra(BOARD_ITEM, board)
                     startActivity(intent)
+                }
+            }
+        boardsAdapter.profileInfoListener =
+            object : BoardsAdapter.ProfileInfoListener {
+                override fun onClick(board: Board) {
+                    savedBoardsViewModel.getUserProfile(board.memberId)
+                    savedBoardsViewModel.profileInfo.observe(this@SavedBoardsActivity) {
+                        val intent = Intent(this@SavedBoardsActivity, UserProfileActivity::class.java)
+                        intent.putExtra(USER_INFO, it)
+                        startActivity(intent)
+                    }
                 }
             }
 
