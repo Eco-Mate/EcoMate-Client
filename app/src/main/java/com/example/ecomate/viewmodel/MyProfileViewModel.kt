@@ -29,18 +29,18 @@ class MyProfileViewModel : ViewModel() {
         getMyAllChallenge()
     }
 
-    private fun getMyProfile() {
+    fun getMyProfile() {
         viewModelScope.launch {
             _ProfileInfo.value = RetrofitUtil.memberApi.getMyProfile().response
         }
     }
-    private fun getMyBoards() {
+    fun getMyBoards() {
         viewModelScope.launch {
             _myBoards.value = RetrofitUtil.boardApi.getMyBoards().response["boardDtoList"]
         }
     }
 
-    private fun getMyAllChallenge() {
+    fun getMyAllChallenge() {
         viewModelScope.launch {
             _myAllChallenges.value = RetrofitUtil.challengeApi.getMyAllChallenge().response
         }

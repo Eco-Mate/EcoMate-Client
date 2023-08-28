@@ -34,6 +34,13 @@ class MyProfileFragment : Fragment() {
         setUi()
     }
 
+    override fun onResume() {
+        super.onResume()
+        myProfileViewModel.getMyProfile()
+        myProfileViewModel.getMyAllChallenge()
+        myProfileViewModel.getMyBoards()
+    }
+
     private fun setUi() {
         binding.apply {
             myProfileViewModel.profileInfo.observe(viewLifecycleOwner) {
@@ -46,7 +53,7 @@ class MyProfileFragment : Fragment() {
                 profileNickname.text = it.nickname
                 profileState.text = it.statusMessage
                 profileFollower.text = "${it.followerCnt}\n팔로워"
-                profileFollowing.text = "${it.followingCnt}\n팔로워"
+                profileFollowing.text = "${it.followingCnt}\n팔로잉"
                 // 내 챌린지 포인트 설정
                 pointLevel.text = "Lv. ${it.level}"
                 pointProgressBar.progress = ((it.totalTreePoint/20.0)*100).toInt()

@@ -15,12 +15,12 @@ interface FollowApi {
     ): FollowStateResponse
 
     @GET("v1/follows/followings/{nickname}")
-    suspend fun getFollowingUsers(
+    suspend fun getUserFollowings(
         @Path("nickname") nickname: String
     ): FollowResponse
 
-    @GET("v1/follows/followings/{nickname}")
-    suspend fun getFollowerUsers(
+    @GET("v1/follows/followers/{nickname}")
+    suspend fun getUserFollowers(
         @Path("nickname") nickname: String
     ): FollowResponse
 

@@ -42,10 +42,6 @@ class UserProfileActivity : AppCompatActivity() {
 
         profileInfo = intent.getSerializableExtra(USER_INFO) as ProfileInfo
         userProfileViewModel.getUserBoards(profileInfo.memberId)
-        userProfileViewModel.getFollowState(profileInfo.nickname)
-        userProfileViewModel.followState.observe(this) {
-            followState = it
-        }
 
         setAdapter()
         setUi()
@@ -75,10 +71,14 @@ class UserProfileActivity : AppCompatActivity() {
                 finish()
             }
             userNickname.text = profileInfo.nickname
-            if (followState) {
-                followBtn.setBackgroundColor(Color.parseColor("#787878"))
-            } else {
-                followBtn.setBackgroundColor(Color.parseColor("#79C257"))
+            userProfileViewModel.getFollowState(profileInfo.nickname)
+            userProfileViewModel.followState.observe(this@UserProfileActivity) {
+                followState = it
+                if (followState) {
+                    followBtn.setBackgroundColor(Color.parseColor("#787878"))
+                } else {
+                    followBtn.setBackgroundColor(Color.parseColor("#79C257"))
+                }
             }
             followBtn.setOnClickListener {
                 if (followState) {
