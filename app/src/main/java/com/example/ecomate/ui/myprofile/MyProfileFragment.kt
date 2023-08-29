@@ -34,6 +34,13 @@ class MyProfileFragment : Fragment() {
         setUi()
     }
 
+    override fun onResume() {
+        super.onResume()
+        myProfileViewModel.getMyProfile()
+        myProfileViewModel.getMyAllChallenge()
+        myProfileViewModel.getMyBoards()
+    }
+
     private fun setUi() {
         binding.apply {
             myProfileViewModel.profileInfo.observe(viewLifecycleOwner) {
@@ -46,7 +53,7 @@ class MyProfileFragment : Fragment() {
                 profileNickname.text = it.nickname
                 profileState.text = it.statusMessage
                 profileFollower.text = "${it.followerCnt}\n팔로워"
-                profileFollowing.text = "${it.followingCnt}\n팔로워"
+                profileFollowing.text = "${it.followingCnt}\n팔로잉"
                 // 내 챌린지 포인트 설정
                 pointLevel.text = "Lv. ${it.level}"
                 pointProgressBar.progress = ((it.totalTreePoint/20.0)*100).toInt()
@@ -69,15 +76,17 @@ class MyProfileFragment : Fragment() {
 
             // 내 챌린지
             myProfileViewModel.myAllChallenges.observe(viewLifecycleOwner) {
-                challengeNum.text = it.size.toString() + "건"
-                if (it[0].image != null && it[0].image != "") {
-                    Glide.with(this.root.context)
-                        .load(it[0].image)
-                        .into(challengeImage)
+                if (it.size > 0) {
+                    challengeNum.text = it.size.toString() + "건"
+                    if (it[0].image != null && it[0].image != "") {
+                        Glide.with(this.root.context)
+                            .load(it[0].image)
+                            .into(challengeImage)
+                    }
+                    challengeName.text = it[0].challengeTitle
+                    challengeProgressBar.progress = (it[0].doneCnt/it[0].goalCnt)*100
+                    challengeProgressCount.text = "${((it[0].doneCnt/it[0].goalCnt.toFloat())*100).toInt()}% 달성 (${it[0].doneCnt}회/${it[0].goalCnt}회)"
                 }
-                challengeName.text = it[0].challengeTitle
-                challengeProgressBar.progress = (it[0].doneCnt/it[0].goalCnt)*100
-                challengeProgressCount.text = "${((it[0].doneCnt/it[0].goalCnt.toFloat())*100).toInt()}% 달성 (${it[0].doneCnt}회/${it[0].goalCnt}회)"
             }
             challengeBtn.setOnClickListener {
                 startActivity(Intent(activity,MyChallengesActivity::class.java))

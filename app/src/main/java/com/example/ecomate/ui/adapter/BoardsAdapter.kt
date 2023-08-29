@@ -39,6 +39,9 @@ class BoardsAdapter : ListAdapter<Board, BoardsAdapter.BoardsViewHolder>(
                 profileMore.setOnClickListener {
                     setPopUpMenu(this.root.context, it, board)
                 }
+                profileBox.setOnClickListener {
+                    profileInfoListener.onClick(board = board)
+                }
                 Glide.with(this.root)
                     .load(board.image)
                     .into(boardImg)

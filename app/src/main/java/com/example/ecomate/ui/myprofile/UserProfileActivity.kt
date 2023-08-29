@@ -5,29 +5,17 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.ecomate.ApplicationClass
 import com.example.ecomate.ApplicationClass.Companion.USER_INFO
-import com.example.ecomate.R
-import com.example.ecomate.databinding.ActivityFollowInfoBinding
 import com.example.ecomate.databinding.ActivityUserProfileBinding
 import com.example.ecomate.model.Board
 import com.example.ecomate.model.ProfileInfo
-import com.example.ecomate.model.User
-import com.example.ecomate.ui.adapter.FollowInfoAdapter
 import com.example.ecomate.ui.adapter.UserBoardsAdapter
 import com.example.ecomate.ui.community.BoardDetailActivity
-import com.example.ecomate.viewmodel.FollowInfoViewModel
-import com.example.ecomate.viewmodel.MyProfileViewModel
 import com.example.ecomate.viewmodel.UserProfileViewModel
-import com.google.android.material.tabs.TabLayout
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class UserProfileActivity : AppCompatActivity() {
     lateinit var binding: ActivityUserProfileBinding
@@ -42,10 +30,8 @@ class UserProfileActivity : AppCompatActivity() {
 
         profileInfo = intent.getSerializableExtra(USER_INFO) as ProfileInfo
         userProfileViewModel.getUserBoards(profileInfo.memberId)
-        userProfileViewModel.getFollowState(profileInfo.nickname)
-        userProfileViewModel.followState.observe(this) {
-            followState = it
-        }
+        userProfileViewModel.getUserProfile(profileInfo.memberId)
+        userProfileViewModel.getUserChallenges(profileInfo.memberId)
 
         setAdapter()
         setUi()
@@ -60,7 +46,7 @@ class UserProfileActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-        binding.postRv.apply {
+        binding.boardRv.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = userBoardsAdapter
         }
@@ -74,11 +60,33 @@ class UserProfileActivity : AppCompatActivity() {
             backBtn.setOnClickListener {
                 finish()
             }
-            userNickname.text = profileInfo.nickname
-            if (followState) {
-                followBtn.setBackgroundColor(Color.parseColor("#787878"))
-            } else {
-                followBtn.setBackgroundColor(Color.parseColor("#79C257"))
+            userProfileViewModel.profileInfo.observe(this@UserProfileActivity) {
+                // 사용자 프로필 설정
+                userNickname.text = it.nickname
+                if (it.profileImage != null && it.profileImage != "") {
+                    Glide.with(this.root.context)
+                        .load(it.profileImage)
+                        .into(userImage)
+                }
+                userState.text = it.statusMessage
+                userFollower.text = "${it.followerCnt}\n팔로워"
+                userFollowing.text = "${it.followingCnt}\n팔로잉"
+                // 사용자 트리포인트 설정
+                pointLevel.text = "Lv. ${it.level}"
+                pointProgressBar.progress = ((it.totalTreePoint/20.0)*100).toInt()
+                currentPoint.text = "(${it.totalTreePoint}/20)"
+                pointRest.text = "다음 레벨까지 ${(20-it.totalTreePoint)} 트리포인트 남았어요!"
+            }
+
+            // 팔로우 버튼 설정
+            userProfileViewModel.getFollowState(profileInfo.nickname)
+            userProfileViewModel.followState.observe(this@UserProfileActivity) {
+                followState = it
+                if (followState) {
+                    followBtn.setBackgroundColor(Color.parseColor("#787878"))
+                } else {
+                    followBtn.setBackgroundColor(Color.parseColor("#79C257"))
+                }
             }
             followBtn.setOnClickListener {
                 if (followState) {
@@ -91,15 +99,27 @@ class UserProfileActivity : AppCompatActivity() {
                     followState = true
                 }
             }
-            if (profileInfo.profileImage != null && profileInfo.profileImage != "") {
-                Glide.with(this.root.context)
-                    .load(profileInfo.profileImage)
-                    .into(userImage)
+            // 사용자 참여 챌린지 설정
+            userProfileViewModel.userChallenges.observe(this@UserProfileActivity) {
+                if (it.size > 0) {
+                    challengeNum.text = it.size.toString() + "\n참여 챌린지 수"
+                    if (it[0].image != null && it[0].image != "") {
+                        Glide.with(this.root.context)
+                            .load(it[0].image)
+                            .into(challengeImage)
+                    }
+                    challengeName.text = it[0].challengeTitle
+                    challengeProgressBar.progress = (it[0].doneCnt/it[0].goalCnt)*100
+                    challengeProgressCount.text = "${((it[0].doneCnt/it[0].goalCnt.toFloat())*100).toInt()}% 달성 (${it[0].doneCnt}회/${it[0].goalCnt}회)"
+                } else {
+                    challengeNum.text = "0\n참여 챌린지 수"
+                }
             }
-            userState.text = profileInfo.statusMessage
-//            userChallengeNum.text = "\n완료한 챌린지"
-            userFollower.text = "${profileInfo.followerCnt}\n팔로워"
-            userFollowing.text = "${profileInfo.followingCnt}\n팔로잉"
+
+            // 게시글 수 설정
+            userProfileViewModel.userBoards.observe(this@UserProfileActivity) {
+                boardNum.text = it.size.toString() + "건"
+            }
         }
     }
 }

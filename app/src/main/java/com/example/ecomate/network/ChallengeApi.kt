@@ -33,6 +33,11 @@ interface ChallengeApi {
     @GET("v1/myChallenges/member/all")
     suspend fun getMyAllChallenge(): MyChallengeListResponse
 
+    @GET("v1/myChallenges/member/{memberId}/all")
+    suspend fun getUserAllChallenge(
+        @Path("memberId") memberId: Int
+    ): MyChallengeListResponse
+
     @GET("v1/myChallenges/member/{memberId}/proceeding")
     suspend fun getUserProceedingChallenge(): MyChallengeListResponse
 

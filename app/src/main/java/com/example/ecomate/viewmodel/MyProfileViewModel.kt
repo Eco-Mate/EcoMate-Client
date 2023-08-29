@@ -11,9 +11,9 @@ import com.example.ecomate.network.RetrofitUtil
 import kotlinx.coroutines.launch
 
 class MyProfileViewModel : ViewModel() {
-    private val _ProfileInfo = MutableLiveData<ProfileInfo>()
+    private val _profileInfo = MutableLiveData<ProfileInfo>()
     val profileInfo: LiveData<ProfileInfo>
-        get() = _ProfileInfo
+        get() = _profileInfo
 
     private val _myBoards = MutableLiveData<List<Board>>()
     val myBoards: LiveData<List<Board>>
@@ -29,18 +29,18 @@ class MyProfileViewModel : ViewModel() {
         getMyAllChallenge()
     }
 
-    private fun getMyProfile() {
+    fun getMyProfile() {
         viewModelScope.launch {
-            _ProfileInfo.value = RetrofitUtil.memberApi.getMyProfile().response
+            _profileInfo.value = RetrofitUtil.memberApi.getMyProfile().response
         }
     }
-    private fun getMyBoards() {
+    fun getMyBoards() {
         viewModelScope.launch {
             _myBoards.value = RetrofitUtil.boardApi.getMyBoards().response["boardDtoList"]
         }
     }
 
-    private fun getMyAllChallenge() {
+    fun getMyAllChallenge() {
         viewModelScope.launch {
             _myAllChallenges.value = RetrofitUtil.challengeApi.getMyAllChallenge().response
         }
