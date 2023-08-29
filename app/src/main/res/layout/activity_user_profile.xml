@@ -92,17 +92,18 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
                     <TextView
-                        android:id="@+id/user_state"
-                        android:layout_width="100dp"
+                        android:id="@+id/challenge_num"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="5\n참여 챌린지 수"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="지구지키기 10일 째"
-                        android:textSize="12dp"
                         app:layout_constraintStart_toEndOf="@id/user_image"
-                        app:layout_constraintEnd_toStartOf="@id/user_follower"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
+                        app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
                         android:id="@+id/user_follower"
                         android:layout_width="wrap_content"
@@ -129,6 +130,16 @@
                         android:layout_marginEnd="40dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                        android:id="@+id/user_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="지구지키기 10일 째"
+                        android:textSize="12dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/user_image"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/point"
@@ -210,24 +221,6 @@
                     android:textSize="14dp"
                     android:layout_margin="20dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-                <TextView
-                    android:id="@+id/challenge_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5건"
-                    android:textStyle="bold"
-                    android:textSize="12dp"
-                    android:layout_margin="20dp"
-                    app:layout_constraintStart_toEndOf="@id/challenge_mark"
-                    app:layout_constraintTop_toTopOf="parent"/>
-                <Button
-                    android:id="@+id/challenge_btn"
-                    android:layout_width="8dp"
-                    android:layout_height="16dp"
-                    android:background="@drawable/right_arrow"
-                    android:layout_margin="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/current_challenge"
