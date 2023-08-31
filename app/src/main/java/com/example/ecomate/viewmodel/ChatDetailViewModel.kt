@@ -29,6 +29,7 @@ class ChatDetailViewModel : ViewModel() {
     fun getChatDetail(roomId: Int) {
         viewModelScope.launch {
             _chatDetail.value = RetrofitUtil.chatApi.getChatDetail(roomId).response.chatList
+            chatMessage.addAll(_chatDetail.value as List<Chat>)
         }
     }
 
@@ -46,14 +47,33 @@ class ChatDetailViewModel : ViewModel() {
         stompClient.topic("/topic/chat/${roomId}").subscribe { topicMessage ->
             Log.d("message Receive", topicMessage.payload)
             val sender = JSONObject(topicMessage.payload).getString("senderId").toInt()
-            if(sender != ApplicationClass.sharedPreferencesUtil.getMemberId()){
-                val content = JSONObject(topicMessage.payload).getString("message")
-                val profileImage = JSONObject(topicMessage.payload).getString("profileImage")
-                val senderNickname = JSONObject(topicMessage.payload).getString("senderNickname")
+            val content = JSONObject(topicMessage.payload).getString("message")
+            val profileImage = JSONObject(topicMessage.payload).getString("profileImage")
+            val chatId = JSONObject(topicMessage.payload).getString("chatId").toInt()
+            val chatType = JSONObject(topicMessage.payload).getString("chatType")
+            val senderNickname = JSONObject(topicMessage.payload).getString("senderNickname")
+            val createdTime = JSONObject(topicMessage.payload).getString("createdTime")
 
+            chatMessage.add(
+                Chat(
+                    chatId,
+                    createdTime,
+                    content,
+                    profileImage,
+                    sender,
+                    senderNickname,
+                    chatType
+                )
+            )
+            _chatDetail.postValue(chatMessage.toMutableList())
 
-               // _chatDetail.postValue()
-            }
+//
+//            if(sender != ApplicationClass.sharedPreferencesUtil.getMemberId()){
+//
+//
+//
+//                // _chatDetail.postValue()
+//            }
         }
 
 
@@ -82,7 +102,8 @@ class ChatDetailViewModel : ViewModel() {
     fun sendStomp(msg: String, roomId: Int) {
         val data = JSONObject()
         data.put("message", msg)
-        data.put("chatType", 0)
+        data.put("chatType", "CHAT")
+
 
         stompClient.send("/pub/chat/${roomId}", data.toString()).subscribe()
         Log.d("Message Send", "내가 보낸거: " + msg)

@@ -2,6 +2,7 @@ package com.example.ecomate.ui.chat
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,7 @@ class ChatDetailActivity : AppCompatActivity() {
         chatDetailViewModel.runStomp(chatInfoItem.roomId)
 
         binding.chatSendBtn.setOnClickListener {
+            Log.e("chatSendBtn", binding.chatEt.text.toString() + chatInfoItem.roomId.toString())
             chatDetailViewModel.sendStomp(binding.chatEt.text.toString(), chatInfoItem.roomId)
             binding.chatEt.setText("")
         }
@@ -92,9 +94,6 @@ class ChatDetailActivity : AppCompatActivity() {
                 if (!drawer.isDrawerOpen(Gravity.RIGHT)) {
                     drawer.openDrawer(Gravity.RIGHT)
                 }
-            }
-            chatSendBtn.setOnClickListener {
-
             }
             drawerBackBtn.setOnClickListener {
                 if (drawer.isDrawerOpen(Gravity.RIGHT)) {
