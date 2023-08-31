@@ -8,5 +8,6 @@ data class Chat(
     val message: String,
     val profileImage: String?,
     val senderId: Int,
-    val senderNickname: String
+    val senderNickname: String,
+    val chatType: String
 ) : Serializable

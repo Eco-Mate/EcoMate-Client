@@ -28,6 +28,7 @@ class ChatDetailActivity : AppCompatActivity() {
 
         binding.chatSendBtn.setOnClickListener {
             chatDetailViewModel.sendStomp(binding.chatEt.text.toString(), chatInfoItem.roomId)
+            binding.chatEt.setText("")
         }
 
         setAdapter()

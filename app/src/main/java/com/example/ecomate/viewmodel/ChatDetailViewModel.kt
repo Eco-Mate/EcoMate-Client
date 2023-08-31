@@ -24,6 +24,8 @@ class ChatDetailViewModel : ViewModel() {
     val chatDetail: LiveData<List<Chat>>
         get() = _chatDetail
 
+    var chatMessage = mutableListOf<Chat>()
+
     fun getChatDetail(roomId: Int) {
         viewModelScope.launch {
             _chatDetail.value = RetrofitUtil.chatApi.getChatDetail(roomId).response.chatList
@@ -43,6 +45,15 @@ class ChatDetailViewModel : ViewModel() {
 
         stompClient.topic("/topic/chat/${roomId}").subscribe { topicMessage ->
             Log.d("message Receive", topicMessage.payload)
+            val sender = JSONObject(topicMessage.payload).getString("senderId").toInt()
+            if(sender != ApplicationClass.sharedPreferencesUtil.getMemberId()){
+                val content = JSONObject(topicMessage.payload).getString("message")
+                val profileImage = JSONObject(topicMessage.payload).getString("profileImage")
+                val senderNickname = JSONObject(topicMessage.payload).getString("senderNickname")
+
+
+               // _chatDetail.postValue()
+            }
         }
 
 
