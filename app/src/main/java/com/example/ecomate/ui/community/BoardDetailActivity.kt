@@ -21,6 +21,7 @@ import com.example.ecomate.R
 import com.example.ecomate.databinding.ActivityBoardDetailBinding
 import com.example.ecomate.model.Board
 import com.example.ecomate.model.Comment
+import com.example.ecomate.ui.LoadingDialog
 import com.example.ecomate.ui.adapter.CommentsAdapter
 import com.example.ecomate.ui.myprofile.UserProfileActivity
 import com.example.ecomate.viewmodel.BoardDetailViewModel
@@ -85,10 +86,14 @@ class BoardDetailActivity : AppCompatActivity() {
             }
             profileNickname.text = board.nickname
             // 게시글 저장 버튼 이미지 설정
-            if (isSaved) {
-                boardSaveBtn.setImageResource(R.drawable.star_click)
-            } else {
-                boardSaveBtn.setImageResource(R.drawable.star_unclick)
+            boardDetailViewModel.getBoardSaveState(board.boardId)
+            boardDetailViewModel.boardSaveState.observe(this@BoardDetailActivity) {
+                isSaved = it
+                if (isSaved) {
+                    boardSaveBtn.setImageResource(R.drawable.star_click)
+                } else {
+                    boardSaveBtn.setImageResource(R.drawable.star_unclick)
+                }
             }
             // 게시글 저장 버튼 컨트롤
             boardSaveBtn.setOnClickListener {

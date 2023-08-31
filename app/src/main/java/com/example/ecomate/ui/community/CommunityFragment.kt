@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.ApplicationClass.Companion.USER_INFO
+import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.R
 import com.example.ecomate.databinding.FragmentCommunityBinding
 import com.example.ecomate.model.Board
@@ -37,6 +38,11 @@ class CommunityFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUi()
         setAdapter(view)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        communityViewModel.getBoards()
     }
 
     private fun setUi() {
@@ -106,11 +112,13 @@ class CommunityFragment : Fragment() {
         boardsAdapter.profileInfoListener =
             object : BoardsAdapter.ProfileInfoListener {
                 override fun onClick(board: Board) {
-                    communityViewModel.getUserProfile(board.memberId)
-                    communityViewModel.profileInfo.observe(viewLifecycleOwner) {
-                        val intent = Intent(activity, UserProfileActivity::class.java)
-                        intent.putExtra(USER_INFO, it)
-                        startActivity(intent)
+                    if (sharedPreferencesUtil.getMemberId() != board.memberId) {
+                        communityViewModel.getUserProfile(board.memberId)
+                        communityViewModel.profileInfo.observe(viewLifecycleOwner) {
+                            val intent = Intent(activity, UserProfileActivity::class.java)
+                            intent.putExtra(USER_INFO, it)
+                            startActivity(intent)
+                        }
                     }
                 }
             }

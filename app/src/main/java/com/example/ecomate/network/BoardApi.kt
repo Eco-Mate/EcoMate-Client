@@ -1,7 +1,7 @@
 package com.example.ecomate.network
 
 import com.example.ecomate.model.BoardDeleteResponse
-import com.example.ecomate.model.BoardPostResponse
+import com.example.ecomate.model.BoardDto
 import com.example.ecomate.model.BoardLikeBody
 import com.example.ecomate.model.BoardLikeResponse
 import com.example.ecomate.model.BoardPutBody
@@ -15,16 +15,13 @@ import com.example.ecomate.model.CommentResponse
 import com.example.ecomate.model.CommentPostBody
 import com.example.ecomate.model.CommentPostResponse
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
-import retrofit2.http.PartMap
 import retrofit2.http.Path
 interface BoardApi {
     @GET("v1/boards")
@@ -42,9 +39,9 @@ interface BoardApi {
     @Multipart
     @POST("v1/boards")
     suspend fun postBoard(
-        @PartMap data: HashMap<String, RequestBody>,
+        @Part("createDto") board: BoardDto,
         @Part file: MultipartBody.Part
-    ): BoardPostResponse
+    )
 
     @PUT("v1/boards/{boardId}")
     suspend fun putBoard(

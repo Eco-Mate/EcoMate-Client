@@ -1,9 +1,7 @@
 package com.example.ecomate.network
 
 import com.example.ecomate.model.MyProfileImageDeleteResponse
-import com.example.ecomate.model.MyProfileImagePostResponse
 import com.example.ecomate.model.MyProfileInfoBody
-import com.example.ecomate.model.MyProfileInfoResponse
 import com.example.ecomate.model.ProfileResponse
 import okhttp3.MultipartBody
 import retrofit2.http.Body
@@ -27,12 +25,12 @@ interface MemberApi {
     @POST("v1/members/profile-image")
     suspend fun postMyProfileImage(
         @Part profileImage: MultipartBody.Part
-    ): MyProfileImagePostResponse
+    )
 
     @PUT("v1/members")
     suspend fun postMyProfileInfo(
         @Body myProfileInfo: MyProfileInfoBody
-    ): MyProfileInfoResponse
+    )
 
     @DELETE("v1/members/profile-image")
     suspend fun deleteMyProfileImage(): MyProfileImageDeleteResponse

@@ -1,24 +1,22 @@
 package com.example.ecomate.ui.myprofile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecomate.ApplicationClass.Companion.USER_INFO
 import com.example.ecomate.databinding.ActivityFollowInfoBinding
-import com.example.ecomate.model.User
 import com.example.ecomate.ui.adapter.FollowInfoAdapter
 import com.example.ecomate.viewmodel.FollowInfoViewModel
-import com.example.ecomate.viewmodel.MyProfileViewModel
 import com.google.android.material.tabs.TabLayout
 
 class FollowInfoActivity : AppCompatActivity() {
     lateinit var binding: ActivityFollowInfoBinding
+    private val followInfoViewModel: FollowInfoViewModel by viewModels()
     private val followInfoAdapter = FollowInfoAdapter()
     lateinit var nickname: String
-    private val followInfoViewModel: FollowInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +30,23 @@ class FollowInfoActivity : AppCompatActivity() {
         setAdapter()
         setUi()
     }
+
+    override fun onResume() {
+        super.onResume()
+        followInfoViewModel.getFollowerUsers(nickname)
+        followInfoViewModel.getFollowingUsers(nickname)
+    }
+
     private fun setAdapter() {
-        followInfoAdapter.detailFollowInfoListener =
-            object : FollowInfoAdapter.DetailFollowInfoListener {
-                override fun onClick(userId: Int) {
-                    Toast.makeText(this@FollowInfoActivity, "$userId Clicked!", Toast.LENGTH_SHORT).show()
+        followInfoAdapter.detailUserProfileListener =
+            object : FollowInfoAdapter.DetailUserProfileListener {
+                override fun onClick(memberId: Int) {
+                    followInfoViewModel.getUserProfile(memberId)
+                    followInfoViewModel.profileInfo.observe(this@FollowInfoActivity) {
+                        val intent = Intent(this@FollowInfoActivity, UserProfileActivity::class.java)
+                        intent.putExtra(USER_INFO, it)
+                        startActivity(intent)
+                    }
                 }
             }
         binding.userRv.apply {

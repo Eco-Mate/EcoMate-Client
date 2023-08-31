@@ -56,22 +56,26 @@
                         app:layout_constraintBottom_toBottomOf="parent"/>
                     <TextView
                         android:id="@+id/profile_nickname"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="지구지킴이"
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="16dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
                         app:layout_constraintStart_toEndOf="@id/profile_img"
                         app:layout_constraintTop_toTopOf="parent" />
                     <TextView
                         android:id="@+id/profile_state"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="상태메세지"
                         android:textSize="12dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         android:layout_marginStart="20dp"
                         app:layout_constraintStart_toEndOf="@id/profile_img"
                         app:layout_constraintTop_toBottomOf="@id/profile_nickname"
@@ -85,7 +89,7 @@
                         android:textSize="16dp"
                         android:textStyle="bold"
                         android:gravity="center"
-                        app:layout_constraintStart_toEndOf="@id/profile_nickname"
+                        android:layout_marginEnd="40dp"
                         app:layout_constraintEnd_toStartOf="@id/profile_following"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -98,7 +102,7 @@
                         android:textSize="16dp"
                         android:textStyle="bold"
                         android:gravity="center"
-                        app:layout_constraintStart_toEndOf="@id/profile_follower"
+                        android:layout_marginEnd="40dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -119,35 +123,36 @@
                         android:id="@+id/point_level"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lv 1\n씨앗"
+                        android:text="Lv. 씨앗"
                         android:textStyle="bold"
                         android:textSize="28dp"
                         android:textColor="@color/black"
                         android:layout_margin="20dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/point_total_progressbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/point_progress_bar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/primary"
+                        android:progress="30"
+                        app:indicatorColor="@color/primary"
+                        android:layout_margin="20dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/point_level"
-                        app:layout_constraintBottom_toTopOf="@id/point_rest">
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/point_current_progressbar"
-                            android:layout_width="100dp"
-                            android:layout_height="5dp"
-                            android:background="@drawable/black_background"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        app:layout_constraintTop_toBottomOf="@id/point_level" />
+                    <TextView
+                        android:id="@+id/current_point"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(900 / 1000)"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/point_progress_bar"/>
                     <TextView
                         android:id="@+id/point_rest"
                         android:layout_width="wrap_content"
@@ -156,8 +161,10 @@
                         android:textColor="@color/black"
                         android:textSize="12dp"
                         android:textStyle="bold"
-                        android:layout_margin="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginBottom="10dp"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/current_point"
                         app:layout_constraintBottom_toBottomOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -211,7 +218,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/challenge_mark">
                     <ImageView
-                        android:id="@+id/current_challenge_image"
+                        android:id="@+id/challenge_image"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:src="@drawable/challenge_ex_2"
@@ -220,7 +227,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
                     <TextView
-                        android:id="@+id/current_challenge_name"
+                        android:id="@+id/challenge_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="대중교통 이용하기"
@@ -228,31 +235,24 @@
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:layout_margin="20dp"
-                        app:layout_constraintStart_toEndOf="@id/current_challenge_image"
+                        app:layout_constraintStart_toEndOf="@id/challenge_image"
                         app:layout_constraintTop_toTopOf="parent"/>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/current_challenge_total_progressbar"
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/challenge_progress_bar"
                         android:layout_width="0dp"
-                        android:layout_height="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:progress="30"
+                        app:indicatorColor="@color/primary"
                         android:layout_margin="20dp"
-                        android:background="@color/primary"
-                        app:layout_constraintStart_toEndOf="@id/current_challenge_image"
+                        app:layout_constraintStart_toEndOf="@id/challenge_image"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/current_challenge_name">
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/current_challenge_current_progressbar"
-                            android:layout_width="100dp"
-                            android:layout_height="5dp"
-                            android:background="@drawable/black_background"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        app:layout_constraintTop_toBottomOf="@id/challenge_name" />
                     <TextView
-                        android:id="@+id/current_challenge_progress_count"
+                        android:id="@+id/challenge_progress_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="30% 달성"
+                        android:text="30% 달성 (2회/10회)"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="12dp"
@@ -260,7 +260,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/current_challenge_total_progressbar"
+                        app:layout_constraintTop_toBottomOf="@id/challenge_progress_bar"
                         app:layout_constraintBottom_toBottomOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -332,7 +332,6 @@
                             android:layout_height="wrap_content"
                             android:text="대중교통 챌린지를 하는 중"
                             android:textSize="12dp"
-                            android:maxLength="10"
                             android:ellipsize="end"
                             android:ems="5"
                             android:maxLines="1"
@@ -364,7 +363,6 @@
                             android:layout_height="wrap_content"
                             android:text="용기내 챌린지를 하는 중"
                             android:textSize="12dp"
-                            android:maxLength="10"
                             android:ellipsize="end"
                             android:ems="5"
                             android:maxLines="1"
@@ -396,7 +394,6 @@
                             android:layout_height="wrap_content"
                             android:text="쓰레기 줍기 챌린지를 하는 중"
                             android:textSize="12dp"
-                            android:maxLength="10"
                             android:ellipsize="end"
                             android:ems="5"
                             android:maxLines="1"
