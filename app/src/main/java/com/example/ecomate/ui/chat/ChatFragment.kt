@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ecomate.ApplicationClass.Companion.CHAT_ITEM
 import com.example.ecomate.databinding.FragmentChatBinding
-import com.example.ecomate.model.Chat
 import com.example.ecomate.model.ChatInfoItem
 import com.example.ecomate.ui.adapter.ChatAdapter
 import com.example.ecomate.viewmodel.ChatViewModel
@@ -59,6 +57,11 @@ class ChatFragment : Fragment() {
         setUi()
     }
 
+    override fun onResume() {
+        super.onResume()
+        chatViewModel.getChatList()
+    }
+
     private fun setAdapter(view: View) {
         val chatAdapter = ChatAdapter()
         chatAdapter.detailChatListener =
@@ -74,7 +77,7 @@ class ChatFragment : Fragment() {
             layoutManager = LinearLayoutManager(view.context)
             adapter = chatAdapter
         }
-        chatViewModel.chatList.observe(viewLifecycleOwner){
+        chatViewModel.chatList.observe(viewLifecycleOwner) {
             chatAdapter.submitList(it)
         }
 

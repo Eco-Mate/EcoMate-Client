@@ -46,10 +46,6 @@ class ChatViewModel : ViewModel() {
     }
 
 
-    init {
-        getChatList()
-    }
-
     fun getChatList() {
         viewModelScope.launch {
             _chatList.value = RetrofitUtil.chatApi.getChatList().response
