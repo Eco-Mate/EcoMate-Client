@@ -17,9 +17,15 @@ class BoardSearchViewModel : ViewModel() {
         getBoards()
     }
 
-    private fun getBoards() {
+    fun getBoards() {
         viewModelScope.launch {
             _boards.value = RetrofitUtil.boardApi.getBoards().response["boardDtoList"]
+        }
+    }
+
+    fun getSearchBoards(searchWord: String) {
+        viewModelScope.launch {
+            _boards.value = RetrofitUtil.boardApi.getSearchBoards(searchWord).response["boardDtoList"]
         }
     }
 }
