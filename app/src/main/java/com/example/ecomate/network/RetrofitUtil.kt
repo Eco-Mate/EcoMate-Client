@@ -9,5 +9,6 @@ class RetrofitUtil {
         val boardApi: BoardApi = ApplicationClass.retrofit.create(BoardApi::class.java)
         val memberApi: MemberApi = ApplicationClass.retrofit.create(MemberApi::class.java)
         val followApi: FollowApi = ApplicationClass.retrofit.create(FollowApi::class.java)
+        val levelApi: LevelApi = ApplicationClass.retrofit.create(LevelApi::class.java)
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecomate.model.Board
+import com.example.ecomate.model.LevelInfo
 import com.example.ecomate.model.MyDetailChallenge
 import com.example.ecomate.model.ProfileInfo
 import com.example.ecomate.model.User
@@ -27,6 +28,11 @@ class UserProfileViewModel : ViewModel() {
     private val _userChallenges = MutableLiveData<List<MyDetailChallenge>>()
     val userChallenges: LiveData<List<MyDetailChallenge>>
         get() = _userChallenges
+
+
+    private val _levelInfo = MutableLiveData<LevelInfo>()
+    val levelInfo: LiveData<LevelInfo>
+        get() = _levelInfo
 
     fun getUserBoards(reqMemberId: Int) {
         viewModelScope.launch {
@@ -61,6 +67,12 @@ class UserProfileViewModel : ViewModel() {
     fun getUserChallenges(memberId: Int) {
         viewModelScope.launch {
             _userChallenges.value = RetrofitUtil.challengeApi.getUserAllChallenge(memberId).response
+        }
+    }
+
+    fun getLevelInfo(levelName: String) {
+        viewModelScope.launch {
+            _levelInfo.value = RetrofitUtil.levelApi.getLevelInfo(levelName).response
         }
     }
 }

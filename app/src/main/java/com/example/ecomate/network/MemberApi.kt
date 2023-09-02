@@ -34,6 +34,4 @@ interface MemberApi {
 
     @DELETE("v1/members/profile-image")
     suspend fun deleteMyProfileImage(): MyProfileImageDeleteResponse
-
-
 }

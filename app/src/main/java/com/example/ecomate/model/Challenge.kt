@@ -1,12 +1,12 @@
 package com.example.ecomate.model
 
 data class Challenge(
-    val activeYn: Boolean,
     val challengeId: Int,
+    val activeYn: Boolean,
     val challengeTitle: String,
-    val createdDate: String,
     val description: String,
-    val goalCnt: Int,
     val image: String,
-    val treePoint: Int
+    val goalCnt: Int,
+    val treePoint: Int,
+    val createdDate: String,
 )

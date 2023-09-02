@@ -28,7 +28,9 @@ class HomeChallengeAllAdapter :
                 root.setOnClickListener {
                     detailHomeChallengeListener.onClick(challengeId = challenge.challengeId)
                 }
-                loadImg(binding.root.context, challenge.image, binding.challengeAllIv)
+                if (challenge.image != null) {
+                    loadImg(binding.root.context, challenge.image, binding.challengeAllIv)
+                }
             }
         }
     }
