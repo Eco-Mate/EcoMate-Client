@@ -7,9 +7,17 @@
         android:required="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+        <uses-permission android:name="android.permission.POST_NOTIFICATIONS" android:minSdkVersion="33"/>
+        <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" android:minSdkVersion="33"/>
+        <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" android:minSdkVersion="33"/>
+        <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" android:minSdkVersion="33"/>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -96,6 +104,7 @@
         <activity
             android:name=".ui.chat.ChatAddActivity"
             android:exported="false" />
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="cebdd0ca4485962420dd65ef536d8fb9"/>
     </application>
 
 </manifest>

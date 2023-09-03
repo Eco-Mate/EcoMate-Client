@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +20,7 @@ import com.example.ecomate.ui.user.LoginActivity
 class PermissionActivity : AppCompatActivity() {
     lateinit var binding: ActivityPermissionBinding
     private val REQUEST_PERMISSIONS = 1
-    private val permissionList = arrayOf(
+    private val permissionList = mutableListOf(
         Manifest.permission.CAMERA,
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -37,6 +38,13 @@ class PermissionActivity : AppCompatActivity() {
 
     private fun checkPermission() {
         var status = true
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissionList.add(Manifest.permission.READ_MEDIA_VIDEO)
+            permissionList.add(Manifest.permission.READ_MEDIA_AUDIO)
+            permissionList.add(Manifest.permission.READ_MEDIA_IMAGES)
+            permissionList.remove(Manifest.permission.READ_EXTERNAL_STORAGE)
+            permissionList.remove(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
         permissionList.forEach {
             if (ContextCompat.checkSelfPermission(this,it) == PackageManager.PERMISSION_DENIED) {
                 status = false
@@ -54,7 +62,7 @@ class PermissionActivity : AppCompatActivity() {
 
         dialogBinding.apply {
             accessSettingBtn.setOnClickListener {
-                requestMultiplePermissions.launch(permissionList)
+                requestMultiplePermissions.launch(permissionList.toTypedArray())
             }
             accessCancelBtn.setOnClickListener {
                 dlg.dismiss()

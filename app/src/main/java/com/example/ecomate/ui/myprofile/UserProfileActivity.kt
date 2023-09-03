@@ -36,6 +36,7 @@ class UserProfileActivity : AppCompatActivity() {
         setAdapter()
         setUi()
     }
+
     private fun setAdapter() {
         val userBoardsAdapter = UserBoardsAdapter()
         userBoardsAdapter.detailBoardListener =
@@ -55,27 +56,33 @@ class UserProfileActivity : AppCompatActivity() {
             userBoardsAdapter.submitList(it)
         }
     }
+
     private fun setUi() {
         binding.apply {
             backBtn.setOnClickListener {
                 finish()
             }
-            userProfileViewModel.profileInfo.observe(this@UserProfileActivity) {
+            userProfileViewModel.profileInfo.observe(this@UserProfileActivity) { profileInfo ->
                 // 사용자 프로필 설정
-                userNickname.text = it.nickname
-                if (it.profileImage != null && it.profileImage != "") {
+                userNickname.text = profileInfo.nickname
+                if (profileInfo.profileImage != null && profileInfo.profileImage != "") {
                     Glide.with(this.root.context)
-                        .load(it.profileImage)
+                        .load(profileInfo.profileImage)
                         .into(userImage)
                 }
-                userState.text = it.statusMessage
-                userFollower.text = "${it.followerCnt}\n팔로워"
-                userFollowing.text = "${it.followingCnt}\n팔로잉"
+                userState.text = profileInfo.statusMessage
+                userFollower.text = "${profileInfo.followerCnt}\n팔로워"
+                userFollowing.text = "${profileInfo.followingCnt}\n팔로잉"
                 // 사용자 트리포인트 설정
-                pointLevel.text = "Lv. ${it.level}"
-                pointProgressBar.progress = ((it.totalTreePoint/20.0)*100).toInt()
-                currentPoint.text = "(${it.totalTreePoint}/20)"
-                pointRest.text = "다음 레벨까지 ${(20-it.totalTreePoint)} 트리포인트 남았어요!"
+                userProfileViewModel.getLevelInfo(profileInfo.level)
+                pointLevel.text = "${profileInfo.level}"
+                userProfileViewModel.levelInfo.observe(this@UserProfileActivity) { levelInfo ->
+                    pointProgressBar.progress =
+                        ((profileInfo.totalTreePoint / levelInfo.goalTreePoint.toDouble()) * 100).toInt()
+                    currentPoint.text = "(${profileInfo.totalTreePoint}/${levelInfo.goalTreePoint})"
+                    pointRest.text =
+                        "다음 레벨까지 ${(levelInfo.goalTreePoint - profileInfo.totalTreePoint)} 트리포인트 남았어요!"
+                }
             }
 
             // 팔로우 버튼 설정
@@ -109,8 +116,9 @@ class UserProfileActivity : AppCompatActivity() {
                             .into(challengeImage)
                     }
                     challengeName.text = it[0].challengeTitle
-                    challengeProgressBar.progress = (it[0].doneCnt/it[0].goalCnt)*100
-                    challengeProgressCount.text = "${((it[0].doneCnt/it[0].goalCnt.toFloat())*100).toInt()}% 달성 (${it[0].doneCnt}회/${it[0].goalCnt}회)"
+                    challengeProgressBar.progress = (it[0].doneCnt / it[0].goalCnt) * 100
+                    challengeProgressCount.text =
+                        "${((it[0].doneCnt / it[0].goalCnt.toFloat()) * 100).toInt()}% 달성 (${it[0].doneCnt}회/${it[0].goalCnt}회)"
                 } else {
                     challengeNum.text = "0\n참여 챌린지 수"
                 }

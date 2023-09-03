@@ -43,7 +43,7 @@ class BoardModifyActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListen
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
     )
     private lateinit var imageUri: Uri
-    private var challenge_id: Int = 0
+    private var challenge_id: Int = -1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,8 +60,12 @@ class BoardModifyActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListen
         // 챌린지 팝업 메뉴 설정
         val popup = PopupMenu(binding.root.context, binding.challengeSelectBtn, Gravity.END)
         boardModifyViewModel.challenges.observe(this@BoardModifyActivity) { challengeList ->
-            challengeList.forEach {
-                popup.menu.add(0, it.challengeId, 0, it.challengeTitle)
+            if (challengeList.size > 0) {
+                challengeList.forEach {
+                    popup.menu.add(0, it.challengeId, 0, it.challengeTitle)
+                }
+            } else {
+                popup.menu.add(0, -1, 0, "진행 중인 챌린지 없음")
             }
         }
         popup.setOnMenuItemClickListener(this@BoardModifyActivity)
@@ -106,8 +110,10 @@ class BoardModifyActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListen
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
-        binding.challengeName.text = item?.title
-        challenge_id = item?.itemId!!
+        if (item?.itemId != -1) {
+            challenge_id = item?.itemId!!
+            binding.challengeName.text = item?.title
+        }
 
         return item != null
     }

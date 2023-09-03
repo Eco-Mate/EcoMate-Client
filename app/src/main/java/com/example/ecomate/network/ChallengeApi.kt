@@ -20,6 +20,9 @@ interface ChallengeApi {
     @GET("v1/challenges")
     suspend fun getAllChallenges(): ChallengeListBody
 
+    @GET("v1/challenges/unchallenged")
+    suspend fun getAllUnChallenges(): ChallengeListBody
+
     @GET("v1/challenges/{challengeId}")
     suspend fun getChallenge(@Path("challengeId") challengeId: Int): ChallengeDetailBody
 
@@ -37,9 +40,6 @@ interface ChallengeApi {
     suspend fun getUserAllChallenge(
         @Path("memberId") memberId: Int
     ): MyChallengeListResponse
-
-    @GET("v1/myChallenges/member/{memberId}/proceeding")
-    suspend fun getUserProceedingChallenge(): MyChallengeListResponse
 
     @GET("v1/myChallenges/member/proceeding")
     suspend fun getAllProceedingChallenge(): MyChallengeListResponse
@@ -64,5 +64,8 @@ interface ChallengeApi {
 
     @GET("v1/myChallenges/member/finish")
     suspend fun getMyFinishChallenge(): MyChallengeListResponse
+
+    @PUT("v1/myChallenges/{challengeId}")
+    suspend fun updateMyChallenge(@Path("challengeId") challengeId: Int)
 
 }

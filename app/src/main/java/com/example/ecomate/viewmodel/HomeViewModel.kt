@@ -28,7 +28,6 @@ class HomeViewModel : ViewModel() {
         get() = _popularBoards
 
     init {
-        getAllChallenge()
         getProgressMyChallenge()
         getFinishMyChallenge()
         getPopularBoards()
@@ -38,6 +37,13 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             _challengeList.value =
                 RetrofitUtil.challengeApi.getAllChallenges().response.toMutableList()
+        }
+    }
+
+    fun getAllUnChallenges(){
+        viewModelScope.launch {
+            _challengeList.value =
+                RetrofitUtil.challengeApi.getAllUnChallenges().response.toMutableList()
         }
     }
 

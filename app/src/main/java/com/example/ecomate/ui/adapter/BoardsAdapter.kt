@@ -2,6 +2,7 @@ package com.example.ecomate.ui.adapter
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,8 @@ class BoardsAdapter : ListAdapter<Board, BoardsAdapter.BoardsViewHolder>(
                     Glide.with(this.root)
                         .load(board.profileImage)
                         .into(profileImg)
+                } else {
+                    profileImg.setImageResource(R.drawable.profile_image_1)
                 }
                 profileNickname.text = board.nickname
                 boardDate.text = board.createdDate.substring(0, 4) +
@@ -42,9 +45,11 @@ class BoardsAdapter : ListAdapter<Board, BoardsAdapter.BoardsViewHolder>(
                 profileBox.setOnClickListener {
                     profileInfoListener.onClick(board = board)
                 }
-                Glide.with(this.root)
-                    .load(board.image)
-                    .into(boardImg)
+                if (board.image != null && board.image != "") {
+                    Glide.with(this.root)
+                        .load(board.image)
+                        .into(boardImg)
+                }
                 boardContent.text = board.boardContent
                 root.setOnClickListener {
                     detailBoardListener.onClick(board = board)

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecomate.ApplicationClass
 import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.ApplicationClass.Companion.CHALLENGE_ID
 import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
@@ -43,7 +43,10 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        homeViewModel.getAllChallenge()
+        if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 10)
+            homeViewModel.getAllChallenge()
+        else
+            homeViewModel.getAllUnChallenges()
         homeViewModel.getProgressMyChallenge()
         homeViewModel.getFinishMyChallenge()
         homeViewModel.getPopularBoards()

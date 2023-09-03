@@ -1,35 +1,23 @@
 package com.example.ecomate.ui.community
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.widget.PopupMenu
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ecomate.databinding.ActivityBoardAddBinding
 import com.example.ecomate.model.BoardDto
 import com.example.ecomate.ui.LoadingDialog
 import com.example.ecomate.viewmodel.BoardAddViewModel
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.parse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.Request
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream
 
@@ -37,7 +25,7 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
     lateinit var binding: ActivityBoardAddBinding
     private val boardAddViewModel: BoardAddViewModel by viewModels()
     private lateinit var selectedImageUri: Uri
-    private var challenge_id: Int = 0
+    private var challenge_id: Int = -1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,8 +39,12 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
         // 챌린지 팝업 메뉴 설정
         val popup = PopupMenu(binding.root.context, binding.challengeSelectBtn, Gravity.END)
         boardAddViewModel.challenges.observe(this@BoardAddActivity) { challengeList ->
-            challengeList.forEach {
-                popup.menu.add(0, it.challengeId, 0, it.challengeTitle)
+            if (challengeList.size > 0) {
+                challengeList.forEach {
+                    popup.menu.add(0, it.challengeId, 0, it.challengeTitle)
+                }
+            } else {
+                popup.menu.add(0, -1, 0, "진행 중인 챌린지 없음")
             }
         }
         popup.setOnMenuItemClickListener(this@BoardAddActivity)
@@ -81,6 +73,8 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
                         boardContentEditText.text.toString()
                     ), postBoardWithImage(), this@BoardAddActivity
                 )
+                Log.e("하위",challenge_id.toString())
+                boardAddViewModel.updateMyChallenge(challenge_id)
             }
         }
 
@@ -95,8 +89,10 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
-        binding.challengeName.text = item?.title
-        challenge_id = item?.itemId!!
+        if (item?.itemId != -1) {
+            challenge_id = item?.itemId!!
+            binding.challengeName.text = item?.title
+        }
 
         return item != null
     }
@@ -104,13 +100,15 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
     private fun openGallery() {
         galleryLauncher.launch("image/*")
     }
-    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        uri: Uri? ->
-        if (uri != null) {
-            selectedImageUri = uri
-            binding.boardImageBtn.setImageURI(selectedImageUri)
+
+    private val galleryLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            if (uri != null) {
+                selectedImageUri = uri
+                binding.boardImageBtn.setImageURI(selectedImageUri)
+            }
         }
-    }
+
     private fun postBoardWithImage(): MultipartBody.Part {
         val imageFile = File(cacheDir, "temp_image.jpg")
         val outputStream = FileOutputStream(imageFile)

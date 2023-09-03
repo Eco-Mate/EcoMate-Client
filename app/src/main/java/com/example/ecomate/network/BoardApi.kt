@@ -5,7 +5,6 @@ import com.example.ecomate.model.BoardDto
 import com.example.ecomate.model.BoardLikeBody
 import com.example.ecomate.model.BoardLikeResponse
 import com.example.ecomate.model.BoardPutBody
-import com.example.ecomate.model.BoardPutResponse
 import com.example.ecomate.model.BoardResponse
 import com.example.ecomate.model.BoardSaveBody
 import com.example.ecomate.model.BoardSaveDeleteResponse
@@ -23,6 +22,8 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
+
 interface BoardApi {
     @GET("v1/boards")
     suspend fun getBoards(): BoardResponse
@@ -47,7 +48,7 @@ interface BoardApi {
     suspend fun putBoard(
         @Path("boardId") boardId: Int,
         @Body boardPutBody: BoardPutBody
-    ): BoardPutResponse
+    )
 
     @DELETE("v1/boards/{boardId}")
     suspend fun deleteBoard(@Path("boardId") boardId: Int): BoardDeleteResponse
@@ -80,5 +81,10 @@ interface BoardApi {
     @GET("v1/boards/members/{reqMemberId}")
     suspend fun getUserBoards(
         @Path("reqMemberId") reqMemberId: Int
+    ): BoardResponse
+
+    @GET("v1/boards/search")
+    suspend fun getSearchBoards(
+        @Query("searchWord") searchWord: String
     ): BoardResponse
 }
