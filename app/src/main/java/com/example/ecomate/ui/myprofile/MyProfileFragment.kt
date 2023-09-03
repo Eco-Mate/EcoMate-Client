@@ -59,7 +59,7 @@ class MyProfileFragment : Fragment() {
                 profileFollowing.text = "${profileInfo.followingCnt}\n팔로잉"
                 // 내 챌린지 포인트 설정
                 myProfileViewModel.getLevelInfo(profileInfo.level)
-                pointLevel.text = "Lv. ${profileInfo.level}"
+                pointLevel.text = "${profileInfo.level}"
                 myProfileViewModel.levelInfo.observe(viewLifecycleOwner) { levelInfo ->
                     pointProgressBar.progress =
                         ((profileInfo.totalTreePoint / levelInfo.goalTreePoint.toDouble()) * 100).toInt()

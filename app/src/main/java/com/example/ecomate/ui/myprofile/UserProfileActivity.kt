@@ -75,7 +75,7 @@ class UserProfileActivity : AppCompatActivity() {
                 userFollowing.text = "${profileInfo.followingCnt}\n팔로잉"
                 // 사용자 트리포인트 설정
                 userProfileViewModel.getLevelInfo(profileInfo.level)
-                pointLevel.text = "Lv. ${profileInfo.level}"
+                pointLevel.text = "${profileInfo.level}"
                 userProfileViewModel.levelInfo.observe(this@UserProfileActivity) { levelInfo ->
                     pointProgressBar.progress =
                         ((profileInfo.totalTreePoint / levelInfo.goalTreePoint.toDouble()) * 100).toInt()
