@@ -21,6 +21,7 @@ import com.example.ecomate.model.Board
 import com.example.ecomate.model.Comment
 import com.example.ecomate.ui.adapter.CommentsAdapter
 import com.example.ecomate.ui.myprofile.UserProfileActivity
+import com.example.ecomate.ui.util.Util.hideKeyboard
 import com.example.ecomate.viewmodel.BoardDetailViewModel
 
 class BoardDetailActivity : AppCompatActivity() {
@@ -199,10 +200,5 @@ class BoardDetailActivity : AppCompatActivity() {
             }
         }
         popUp.show()
-    }
-
-    private fun hideKeyboard(activity: Activity) {
-        val ims = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        ims.hideSoftInputFromWindow(activity.window.decorView.applicationWindowToken, 0)
     }
 }

@@ -19,6 +19,7 @@ import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.databinding.ActivityBoardSearchBinding
 import com.example.ecomate.model.Board
 import com.example.ecomate.ui.adapter.BoardSearchAdapter
+import com.example.ecomate.ui.util.Util.hideKeyboard
 import com.example.ecomate.viewmodel.BoardSearchViewModel
 import retrofit2.HttpException
 import java.lang.Exception
