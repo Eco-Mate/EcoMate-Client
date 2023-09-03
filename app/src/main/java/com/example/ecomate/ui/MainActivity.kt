@@ -1,7 +1,11 @@
 package com.example.ecomate.ui
 
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.content.pm.Signature
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.R
@@ -12,6 +16,8 @@ import com.example.ecomate.ui.map.MapFragment
 import com.example.ecomate.ui.myprofile.MyProfileFragment
 import com.example.ecomate.ui.home.HomeFragment
 import com.google.android.material.tabs.TabLayout
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -19,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        getHashKey()
         setUi()
     }
 
@@ -52,5 +59,25 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    private fun getHashKey() {
+        var packageInfo: PackageInfo? = null
+        try {
+            packageInfo = packageManager.getPackageInfo(packageName,PackageManager.GET_SIGNATURES)
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+        if (packageInfo == null)
+            Log.e("KeyHash", "KeyHash:null")
+        for (signature: Signature in packageInfo!!.signatures) {
+            try {
+                var md: MessageDigest = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                Log.d("KeyHash",Base64.encodeToString(md.digest(), Base64.DEFAULT))
+            } catch (e: NoSuchAlgorithmException) {
+                Log.e("KeyHash","Unable to get MessageDigest. signature=" + signature, e)
+            }
+        }
     }
 }
