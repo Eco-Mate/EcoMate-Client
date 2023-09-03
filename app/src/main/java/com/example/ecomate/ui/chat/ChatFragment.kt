@@ -99,7 +99,7 @@ class ChatFragment : Fragment() {
             adapter = chatAdapter
         }
         chatViewModel.chatList.observe(viewLifecycleOwner) {
-            chatAdapter.submitList(it)
+            chatAdapter.submitList(it.toMutableList())
         }
 
     }
