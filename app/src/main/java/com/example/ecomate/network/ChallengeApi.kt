@@ -20,6 +20,9 @@ interface ChallengeApi {
     @GET("v1/challenges")
     suspend fun getAllChallenges(): ChallengeListBody
 
+    @GET("v1/challenges/unchallenged")
+    suspend fun getAllUnChallenges(): ChallengeListBody
+
     @GET("v1/challenges/{challengeId}")
     suspend fun getChallenge(@Path("challengeId") challengeId: Int): ChallengeDetailBody
 

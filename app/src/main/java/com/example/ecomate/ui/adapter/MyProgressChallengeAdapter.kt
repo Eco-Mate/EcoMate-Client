@@ -27,8 +27,10 @@ class MyProgressChallengeAllAdapter :
                 challengeProgressBar.max = myChallenge.goalCnt
                 challengeProgressBar.progress = myChallenge.doneCnt
 
+                val temp = (myChallenge.doneCnt.toFloat() / myChallenge.goalCnt.toFloat()) * 100
+
                 challengeProgressDes.text =
-                    "${myChallenge.doneCnt / myChallenge.goalCnt}% 달성 (${myChallenge.doneCnt}회/${myChallenge.goalCnt}회)"
+                    "${temp.toInt()}% 달성 (${myChallenge.doneCnt}회/${myChallenge.goalCnt}회)"
             }
         }
     }
@@ -59,7 +61,10 @@ class MyProgressChallengeDiffCallback : DiffUtil.ItemCallback<MyDetailChallenge>
         return oldItem.myChallengeId == newItem.myChallengeId
     }
 
-    override fun areContentsTheSame(oldItem: MyDetailChallenge, newItem: MyDetailChallenge): Boolean {
+    override fun areContentsTheSame(
+        oldItem: MyDetailChallenge,
+        newItem: MyDetailChallenge
+    ): Boolean {
         return newItem == oldItem
     }
 }
