@@ -4,7 +4,7 @@ import com.example.ecomate.model.ChatDetailResponse
 import com.example.ecomate.model.ChatResponse
 import com.example.ecomate.model.MemberBody
 import com.example.ecomate.model.MemberResponse
-import com.example.ecomate.model.MyProfileInfoBody
+import com.example.ecomate.model.RoomNameBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -25,5 +25,8 @@ interface ChatApi {
 
     @POST("v1/chat-rooms")
     suspend fun postChat(@Body memberBody: MemberBody)
+
+    @PUT("v1/chat-rooms/{roomId}")
+    suspend fun modifyRoomName(@Path("roomId") roomId: Int, @Body roomName: RoomNameBody)
 
 }
