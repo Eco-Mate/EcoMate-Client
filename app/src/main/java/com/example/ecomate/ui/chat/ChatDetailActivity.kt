@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,10 +51,22 @@ class ChatDetailActivity : AppCompatActivity() {
             chatRv.apply {
                 layoutManager = LinearLayoutManager(this.context)
                 adapter = chatDetailAdapter
+
+                addOnLayoutChangeListener(onLayoutChangeListener)
+            }
+        }
+        binding.chatRv.addOnLayoutChangeListener{_, _, _, _, bottom, _, _, _, oldBottom ->
+            Log.d("chatRv", "Bottom: $bottom, OldBottom: $oldBottom")
+            if (bottom <= oldBottom) {
+                // 키보드가 나타날 때(레이아웃의 하단 위치가 이전보다 작아질 때)
+                binding.chatRv.postDelayed({
+                    binding.chatRv.scrollToPosition(chatDetailAdapter.itemCount - 1)
+                }, 100)
             }
         }
         chatDetailViewModel.chatDetail.observe(this) {
             chatDetailAdapter.submitList(it.toMutableList())
+            binding.chatRv.scrollToPosition(chatDetailAdapter.itemCount - 1)
         }
 
 
@@ -82,6 +95,13 @@ class ChatDetailActivity : AppCompatActivity() {
 
         //chatMemberAdapter.submitList(chatItem.members)
     }
+    private val onLayoutChangeListener =
+        View.OnLayoutChangeListener { _, _, _, _, bottom, _, _, _, oldBottom ->
+            // 키보드가 올라와 높이가 변함
+            if (bottom < oldBottom) {
+                binding.chatRv.scrollBy(0, oldBottom - bottom) // 스크롤 유지를 위해 추가
+            }
+        }
 
     private fun setUi() {
         binding.apply {

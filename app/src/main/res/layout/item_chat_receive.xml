@@ -12,6 +12,7 @@
         android:id="@+id/receiveIv"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:src="@drawable/baseline_delete_24"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

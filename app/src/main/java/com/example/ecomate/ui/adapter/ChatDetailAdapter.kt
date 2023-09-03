@@ -1,5 +1,6 @@
 package com.example.ecomate.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -23,11 +24,20 @@ class ChatDetailAdapter :
     inner class ReceivedViewHolder(private val binding: ItemChatReceiveBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Chat) {
-            Glide.with(binding.root.context)
-                .load(item.profileImage)
-                .fallback(R.drawable.baseline_delete_24)
-                .circleCrop()
-                .into(binding.receiveIv)
+            if (item.profileImage != null) {
+                Glide.with(binding.root.context)
+                    .load(item.profileImage)
+                    .circleCrop()
+                    .into(binding.receiveIv)
+            } else {
+                // item.profileImage가 null인 경우 기본 이미지를 로드
+                Glide.with(binding.root.context)
+                    .load(R.drawable.baseline_delete_24) // 기본 이미지 리소스
+                    .circleCrop()
+                    .into(binding.receiveIv)
+            }
+            Log.e("baseline_delete_24",item.toString())
+
             binding.receiveNickname.text = item.senderNickname
             binding.receiveMessageText.text = item.message
         }
