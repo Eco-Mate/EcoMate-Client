@@ -2,7 +2,7 @@ package com.example.ecomate.model
 
 import java.io.Serializable
 
-data class BoardPutResponse(
+data class StoreResponse(
     val message: String,
-    val response: Int,
-) : Serializable
+    val response: StoreInfo,
+)

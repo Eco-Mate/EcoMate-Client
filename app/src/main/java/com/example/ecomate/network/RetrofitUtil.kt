@@ -11,6 +11,6 @@ class RetrofitUtil {
         val memberApi: MemberApi = ApplicationClass.retrofit.create(MemberApi::class.java)
         val followApi: FollowApi = ApplicationClass.retrofit.create(FollowApi::class.java)
         val levelApi: LevelApi = ApplicationClass.retrofit.create(LevelApi::class.java)
-
+        val ecostoreApi: EcostoreApi = ApplicationClass.retrofit.create(EcostoreApi::class.java)
     }
 }
