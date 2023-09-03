@@ -3,6 +3,8 @@ package com.example.ecomate.ui.community
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
@@ -46,9 +48,18 @@ class BoardSearchActivity : AppCompatActivity() {
     }
 
     private fun setUi() {
-        binding.backBtn.setOnClickListener {
-            finish()
+        binding.apply {
+            backBtn.setOnClickListener {
+                finish()
+            }
+            // 검색 내용 입력
+            searchBtn.setOnClickListener {
+                if (boardSearchEditText.text.toString() == "") {
+                    boardSearchViewModel.getBoards()
+                } else {
+                    boardSearchViewModel.getSearchBoards(boardSearchEditText.text.toString())
+                }
+            }
         }
-        // 검색 내용 입력
     }
 }

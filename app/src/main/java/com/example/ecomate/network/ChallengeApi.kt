@@ -38,9 +38,6 @@ interface ChallengeApi {
         @Path("memberId") memberId: Int
     ): MyChallengeListResponse
 
-    @GET("v1/myChallenges/member/{memberId}/proceeding")
-    suspend fun getUserProceedingChallenge(): MyChallengeListResponse
-
     @GET("v1/myChallenges/member/proceeding")
     suspend fun getAllProceedingChallenge(): MyChallengeListResponse
 
@@ -64,5 +61,8 @@ interface ChallengeApi {
 
     @GET("v1/myChallenges/member/finish")
     suspend fun getMyFinishChallenge(): MyChallengeListResponse
+
+    @PUT("v1/myChallenges/{challengeId}")
+    suspend fun updateMyChallenge(@Path("challengeId") challengeId: Int)
 
 }
