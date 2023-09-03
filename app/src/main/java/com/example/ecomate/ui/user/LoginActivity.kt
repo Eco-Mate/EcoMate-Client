@@ -1,14 +1,18 @@
 package com.example.ecomate.ui.user
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecomate.ApplicationClass
 import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.databinding.ActivityLoginBinding
 import com.example.ecomate.ui.MainActivity
+import com.example.ecomate.ui.util.Util.hideKeyboard
 import com.example.ecomate.viewmodel.LogInViewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -34,7 +38,8 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.apply {
             loginBtn.setOnClickListener {
-                logInViewModel.logIn(loginId.text.toString(), loginPassword.text.toString())
+                logInViewModel.logIn(loginId.text.toString(), loginPassword.text.toString(), this@LoginActivity)
+                hideKeyboard(this@LoginActivity)
             }
             loginSignUp.setOnClickListener {
                 startActivity(Intent(this@LoginActivity, SignupActivity::class.java))

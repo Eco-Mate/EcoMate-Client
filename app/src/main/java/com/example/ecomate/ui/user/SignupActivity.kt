@@ -43,8 +43,4 @@ class SignupActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun checkPassword() {
-
-    }
 }
