@@ -31,7 +31,9 @@ class ChallengeDetailActivity : AppCompatActivity() {
                 binding.apply {
                     toolbar.title = it.challengeTitle
                     challengeContent.text = it.description
-                    loadImg(this@ChallengeDetailActivity, it.image, binding.challengeDetailIv)
+                    if (it.image != null && it.image != "") {
+                        loadImg(this@ChallengeDetailActivity, it.image, binding.challengeDetailIv)
+                    }
                     challengeDetailInfoTv.text = "성공보상 : ${it.treePoint}\n 목표횟수 : ${it.goalCnt}"
 
 
@@ -61,7 +63,9 @@ class ChallengeDetailActivity : AppCompatActivity() {
                 binding.apply {
                     toolbar.title = it.challengeTitle
                     challengeContent.text = it.description
-                    loadImg(this@ChallengeDetailActivity, it.image, binding.challengeDetailIv)
+                    if (it.image != null && it.image != "") {
+                        loadImg(this@ChallengeDetailActivity, it.image, binding.challengeDetailIv)
+                    }
                     challengeDetailInfoTv.text = "성공보상 : ${it.treePoint}\n 목표횟수 : ${it.goalCnt}"
 
                     if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 10) {
