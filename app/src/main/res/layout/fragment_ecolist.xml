@@ -41,11 +41,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ecoshop_rv"
+        android:id="@+id/ecostore_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_board"
-        android:layout_marginTop="20dp"
+        tools:listitem="@layout/item_store"
+        android:layout_margin="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ecoshop_search_box"/>
