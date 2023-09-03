@@ -3,17 +3,15 @@ package com.example.ecomate.ui.community
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.ecomate.ApplicationClass
 import com.example.ecomate.ApplicationClass.Companion.BOARD_ITEM
 import com.example.ecomate.ApplicationClass.Companion.USER_INFO
 import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
@@ -21,7 +19,6 @@ import com.example.ecomate.R
 import com.example.ecomate.databinding.ActivityBoardDetailBinding
 import com.example.ecomate.model.Board
 import com.example.ecomate.model.Comment
-import com.example.ecomate.ui.LoadingDialog
 import com.example.ecomate.ui.adapter.CommentsAdapter
 import com.example.ecomate.ui.myprofile.UserProfileActivity
 import com.example.ecomate.viewmodel.BoardDetailViewModel
@@ -66,7 +63,7 @@ class BoardDetailActivity : AppCompatActivity() {
             adapter = commentsAdapter
         }
         boardDetailViewModel.comments.observe(this) {
-            commentsAdapter.submitList(it)
+            commentsAdapter.submitList(it.toMutableList())
         }
     }
 
@@ -173,9 +170,10 @@ class BoardDetailActivity : AppCompatActivity() {
                         intent.putExtra(BOARD_ITEM, board)
                         startActivity(intent)
                     }
+
                     R.id.board_delete -> {
                         boardDetailViewModel.deleteBoard(board.boardId)
-                        Toast.makeText(this, "게시글이 삭제되었습니다",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "게시글이 삭제되었습니다", Toast.LENGTH_SHORT).show()
                         finish()
                     }
                 }
@@ -194,6 +192,7 @@ class BoardDetailActivity : AppCompatActivity() {
                             startActivity(intent)
                         }
                     }
+
                     R.id.board_save -> Toast.makeText(context, "게시글 저장", Toast.LENGTH_SHORT).show()
                 }
                 false

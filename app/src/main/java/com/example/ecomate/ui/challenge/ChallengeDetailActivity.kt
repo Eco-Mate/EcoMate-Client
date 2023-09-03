@@ -34,6 +34,17 @@ class ChallengeDetailActivity : AppCompatActivity() {
                     loadImg(this@ChallengeDetailActivity, it.image, binding.challengeDetailIv)
                     challengeDetailInfoTv.text = "성공보상 : ${it.treePoint}\n 목표횟수 : ${it.goalCnt}"
 
+
+                    challengeProgressBar.visibility = View.VISIBLE
+                    challengeProgressDes.visibility = View.VISIBLE
+
+                    challengeProgressBar.max = it.goalCnt
+                    challengeProgressBar.progress = it.doneCnt
+
+                    val temp = (it.doneCnt.toFloat() / it.goalCnt.toFloat()) * 100
+
+                    challengeProgressDes.text =
+                        "${temp.toInt()}% 달성 (${it.doneCnt}회/${it.goalCnt}회)"
                     binding.challengeDetailSelectBtn.text = "포기하기"
                     binding.challengeDetailSelectBtn.setOnClickListener { view ->
                         detailChallengeViewModel.deleteMyChallenge(
