@@ -5,13 +5,11 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.ecomate.databinding.AccessDialogBinding
 import com.example.ecomate.databinding.ActivityPermissionBinding
@@ -25,8 +23,9 @@ class PermissionActivity : AppCompatActivity() {
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_FINE_LOCATION
-    )
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPermissionBinding.inflate(layoutInflater)
@@ -42,11 +41,12 @@ class PermissionActivity : AppCompatActivity() {
             permissionList.add(Manifest.permission.READ_MEDIA_VIDEO)
             permissionList.add(Manifest.permission.READ_MEDIA_AUDIO)
             permissionList.add(Manifest.permission.READ_MEDIA_IMAGES)
+            permissionList.add(Manifest.permission.POST_NOTIFICATIONS)
             permissionList.remove(Manifest.permission.READ_EXTERNAL_STORAGE)
             permissionList.remove(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
         permissionList.forEach {
-            if (ContextCompat.checkSelfPermission(this,it) == PackageManager.PERMISSION_DENIED) {
+            if (ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_DENIED) {
                 status = false
             }
         }
@@ -56,6 +56,7 @@ class PermissionActivity : AppCompatActivity() {
             finish()
         }
     }
+
     private fun setUi() {
         val dialogBinding = AccessDialogBinding.inflate(layoutInflater)
         val dlg = Dialog(this)
@@ -78,12 +79,14 @@ class PermissionActivity : AppCompatActivity() {
         }
     }
 
-    private val requestMultiplePermissions = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-        results -> results.forEach {
-            if (!it.value) {
-                Toast.makeText(applicationContext, "${it.key} 권한 허용 필요", Toast.LENGTH_SHORT).show()
+    private val requestMultiplePermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
+            results.forEach {
+                if (!it.value) {
+                    Toast.makeText(applicationContext, "${it.key} 권한 허용 필요", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
+            checkPermission()
         }
-        checkPermission()
-    }
 }

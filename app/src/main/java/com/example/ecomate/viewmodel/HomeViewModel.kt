@@ -40,7 +40,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun getAllUnChallenges(){
+    fun getAllUnChallenges() {
         viewModelScope.launch {
             _challengeList.value =
                 RetrofitUtil.challengeApi.getAllUnChallenges().response.toMutableList()
