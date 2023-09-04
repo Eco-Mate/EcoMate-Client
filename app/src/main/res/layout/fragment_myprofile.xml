@@ -1,576 +1,635 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="내 정보"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:gravity="center"
         android:background="@drawable/underborder_background"
+        android:gravity="center"
         android:paddingBottom="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="내 정보"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/box_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/underborder_background"
                 android:paddingBottom="20dp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/profile_box"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+
                     <ImageView
                         android:id="@+id/profile_img"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/profile_image_1"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/profile_nickname"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="지구지킴이"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="지구지킴이"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@id/profile_img"
                         app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/profile_state"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="상태메세지"
                         android:textSize="12dp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:layout_marginStart="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/profile_img"
-                        app:layout_constraintTop_toBottomOf="@id/profile_nickname"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@id/profile_nickname" />
+
                     <TextView
                         android:id="@+id/profile_follower"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="40dp"
+                        android:gravity="center"
                         android:text="15\n팔로워"
                         android:textColor="@color/black"
                         android:textSize="16dp"
                         android:textStyle="bold"
-                        android:gravity="center"
-                        android:layout_marginEnd="40dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/profile_following"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/profile_following"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="40dp"
+                        android:gravity="center"
                         android:text="30\n팔로잉"
                         android:textColor="@color/black"
                         android:textSize="16dp"
                         android:textStyle="bold"
-                        android:gravity="center"
-                        android:layout_marginEnd="40dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/point_box"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/yellow_background"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/profile_box">
 
                     <TextView
                         android:id="@+id/point_level"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="씨앗"
-                        android:textStyle="bold"
-                        android:textSize="28dp"
-                        android:textColor="@color/black"
                         android:layout_margin="20dp"
+                        android:text="씨앗"
+                        android:textColor="@color/black"
+                        android:textSize="28dp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <com.google.android.material.progressindicator.LinearProgressIndicator
                         android:id="@+id/point_progress_bar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
                         android:layout_marginTop="20dp"
                         android:progress="30"
                         app:indicatorColor="@color/primary"
-                        android:layout_margin="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/point_level" />
+
                     <TextView
                         android:id="@+id/current_point"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
                         android:text="(900 / 1000)"
                         android:textColor="@color/black"
                         android:textSize="12dp"
                         android:textStyle="bold"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/point_progress_bar"/>
+                        app:layout_constraintTop_toBottomOf="@id/point_progress_bar" />
+
                     <TextView
                         android:id="@+id/point_rest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginBottom="10dp"
                         android:text="다음 레벨까지 100 트리포인트 남았어요!"
                         android:textColor="@color/black"
                         android:textSize="12dp"
                         android:textStyle="bold"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginBottom="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/current_point"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@id/current_point" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/box_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
-                app:layout_constraintStart_toStartOf="parent"
+                android:paddingBottom="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/box_1">
+
                 <TextView
                     android:id="@+id/challenge_mark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
                     android:text="내 챌린지"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="14dp"
-                    android:layout_margin="20dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/challenge_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4건"
-                    android:textStyle="bold"
-                    android:textSize="12dp"
                     android:layout_margin="20dp"
+                    android:text="4건"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/challenge_mark"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <Button
                     android:id="@+id/challenge_btn"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:background="@drawable/right_arrow"
                     android:layout_margin="20dp"
+                    android:background="@drawable/right_arrow"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/current_challenge"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border_background"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="10dp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/challenge_mark">
-                    <ImageView
-                        android:id="@+id/challenge_image"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:src="@drawable/challenge_ex_2"
-                        android:layout_margin="20dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                    <TextView
-                        android:id="@+id/challenge_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="대중교통 이용하기"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_margin="20dp"
-                        app:layout_constraintStart_toEndOf="@id/challenge_image"
-                        app:layout_constraintTop_toTopOf="parent"/>
-                    <com.google.android.material.progressindicator.LinearProgressIndicator
-                        android:id="@+id/challenge_progress_bar"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:progress="30"
-                        app:indicatorColor="@color/primary"
-                        android:layout_margin="20dp"
-                        app:layout_constraintStart_toEndOf="@id/challenge_image"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/challenge_name" />
-                    <TextView
-                        android:id="@+id/challenge_progress_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="30% 달성 (2회/10회)"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="12dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/challenge_progress_bar"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/current_challenge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/challenge_image"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_margin="20dp"
+                            android:src="@drawable/challenge_ex_2"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/challenge_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="20dp"
+                            android:text="대중교통 이용하기"
+                            android:textColor="@color/black"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@id/challenge_image"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/challenge_progress_bar"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="20dp"
+                            android:layout_marginTop="20dp"
+                            android:progress="30"
+                            app:indicatorColor="@color/primary"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/challenge_image"
+                            app:layout_constraintTop_toBottomOf="@id/challenge_name" />
+
+                        <TextView
+                            android:id="@+id/challenge_progress_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:text="30% 달성 (2회/10회)"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/challenge_progress_bar" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/box_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
-                app:layout_constraintStart_toStartOf="parent"
+                android:paddingBottom="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/box_2">
+
                 <TextView
                     android:id="@+id/board_mark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
                     android:text="내 게시물"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="14dp"
-                    android:layout_margin="20dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/board_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4건"
-                    android:textStyle="bold"
-                    android:textSize="12dp"
                     android:layout_margin="20dp"
+                    android:text="4건"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/board_mark"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <Button
                     android:id="@+id/board_btn"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:background="@drawable/right_arrow"
                     android:layout_margin="20dp"
+                    android:background="@drawable/right_arrow"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/boards"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/board_mark">
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/board_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/board_2"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
                         <ImageView
                             android:id="@+id/board_1_image"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/challenge_ex_2"
                             android:layout_margin="20dp"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:src="@drawable/challenge_ex_2"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
                         <TextView
                             android:id="@+id/board_1_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="대중교통 챌린지를 하는 중"
-                            android:textSize="12dp"
+                            android:layout_marginTop="5dp"
                             android:ellipsize="end"
                             android:ems="5"
                             android:maxLines="1"
-                            android:layout_marginTop="5dp"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="대중교통 챌린지를 하는 중"
+                            android:textSize="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/board_1_image"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/board_1_image" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/board_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/board_1"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/board_3"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent">
+                        app:layout_constraintStart_toEndOf="@id/board_1"
+                        app:layout_constraintTop_toTopOf="parent">
+
                         <ImageView
                             android:id="@+id/board_2_image"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/challenge_ex_1"
                             android:layout_margin="20dp"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:src="@drawable/challenge_ex_1"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
                         <TextView
                             android:id="@+id/board_2_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="용기내 챌린지를 하는 중"
-                            android:textSize="12dp"
+                            android:layout_marginTop="5dp"
                             android:ellipsize="end"
                             android:ems="5"
                             android:maxLines="1"
-                            android:layout_marginTop="5dp"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="용기내 챌린지를 하는 중"
+                            android:textSize="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/board_2_image"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/board_2_image" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/board_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/board_2"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent">
+                        app:layout_constraintStart_toEndOf="@id/board_2"
+                        app:layout_constraintTop_toTopOf="parent">
+
                         <ImageView
                             android:id="@+id/board_3_image"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/challenge_ex_3"
                             android:layout_margin="20dp"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:src="@drawable/challenge_ex_3"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
                         <TextView
                             android:id="@+id/board_3_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="쓰레기 줍기 챌린지를 하는 중"
-                            android:textSize="12dp"
+                            android:layout_marginTop="5dp"
                             android:ellipsize="end"
                             android:ems="5"
                             android:maxLines="1"
-                            android:layout_marginTop="5dp"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="쓰레기 줍기 챌린지를 하는 중"
+                            android:textSize="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/board_3_image"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/board_3_image" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/box_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
-                app:layout_constraintStart_toStartOf="parent"
+                android:paddingBottom="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/box_3">
+
                 <TextView
                     android:id="@+id/save_board_mark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
                     android:text="저장한 게시물 보기"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="14dp"
-                    android:layout_margin="20dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <Button
                     android:id="@+id/save_board_btn"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:background="@drawable/right_arrow"
                     android:layout_margin="20dp"
+                    android:background="@drawable/right_arrow"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/box_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
-                app:layout_constraintStart_toStartOf="parent"
+                android:paddingBottom="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/box_4">
+
                 <TextView
                     android:id="@+id/save_echoshop_mark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
                     android:text="저장한 에코 매장"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="14dp"
-                    android:layout_margin="20dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <Button
                     android:id="@+id/save_echoshop_btn"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:background="@drawable/right_arrow"
                     android:layout_margin="20dp"
+                    android:background="@drawable/right_arrow"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/box_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
-                app:layout_constraintStart_toStartOf="parent"
+                android:paddingBottom="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/box_5">
+
                 <TextView
                     android:id="@+id/edit_profile_mark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
                     android:text="프로필 편집"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="14dp"
-                    android:layout_margin="20dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <Button
                     android:id="@+id/edit_profile_btn"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:background="@drawable/right_arrow"
                     android:layout_margin="20dp"
+                    android:background="@drawable/right_arrow"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/box_7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/box_6">
+
                 <TextView
                     android:id="@+id/opensource_license_mark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
                     android:text="오픈소스 라이선스"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="14dp"
-                    android:layout_margin="20dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <Button
                     android:id="@+id/opensource_license_btn"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:background="@drawable/right_arrow"
                     android:layout_margin="20dp"
+                    android:background="@drawable/right_arrow"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/box_8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
                 android:background="@drawable/underborder_background"
-                app:layout_constraintStart_toStartOf="parent"
+                android:paddingBottom="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/box_7">
+
                 <TextView
                     android:id="@+id/app_version_mark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
                     android:text="앱 버전"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="14dp"
-                    android:layout_margin="20dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/app_version_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
                     android:text="0.0.0v"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="14dp"
-                    android:layout_margin="20dp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/box_9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/box_8"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/box_8">
 
                 <TextView
                     android:id="@+id/logout_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
                     android:text="로그아웃"
+                    android:textColor="@color/red"
                     android:textSize="14dp"
                     android:textStyle="bold"
-                    android:textColor="@color/red"
-                    android:layout_margin="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

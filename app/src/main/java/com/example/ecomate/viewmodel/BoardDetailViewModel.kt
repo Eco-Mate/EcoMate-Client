@@ -53,9 +53,10 @@ class BoardDetailViewModel : ViewModel() {
         }
     }
 
-    fun deleteComment(commentId: Int) {
+    fun deleteComment(commentId: Int, boardId: Int) {
         viewModelScope.launch {
             RetrofitUtil.boardApi.deleteComment(commentId)
+            getComments(boardId)
         }
     }
 

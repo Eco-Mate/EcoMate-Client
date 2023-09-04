@@ -74,7 +74,7 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
                     ), postBoardWithImage(), this@BoardAddActivity
                 )
                 Log.e("하위",challenge_id.toString())
-                boardAddViewModel.updateMyChallenge(challenge_id)
+               // boardAddViewModel.updateMyChallenge(challenge_id)
             }
         }
 
