@@ -1,11 +1,9 @@
 package com.example.ecomate.ui.community
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -52,7 +50,7 @@ class BoardDetailActivity : AppCompatActivity() {
             object : CommentsAdapter.DetailCommentListener {
                 override fun onClick(comment: Comment) {
                     if (sharedPreferencesUtil.getMemberId() == comment.memberId) {
-                        boardDetailViewModel.deleteComment(comment.commentId)
+                        boardDetailViewModel.deleteComment(comment.commentId,board.boardId)
                         Toast.makeText(this@BoardDetailActivity, "댓글이 삭제되었습니다.", Toast.LENGTH_SHORT)
                             .show()
                     }
