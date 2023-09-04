@@ -23,6 +23,7 @@ class MyFirebaseMessageService : FirebaseMessagingService() {
         super.onNewToken(token)
         // 새로운 토큰 수신 시 서버로 전송
         CoroutineScope(Dispatchers.IO).launch {
+            Log.e(TAG, "하위")
             RetrofitUtil.chatApi.uploadToken(FcmToken(token))
         }
     }

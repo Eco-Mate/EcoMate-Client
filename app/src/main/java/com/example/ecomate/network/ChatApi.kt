@@ -30,7 +30,7 @@ interface ChatApi {
     @PUT("v1/chat-rooms/{roomId}")
     suspend fun modifyRoomName(@Path("roomId") roomId: Int, @Body roomName: RoomNameBody)
 
-    @PUT("/v1/fcm")
+    @PUT("v1/fcm")
     suspend fun uploadToken(@Body fcmToken: FcmToken)
 
 }
