@@ -1,6 +1,7 @@
 package com.example.ecomate.ui.chat
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -12,6 +13,9 @@ import com.example.ecomate.databinding.ActivityChatDetailBinding
 import com.example.ecomate.model.ChatInfoItem
 import com.example.ecomate.ui.adapter.ChatDetailAdapter
 import com.example.ecomate.viewmodel.ChatDetailViewModel
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 
 class ChatDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityChatDetailBinding
@@ -27,7 +31,7 @@ class ChatDetailActivity : AppCompatActivity() {
 
         chatDetailViewModel.getChatDetail(chatInfoItem.roomId)
         chatDetailViewModel.runStomp(chatInfoItem.roomId)
-
+        chatDetailViewModel.getChatMemberInfo(chatInfoItem.roomId)
         binding.chatSendBtn.setOnClickListener {
             Log.e("chatSendBtn", binding.chatEt.text.toString() + chatInfoItem.roomId.toString())
             chatDetailViewModel.sendStomp(binding.chatEt.text.toString(), chatInfoItem.roomId)
@@ -68,6 +72,12 @@ class ChatDetailActivity : AppCompatActivity() {
             chatDetailAdapter.submitList(it.toMutableList())
             binding.chatRv.scrollToPosition(chatDetailAdapter.itemCount - 1)
         }
+        chatDetailViewModel.chatMemberInfo.observe(this){
+            val dataSet = PieDataSet(it,"")
+            dataSet.colors = ColorTemplate.COLORFUL_COLORS.toList()
+            val pieDate = PieData(dataSet)
+            binding.challengeState.data = pieDate
+        }
 
 
 //        val chatMemberAdapter = ChatMemberAdapter()
@@ -95,6 +105,7 @@ class ChatDetailActivity : AppCompatActivity() {
 
         //chatMemberAdapter.submitList(chatItem.members)
     }
+
     private val onLayoutChangeListener =
         View.OnLayoutChangeListener { _, _, _, _, bottom, _, _, _, oldBottom ->
             // 키보드가 올라와 높이가 변함
@@ -123,6 +134,13 @@ class ChatDetailActivity : AppCompatActivity() {
             memberAddBtn.setOnClickListener {
                 startActivity(Intent(this@ChatDetailActivity, ChatAddActivity::class.java))
             }
+
+            challengeState.description.isEnabled = false
+//            challengeState.isRotationEnabled = true//회전가능
+            challengeState.setUsePercentValues(true)//백분율
+            challengeState.setEntryLabelTextSize(12f)//text 크기
+            challengeState.setEntryLabelColor(Color.BLACK)//라벨 텍스트 색깔
+//            challengeState.animateY(1000)//애니매이션이라고 하는데??
 
         }
     }

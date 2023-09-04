@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,74 +14,79 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/back_btn"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/back_arrow"
                 android:layout_marginStart="20dp"
+                android:background="@drawable/back_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="지구지키기 방범대"
+                android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <Button
                 android:id="@+id/chat_info_btn"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:background="@drawable/black_more_2"
+                android:layout_width="8dp"
+                android:layout_height="9dp"
                 android:layout_marginEnd="20dp"
+                android:background="@drawable/black_more_2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chat_rv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/chat_et"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintBottom_toTopOf="@id/chat_et"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
         <EditText
             android:id="@+id/chat_et"
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:hint="댓글 입력.."
-            android:textSize="12dp"
-            android:background="@drawable/gray_background_1"
-            android:paddingStart="10dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/gray_background_1"
+            android:hint="댓글 입력.."
+            android:paddingStart="10dp"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/chat_send_btn"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
+
         <Button
             android:id="@+id/chat_send_btn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/green_send_message"
-            android:layout_marginEnd="30dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintStart_toEndOf="@id/chat_et"
+            android:background="@drawable/green_send_message"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toEndOf="@id/chat_et" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -94,40 +99,42 @@
             android:id="@+id/drawer_back_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/white_back_arrow"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:background="@drawable/white_back_arrow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/member_add_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/white_plus"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/white_plus"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="지구지키기 방범대"
-            android:textSize="30dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
             android:layout_margin="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/room_state"/>
+            android:text="지구지키기 방범대"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/room_state"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ScrollView
             android:id="@+id/room_state"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:background="@drawable/white_background_2"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -144,42 +151,53 @@
                         android:id="@+id/state_logo"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:src="@drawable/tropy"
                         android:layout_margin="20dp"
+                        android:src="@drawable/tropy"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/state_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
                         android:text="챌린지 달성 현황"
-                        android:textStyle="bold"
                         android:textColor="@color/primary"
                         android:textSize="20dp"
-                        android:layout_margin="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/state_logo"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <TextView
                     android:id="@+id/challenge_state_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="주별 챌린지 달성자 Top 10"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
                     android:layout_margin="20dp"
+                    android:text="주별 챌린지 달성자 Top 10"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/challenge_state_title"/>
-                <ImageView
+                    app:layout_constraintTop_toBottomOf="@id/challenge_state_title" />
+
+                <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/challenge_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/challenge_state_ex"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
                     android:layout_margin="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/challenge_state_subtitle" />
+
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/challenge_state"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:src="@drawable/challenge_state_ex"-->
+                <!--                    android:layout_margin="20dp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/challenge_state_subtitle" />-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/member_state_title"
                     android:layout_width="wrap_content"
@@ -191,32 +209,34 @@
                         android:id="@+id/member_logo"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:src="@drawable/member_state_logo"
                         android:layout_margin="20dp"
+                        android:src="@drawable/member_state_logo"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/member_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
                         android:text="멤버 현황"
-                        android:textStyle="bold"
                         android:textColor="@color/primary"
                         android:textSize="20dp"
-                        android:layout_margin="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/member_logo"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/member_rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/item_chat_member"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/member_state_title"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/member_state_title"
+                    tools:listitem="@layout/item_chat_member" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
