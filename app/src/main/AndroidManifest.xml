@@ -104,6 +104,9 @@
         <activity
             android:name=".ui.chat.ChatAddActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.map.EcostoreAddActivity"
+            android:exported="false" />
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="cebdd0ca4485962420dd65ef536d8fb9"/>
     </application>
 

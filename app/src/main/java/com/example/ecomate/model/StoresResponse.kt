@@ -1,8 +1,6 @@
 package com.example.ecomate.model
 
-import java.io.Serializable
-
-data class MySurroundStoresResponse(
+data class StoresResponse(
     val message: String,
     val response: List<StoreInfo>,
 )

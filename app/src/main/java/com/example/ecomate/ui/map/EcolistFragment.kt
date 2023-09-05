@@ -2,6 +2,7 @@ package com.example.ecomate.ui.map
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.databinding.FragmentEcolistBinding
 import com.example.ecomate.databinding.FragmentMapBinding
 import com.example.ecomate.model.StoreInfo
@@ -25,30 +27,6 @@ import net.daum.mf.map.api.MapView
 class EcolistFragment : Fragment() {
     lateinit var binding: FragmentEcolistBinding
     private val ecolistViewModel: EcolistViewModel by viewModels()
-    val stores = mutableListOf(
-        StoreInfo(
-            0,
-            "매장 1",
-            "매장 상세정보",
-            "",
-            35.856859,
-            128.521188,
-            "매장 주소",
-            0,
-            false
-        ),
-        StoreInfo(
-            1,
-            "매장 2",
-            "매장 상세정보",
-            "",
-            35.856859,
-            128.521188,
-            "매장 주소",
-            0,
-            false
-        ),
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,14 +39,30 @@ class EcolistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ecolistViewModel.getUserProfile(sharedPreferencesUtil.getMemberId())
         setEcoStores()
         setUi()
         setAdapter(view)
     }
 
+    override fun onResume() {
+        super.onResume()
+        ecolistViewModel.getEcoStores()
+    }
+
     private fun setUi() {
         binding.apply {
+            ecolistViewModel.profileInfo.observe(viewLifecycleOwner) {
+                if (it.role == "ROLE_ADMIN") {
+                    ecostoreAdd.visibility = View.VISIBLE
+                }
+            }
+            searchBtn.setOnClickListener {
 
+            }
+            ecostoreAdd.setOnClickListener {
+                startActivity(Intent(activity, EcostoreAddActivity::class.java))
+            }
         }
     }
 
@@ -90,11 +84,10 @@ class EcolistFragment : Fragment() {
                 )
             )
         }
-        ecostoresAdapter.submitList(stores)
 
-//        ecolistViewModel.ecostores.observe(viewLifecycleOwner) {
-//            ecostoresAdapter.submitList(stores)
-//        }
+        ecolistViewModel.ecostores.observe(viewLifecycleOwner) {
+            ecostoresAdapter.submitList(it)
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -106,6 +99,7 @@ class EcolistFragment : Fragment() {
         // 사용자의 현재 위치 (위도, 경도)
         val uLatitude = userCurrentLocation?.latitude
         val uLongitude = userCurrentLocation?.longitude
+
         Log.d("MyLocation", "Latitude: ${uLatitude}, Longitude: ${uLongitude}")
 //        ecolistViewModel.getEcoStores(uLatitude!!, uLongitude!!)
     }

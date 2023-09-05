@@ -8,4 +8,4 @@ data class StoreDto(
     val latitude: Double,
     val longitude: Double,
     val address: String
-)
+): Serializable
