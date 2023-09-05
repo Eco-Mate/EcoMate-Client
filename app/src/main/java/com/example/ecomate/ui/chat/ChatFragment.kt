@@ -87,7 +87,7 @@ class ChatFragment : Fragment() {
             object : ChatAdapter.PopUpChatListener {
                 override fun onClick(v: View, roomId: Int) {
                     setPopUpMenu(requireContext(), v)
-                    setChatRemoveDialog(binding.chatRv)
+                    setChatRemoveDialog(binding.chatRv, roomId)
                     setChatEditDialog(binding.chatRv, roomId)
                 }
             }
@@ -125,13 +125,14 @@ class ChatFragment : Fragment() {
         popUp.show()
     }
 
-    private fun setChatRemoveDialog(parent: ViewGroup) {
+    private fun setChatRemoveDialog(parent: ViewGroup, roomId: Int) {
         val chatRemoveDialogBinding =
             ChatRemoveDialogBinding.inflate(LayoutInflater.from(parent.context))
         chatRemoveDialog = Dialog(chatRemoveDialogBinding.root.context)
 
         chatRemoveDialogBinding.apply {
             checkBtn.setOnClickListener {
+                chatViewModel.deleteChat(roomId)
                 chatRemoveDialog.dismiss()
             }
             cancelBtn.setOnClickListener {

@@ -1,12 +1,14 @@
 package com.example.ecomate.network
 
 import com.example.ecomate.model.ChatDetailResponse
+import com.example.ecomate.model.ChatMemberInfoResponse
 import com.example.ecomate.model.ChatResponse
 import com.example.ecomate.model.FcmToken
 import com.example.ecomate.model.MemberBody
 import com.example.ecomate.model.MemberResponse
 import com.example.ecomate.model.RoomNameBody
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -32,5 +34,12 @@ interface ChatApi {
 
     @PUT("v1/fcm")
     suspend fun uploadToken(@Body fcmToken: FcmToken)
+
+    @DELETE("v1/chat-rooms/{chatRoomId}")
+    suspend fun deleteChat(@Path("chatRoomId") chatRoomId: Int)
+
+    @GET("v1/chat-rooms/{roomId}")
+    suspend fun getChatMemberInfo(@Path("roomId") roomId: Int): ChatMemberInfoResponse
+
 
 }

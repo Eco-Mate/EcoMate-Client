@@ -29,12 +29,13 @@ class ChallengeDetailActivity : AppCompatActivity() {
             detailChallengeViewModel.getDetailMyChallenge(intent.getIntExtra("myChallengeId", 0))
             detailChallengeViewModel.myChallengeDetail.observe(this) {
                 binding.apply {
-                    toolbar.title = it.challengeTitle
+                    challengeDetailTitleTv.text = it.challengeTitle
                     challengeContent.text = it.description
                     if (it.image != null && it.image != "") {
                         loadImg(this@ChallengeDetailActivity, it.image, binding.challengeDetailIv)
                     }
-                    challengeDetailInfoTv.text = "성공보상 : ${it.treePoint}\n 목표횟수 : ${it.goalCnt}"
+                    challengeDetailSuccessTv.text = "${it.treePoint}포인트"
+                    challengeDetailInfoTv.text = "${it.goalCnt}회"
 
 
                     challengeProgressBar.visibility = View.VISIBLE
@@ -61,14 +62,15 @@ class ChallengeDetailActivity : AppCompatActivity() {
             detailChallengeViewModel.getDetailChallenge(intent.getIntExtra("challengeId", 0))
             detailChallengeViewModel.challengeDetail.observe(this) {
                 binding.apply {
-                    toolbar.title = it.challengeTitle
+                    challengeDetailTitleTv.text = it.challengeTitle
                     challengeContent.text = it.description
                     if (it.image != null && it.image != "") {
                         loadImg(this@ChallengeDetailActivity, it.image, binding.challengeDetailIv)
                     }
-                    challengeDetailInfoTv.text = "성공보상 : ${it.treePoint}\n 목표횟수 : ${it.goalCnt}"
+                    challengeDetailSuccessTv.text = "${it.treePoint}포인트"
+                    challengeDetailInfoTv.text = "${it.goalCnt}회"
 
-                    if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 10) {
+                    if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 1) {
                         binding.challengeDetailSelectBtn.text =
                             if (it.activeYn) "비활성화하기" else "활성화하기"
                         challengeDetailSelectBtn.setOnClickListener { view ->
@@ -105,7 +107,7 @@ class ChallengeDetailActivity : AppCompatActivity() {
             }
         }
 
-        if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 10) {
+        if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 1) {
             binding.challengeDetailDelete.visibility = View.VISIBLE
         }
         binding.toolbar.setNavigationOnClickListener {

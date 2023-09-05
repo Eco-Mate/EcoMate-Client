@@ -37,7 +37,11 @@ class ChatAddViewModel : ViewModel() {
     fun postChat(activityChatAddBinding: ChatAddActivity) {
         showProgress()
         viewModelScope.launch {
-            RetrofitUtil.chatApi.postChat(MemberBody(memberList.toList(), "string"))
+            var temp = ""
+            memberList.forEach {
+                temp = temp + it + ", "
+            }
+            RetrofitUtil.chatApi.postChat(MemberBody(memberList.toList(), temp))
             hideProgress()
             activityChatAddBinding.finish()
         }

@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/baseline_arrow_back_24"
-            tools:title="App Title">
+            app:title="챌린지">
 
             <ImageView
                 android:id="@+id/challengeDetailDelete"
@@ -31,6 +31,7 @@
 
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/challengeDetailLayout"
@@ -77,13 +78,24 @@
         tools:text="30% 달성 (18회/60회)" />
 
     <TextView
+        android:id="@+id/challengeDetailTitleTv"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/challengeProgressDes"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        tools:text = "App Title"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
         android:id="@+id/challengeContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/challengeProgressDes"
+        app:layout_constraintTop_toBottomOf="@id/challengeDetailTitleTv"
         tools:text="배달 음식 용기, 아직도 플라스틱을 사용하시나요?\n용기내 챌린지는 식품이나 음료 포장 시 발생하는 플라스틱, 비닐봉지 등 일회용품 사용을 줄이자는 취지에서 다회용기, 물병, 천 주머니 등을 직접 챙겨가 담아오는 캠페인이다.'용기(勇氣)'를 내 '용기(容器)'를 가져가자는 의미를 담고 있다." />
 
     <androidx.cardview.widget.CardView
@@ -95,10 +107,11 @@
         app:layout_constraintTop_toBottomOf="@id/challengeContent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/challengeDetailInfoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:backgroundTint="#D2D2D2"
+        android:backgroundTint="@color/gray_3"
         app:cardCornerRadius="8dp"
         app:layout_constraintStart_toStartOf="@id/challengeContent"
         app:layout_constraintTop_toBottomOf="@id/div">
@@ -107,15 +120,58 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="성공보상   |   " />
+            <TextView
+                android:id="@+id/challengeDetailSuccessTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="16sp"
+                tools:text="20회" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/gray_3"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="@id/challengeContent"
+        app:layout_constraintTop_toBottomOf="@id/challengeDetailInfoLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="목표횟수   |   " />
             <TextView
                 android:id="@+id/challengeDetailInfoTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:textSize="12sp"
-                tools:text="성공보상 : 10\n 목표횟수 : 20" />
+                android:textSize="16sp"
+                tools:text="20회" />
 
         </LinearLayout>
 

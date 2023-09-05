@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="짱구, 철수, 유리, 훈이, 맹구"
             android:textSize="12dp"
-            android:maxLength="25"
+            android:maxLength="35"
             android:ellipsize="end"
             android:ems="15"
             android:maxLines="1"

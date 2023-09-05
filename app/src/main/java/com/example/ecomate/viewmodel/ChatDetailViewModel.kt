@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.ecomate.ApplicationClass
 import com.example.ecomate.model.Chat
 import com.example.ecomate.network.RetrofitUtil
+import com.github.mikephil.charting.data.PieEntry
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import ua.naiksoftware.stomp.Stomp
@@ -25,6 +26,20 @@ class ChatDetailViewModel : ViewModel() {
         get() = _chatDetail
 
     var chatMessage = mutableListOf<Chat>()
+
+    private val _chatMemberInfo = MutableLiveData<List<PieEntry>>()
+    val chatMemberInfo: LiveData<List<PieEntry>>
+        get() = _chatMemberInfo
+
+
+    fun getChatMemberInfo(roomId: Int) {
+        viewModelScope.launch {
+            val temp = RetrofitUtil.chatApi.getChatMemberInfo(roomId).response.challengeStatusList
+            _chatMemberInfo.value = temp.map {
+                PieEntry(it.challengeDoneCnt.toFloat(), it.nickname)
+            }.toMutableList()
+        }
+    }
 
     fun getChatDetail(roomId: Int) {
         viewModelScope.launch {
