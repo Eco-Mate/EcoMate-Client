@@ -85,8 +85,10 @@ class MyProfileFragment : Fragment() {
 
             // 내 챌린지
             myProfileViewModel.myAllChallenges.observe(viewLifecycleOwner) {
+                challengeNum.text = it.size.toString() + "건"
                 if (it.size > 0) {
-                    challengeNum.text = it.size.toString() + "건"
+                    challengeEmptyLayout.visibility = View.INVISIBLE
+                    currentChallenge.visibility = View.VISIBLE
                     if (it[0].image != null && it[0].image != "") {
                         Glide.with(this.root.context)
                             .load(it[0].image)
@@ -96,6 +98,9 @@ class MyProfileFragment : Fragment() {
                     challengeProgressBar.progress = (it[0].doneCnt / it[0].goalCnt) * 100
                     challengeProgressCount.text =
                         "${((it[0].doneCnt / it[0].goalCnt.toFloat()) * 100).toInt()}% 달성 (${it[0].doneCnt}회/${it[0].goalCnt}회)"
+                } else {
+                    challengeEmptyLayout.visibility = View.VISIBLE
+                    currentChallenge.visibility = View.INVISIBLE
                 }
             }
             challengeBtn.setOnClickListener {
@@ -106,7 +111,17 @@ class MyProfileFragment : Fragment() {
             myProfileViewModel.myBoards.observe(viewLifecycleOwner) {
                 boardNum.text = it.size.toString() + "건"
                 // 게시물 1
+                if (it.size == 0) {
+                    boardEmptyLayout.visibility = View.VISIBLE
+                    board1.visibility = View.INVISIBLE
+                    board2.visibility = View.INVISIBLE
+                    board3.visibility = View.INVISIBLE
+                }
                 if (it.size >= 1) {
+                    boardEmptyLayout.visibility = View.INVISIBLE
+                    board1.visibility = View.VISIBLE
+                    board2.visibility = View.INVISIBLE
+                    board3.visibility = View.INVISIBLE
                     val board: Board = it[0]
                     Glide.with(this@MyProfileFragment)
                         .load(board.image)
@@ -120,6 +135,10 @@ class MyProfileFragment : Fragment() {
                 }
                 // 게시물 2
                 if (it.size >= 2) {
+                    boardEmptyLayout.visibility = View.INVISIBLE
+                    board1.visibility = View.VISIBLE
+                    board2.visibility = View.VISIBLE
+                    board3.visibility = View.INVISIBLE
                     val board: Board = it[1]
                     Glide.with(this@MyProfileFragment)
                         .load(board.image)
@@ -133,6 +152,10 @@ class MyProfileFragment : Fragment() {
                 }
                 // 게시물 3
                 if (it.size >= 3) {
+                    boardEmptyLayout.visibility = View.INVISIBLE
+                    board1.visibility = View.VISIBLE
+                    board2.visibility = View.VISIBLE
+                    board3.visibility = View.VISIBLE
                     val board: Board = it[2]
                     Glide.with(this@MyProfileFragment)
                         .load(board.image)
