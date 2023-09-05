@@ -99,7 +99,7 @@ class EcolistFragment : Fragment() {
         // 사용자의 현재 위치 (위도, 경도)
         val uLatitude = userCurrentLocation?.latitude
         val uLongitude = userCurrentLocation?.longitude
-
+      
         Log.d("MyLocation", "Latitude: ${uLatitude}, Longitude: ${uLongitude}")
 //        ecolistViewModel.getEcoStores(uLatitude!!, uLongitude!!)
     }

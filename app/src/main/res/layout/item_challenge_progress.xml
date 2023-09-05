@@ -12,13 +12,24 @@
         android:layout_height="wrap_content"
         android:padding="20dp">
 
+        <ImageView
+            android:id="@+id/challengeProgressIv"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/challenge_ex_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
         <TextView
             android:id="@+id/challengeProgressTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@id/challengeProgressIv"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="플라스틱 씻어서 버리기" />
 

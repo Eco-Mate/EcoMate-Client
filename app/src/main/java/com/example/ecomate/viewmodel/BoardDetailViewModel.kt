@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecomate.model.BoardLikeBody
 import com.example.ecomate.model.BoardLike
+import com.example.ecomate.model.BoardLikeBody
 import com.example.ecomate.model.BoardSaveBody
 import com.example.ecomate.model.Comment
 import com.example.ecomate.model.CommentPostBody
@@ -49,12 +49,14 @@ class BoardDetailViewModel : ViewModel() {
     fun postComment(boardId: Int, content: String) {
         viewModelScope.launch {
             RetrofitUtil.boardApi.postComment(CommentPostBody(boardId, content))
+            getComments(boardId)
         }
     }
 
-    fun deleteComment(commentId: Int) {
+    fun deleteComment(commentId: Int, boardId: Int) {
         viewModelScope.launch {
             RetrofitUtil.boardApi.deleteComment(commentId)
+            getComments(boardId)
         }
     }
 
@@ -90,7 +92,8 @@ class BoardDetailViewModel : ViewModel() {
 
     fun postBoardSave(boardId: Int) {
         viewModelScope.launch {
-            _boardSaveState.value = RetrofitUtil.boardApi.postBoardSave(BoardSaveBody(boardId)).response.saved
+            _boardSaveState.value =
+                RetrofitUtil.boardApi.postBoardSave(BoardSaveBody(boardId)).response.saved
         }
     }
 }

@@ -2,21 +2,19 @@ package com.example.ecomate.ui.community
 
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.widget.PopupMenu
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ecomate.databinding.ActivityBoardAddBinding
 import com.example.ecomate.model.BoardDto
 import com.example.ecomate.ui.LoadingDialog
 import com.example.ecomate.viewmodel.BoardAddViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -75,6 +73,8 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
                         boardContentEditText.text.toString()
                     ), postBoardWithImage(), this@BoardAddActivity
                 )
+                Log.e("하위",challenge_id.toString())
+               // boardAddViewModel.updateMyChallenge(challenge_id)
             }
         }
 
@@ -100,13 +100,15 @@ class BoardAddActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
     private fun openGallery() {
         galleryLauncher.launch("image/*")
     }
-    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        uri: Uri? ->
-        if (uri != null) {
-            selectedImageUri = uri
-            binding.boardImageBtn.setImageURI(selectedImageUri)
+
+    private val galleryLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            if (uri != null) {
+                selectedImageUri = uri
+                binding.boardImageBtn.setImageURI(selectedImageUri)
+            }
         }
-    }
+
     private fun postBoardWithImage(): MultipartBody.Part {
         val imageFile = File(cacheDir, "temp_image.jpg")
         val outputStream = FileOutputStream(imageFile)

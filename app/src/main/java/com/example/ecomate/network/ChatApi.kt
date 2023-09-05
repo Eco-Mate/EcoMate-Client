@@ -2,6 +2,7 @@ package com.example.ecomate.network
 
 import com.example.ecomate.model.ChatDetailResponse
 import com.example.ecomate.model.ChatResponse
+import com.example.ecomate.model.FcmToken
 import com.example.ecomate.model.MemberBody
 import com.example.ecomate.model.MemberResponse
 import com.example.ecomate.model.RoomNameBody
@@ -28,5 +29,8 @@ interface ChatApi {
 
     @PUT("v1/chat-rooms/{roomId}")
     suspend fun modifyRoomName(@Path("roomId") roomId: Int, @Body roomName: RoomNameBody)
+
+    @PUT("v1/fcm")
+    suspend fun uploadToken(@Body fcmToken: FcmToken)
 
 }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecomate.databinding.ItemChallengeProgressBinding
 import com.example.ecomate.model.MyDetailChallenge
+import com.example.ecomate.ui.util.Util.loadImg
 
 
 class MyProgressChallengeAllAdapter :
@@ -19,6 +20,7 @@ class MyProgressChallengeAllAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(myChallenge: MyDetailChallenge) {
             binding.apply {
+                loadImg(binding.root.context, myChallenge.image, binding.challengeProgressIv)
                 challengeProgressTitle.text = myChallenge.challengeTitle
                 root.setOnClickListener {
                     detailMyProgressChallengeListener.onClick(myChallenge.myChallengeId)
@@ -27,8 +29,10 @@ class MyProgressChallengeAllAdapter :
                 challengeProgressBar.max = myChallenge.goalCnt
                 challengeProgressBar.progress = myChallenge.doneCnt
 
+                val temp = (myChallenge.doneCnt.toFloat() / myChallenge.goalCnt.toFloat()) * 100
+
                 challengeProgressDes.text =
-                    "${myChallenge.doneCnt / myChallenge.goalCnt}% 달성 (${myChallenge.doneCnt}회/${myChallenge.goalCnt}회)"
+                    "${temp.toInt()}% 달성 (${myChallenge.doneCnt}회/${myChallenge.goalCnt}회)"
             }
         }
     }
@@ -59,7 +63,10 @@ class MyProgressChallengeDiffCallback : DiffUtil.ItemCallback<MyDetailChallenge>
         return oldItem.myChallengeId == newItem.myChallengeId
     }
 
-    override fun areContentsTheSame(oldItem: MyDetailChallenge, newItem: MyDetailChallenge): Boolean {
+    override fun areContentsTheSame(
+        oldItem: MyDetailChallenge,
+        newItem: MyDetailChallenge
+    ): Boolean {
         return newItem == oldItem
     }
 }

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecomate.model.BoardDto
-import com.example.ecomate.model.Challenge
 import com.example.ecomate.model.MyDetailChallenge
 import com.example.ecomate.network.RetrofitUtil
 import com.example.ecomate.ui.community.BoardAddActivity
@@ -30,6 +29,13 @@ class BoardAddViewModel : ViewModel() {
             _challenges.value = RetrofitUtil.challengeApi.getAllProceedingChallenge().response
         }
     }
+
+    fun updateMyChallenge(challengeId: Int) {
+        viewModelScope.launch {
+            RetrofitUtil.challengeApi.updateMyChallenge(challengeId)
+        }
+    }
+
 
     fun postBoard(
         createDto: BoardDto,

@@ -75,4 +75,9 @@ class BoardSearchActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun hideKeyboard(activity: Activity) {
+        val ims = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        ims.hideSoftInputFromWindow(activity.window.decorView.applicationWindowToken, 0)
+    }
 }

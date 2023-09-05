@@ -33,6 +33,7 @@ class EcomapFragment : Fragment() {
     lateinit var itemBalloonBinding: ItemBalloonBinding
     private val ecomapViewModel: EcomapViewModel by viewModels()
     var isMyLocation = false
+  
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -102,7 +103,7 @@ class EcomapFragment : Fragment() {
     private fun stopTracking() {
         binding.mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
     }
-
+    
     // 커스텀 말풍선 클래스
     inner class CustomBallonAdapter: CalloutBalloonAdapter {
         lateinit var storeInfo: StoreInfo
