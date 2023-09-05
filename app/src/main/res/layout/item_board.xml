@@ -60,7 +60,7 @@
         android:id="@+id/board_img"
         android:layout_width="256dp"
         android:layout_height="256dp"
-        android:src="@drawable/post_img_ex"
+        android:src="@drawable/standard_board_icon"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

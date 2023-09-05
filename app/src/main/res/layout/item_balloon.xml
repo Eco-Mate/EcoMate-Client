@@ -47,19 +47,11 @@
         android:text="더 커먼은 지구와 우리의 건강을 생각하는 공간으로서, 채식 및 비건 메뉴를 제공합니다."
         android:textSize="14dp"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ecostore_name"/>
-    <TextView
-        android:id="@+id/more_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="클릭해서 추가 정보"
-        android:textSize="14dp"
-        android:layout_margin="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ecostore_desc"
+        app:layout_constraintTop_toBottomOf="@id/ecostore_name"
         app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

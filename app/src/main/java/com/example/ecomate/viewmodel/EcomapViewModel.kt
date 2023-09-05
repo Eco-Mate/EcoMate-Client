@@ -18,14 +18,6 @@ class EcomapViewModel : ViewModel() {
     val ecostores: LiveData<List<StoreInfo>>
         get() = _ecostores
 
-    private val _like = MutableLiveData<StoreLike>()
-    val like: LiveData<StoreLike>
-        get() = _like
-
-    private val _unlike = MutableLiveData<StoreLike>()
-    val unlike: LiveData<StoreLike>
-        get() = _unlike
-
     init {
         getEcoStores()
     }
@@ -39,18 +31,6 @@ class EcomapViewModel : ViewModel() {
     fun getSurroundEcoStores(latitude: Double, longitude: Double) {
         viewModelScope.launch {
             _ecostores.value = RetrofitUtil.ecostoreApi.getSurroundEcoStores(latitude, longitude).response
-        }
-    }
-
-    fun postLikeEcoStore(storeId: Int) {
-        viewModelScope.launch {
-            _like.value = RetrofitUtil.ecostoreApi.likeEcoStore(LikePostBody(storeId)).response
-        }
-    }
-
-    fun postUnlikeEcoStore(storeId: Int) {
-        viewModelScope.launch {
-            _unlike.value = RetrofitUtil.ecostoreApi.unlikeEcoStore(LikePostBody(storeId)).response
         }
     }
 }

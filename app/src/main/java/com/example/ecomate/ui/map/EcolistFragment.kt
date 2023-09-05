@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -74,6 +75,33 @@ class EcolistFragment : Fragment() {
 
                 }
             }
+        ecostoresAdapter.likeStoreListener =
+            object : EcostoresAdapter.LikeStoreListener {
+                override fun onClick(storeInfo: StoreInfo) {
+                    ecolistViewModel.apply {
+                        if (storeInfo.liked) {
+                            Toast.makeText(context, "해당 매장을 이미 좋아요 했습니다.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            postLikeEcoStore(storeInfo.storeId)
+                            Toast.makeText(context, "매장을 좋아요 했습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        ecostoresAdapter.unlikeStoreListener =
+            object : EcostoresAdapter.UnlikeStoreListener {
+                override fun onClick(storeInfo: StoreInfo) {
+                    ecolistViewModel.apply {
+                        if (storeInfo.liked) {
+                            postUnlikeEcoStore(storeInfo.storeId)
+                            Toast.makeText(context, "해당 매장의 좋아요를 취소했습니다.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(context, "해당 매장을 이미 좋아요 취소했습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
         binding.ecostoreRv.apply {
             layoutManager = LinearLayoutManager(view.context)
             adapter = ecostoresAdapter
