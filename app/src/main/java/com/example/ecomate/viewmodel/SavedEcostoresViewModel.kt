@@ -38,12 +38,14 @@ class SavedEcostoresViewModel : ViewModel() {
     fun postLikeEcoStore(storeId: Int) {
         viewModelScope.launch {
             _like.value = RetrofitUtil.ecostoreApi.likeEcoStore(LikePostBody(storeId)).response
+            getMyLikeEcoStores()
         }
     }
 
     fun postUnlikeEcoStore(storeId: Int) {
         viewModelScope.launch {
             _unlike.value = RetrofitUtil.ecostoreApi.unlikeEcoStore(LikePostBody(storeId)).response
+            getMyLikeEcoStores()
         }
     }
 }

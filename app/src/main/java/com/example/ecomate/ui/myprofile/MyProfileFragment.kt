@@ -95,7 +95,7 @@ class MyProfileFragment : Fragment() {
                             .into(challengeImage)
                     }
                     challengeName.text = it[0].challengeTitle
-                    challengeProgressBar.progress = (it[0].doneCnt / it[0].goalCnt) * 100
+                    challengeProgressBar.progress = ((it[0].doneCnt / it[0].goalCnt.toFloat()) * 100).toInt()
                     challengeProgressCount.text =
                         "${((it[0].doneCnt / it[0].goalCnt.toFloat()) * 100).toInt()}% 달성 (${it[0].doneCnt}회/${it[0].goalCnt}회)"
                 } else {
