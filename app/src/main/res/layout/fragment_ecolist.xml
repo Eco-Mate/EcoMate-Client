@@ -43,10 +43,24 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ecostore_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         tools:listitem="@layout/item_store"
         android:layout_margin="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ecoshop_search_box"/>
+        app:layout_constraintTop_toBottomOf="@id/ecoshop_search_box"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ecostore_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:borderWidth="0dp"
+        android:src="@drawable/white_plus"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
