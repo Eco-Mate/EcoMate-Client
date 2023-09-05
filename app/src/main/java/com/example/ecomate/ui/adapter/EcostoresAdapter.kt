@@ -1,22 +1,13 @@
 package com.example.ecomate.ui.adapter
 
-import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.ecomate.ApplicationClass.Companion.sharedPreferencesUtil
 import com.example.ecomate.R
-import com.example.ecomate.databinding.ItemBoardBinding
 import com.example.ecomate.databinding.ItemStoreBinding
-import com.example.ecomate.model.Board
 import com.example.ecomate.model.StoreInfo
 
 class EcostoresAdapter : ListAdapter<StoreInfo, EcostoresAdapter.EcostoresViewHolder>(
@@ -32,6 +23,8 @@ class EcostoresAdapter : ListAdapter<StoreInfo, EcostoresAdapter.EcostoresViewHo
                     Glide.with(this.root.context)
                         .load(storeInfo.image)
                         .into(ecostoreImg)
+                } else {
+                    ecostoreImg.setImageResource(R.drawable.standard_store_icon)
                 }
                 ecostoreName.text = storeInfo.storeName
                 ecostoreAddress.text = storeInfo.address

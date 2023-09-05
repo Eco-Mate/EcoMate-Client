@@ -7,24 +7,25 @@
 
     <ImageView
         android:id="@+id/ecostore_img"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ecostore_ex_1"
-        android:layout_marginTop="10dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/standard_store_icon"
+        android:layout_margin="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
         android:id="@+id/ecostore_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="더 커먼"
-        android:textSize="14dp"
+        android:textSize="16dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:ellipsize="end"
         android:maxLines="1"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toEndOf="@id/ecostore_img"
         app:layout_constraintTop_toTopOf="parent"/>
     <TextView
@@ -32,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="대구 중구 국채보상로 741"
-        android:textSize="12dp"
+        android:textSize="14dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:layout_marginStart="20dp"
