@@ -72,6 +72,7 @@
             android:hint="댓글 입력.."
             android:paddingStart="10dp"
             android:textSize="12dp"
+            android:inputType="textLongMessage"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/chat_send_btn"
             app:layout_constraintStart_toStartOf="parent" />
@@ -117,15 +118,18 @@
 
         <TextView
             android:id="@+id/room_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:text="지구지키기 방범대"
             android:textColor="@color/white"
             android:textSize="30dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/room_state"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_margin="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/room_state"/>
 
         <ScrollView
             android:id="@+id/room_state"

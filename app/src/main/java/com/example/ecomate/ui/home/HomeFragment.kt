@@ -37,24 +37,29 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        homeViewModel.getUserProfile(sharedPreferencesUtil.getMemberId())
         setAdapter()
         setUi()
     }
 
     override fun onResume() {
         super.onResume()
-        if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 1)
-            homeViewModel.getAllChallenge()
-        else
-            homeViewModel.getAllUnChallenges()
+        homeViewModel.profileInfo.observe(viewLifecycleOwner) {
+            if (it.role == "ROLE_ADMIN")
+                homeViewModel.getAllChallenge()
+            else
+                homeViewModel.getAllUnChallenges()
+        }
         homeViewModel.getProgressMyChallenge()
         homeViewModel.getFinishMyChallenge()
         homeViewModel.getPopularBoards()
     }
 
     private fun setUi() {
-        if (sharedPreferencesUtil.getMemberId() == 1) {//관리자
-            binding.challengeEditBtn.visibility = View.VISIBLE
+        // 관리자 계정 확인
+        homeViewModel.profileInfo.observe(viewLifecycleOwner) {
+            if (it.role == "ROLE_ADMIN")
+                binding.challengeEditBtn.visibility = View.VISIBLE
         }
 
         homeViewModel.finishMyChallengeCount.observe(viewLifecycleOwner) {

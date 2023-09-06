@@ -25,22 +25,24 @@
 
     <TextView
         android:id="@+id/challengeAllTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:maxLength="15"
+        android:maxLines="1"
         android:ellipsize="end"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@id/challengeAllLayout"
+        app:layout_constraintEnd_toEndOf="@id/challengeAllLayout"
         app:layout_constraintTop_toBottomOf="@id/challengeAllLayout"
-        tools:text="한달 채식 챌린지 " />
+        tools:text="한달 채식 챌린지" />
 
     <TextView
         android:id="@+id/challengeAllPeople"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/challengeAllTitle"
+        app:layout_constraintEnd_toEndOf="@id/challengeAllTitle"
         app:layout_constraintTop_toBottomOf="@id/challengeAllTitle"
         tools:text="1,923명 도전 중" />
 
