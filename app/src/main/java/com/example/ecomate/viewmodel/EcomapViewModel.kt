@@ -18,10 +18,6 @@ class EcomapViewModel : ViewModel() {
     val ecostores: LiveData<List<StoreInfo>>
         get() = _ecostores
 
-    init {
-        getEcoStores()
-    }
-
     fun getEcoStores() {
         viewModelScope.launch {
             _ecostores.value = RetrofitUtil.ecostoreApi.getEcoStores().response
