@@ -23,11 +23,13 @@
 
     <TextView
         android:id="@+id/challengeTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@id/challengeLayout"
         app:layout_constraintTop_toTopOf="@id/challengeLayout"
         tools:text="대중교통 이용하기" />
@@ -39,7 +41,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@id/challengeTitle"
         app:layout_constraintTop_toBottomOf="@id/challengeTitle"
-        tools:text="도전기간 22. 8. 28 ~ 22. 10.28" />
+        tools:text="도전기간 22.8.28 ~ 22.10.28" />
     <TextView
         android:id="@+id/challengeProgress"
         android:layout_width="wrap_content"

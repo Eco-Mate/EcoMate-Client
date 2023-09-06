@@ -19,12 +19,14 @@
 
     <TextView
         android:id="@+id/receiveNickname"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/receiveIv"
         app:layout_constraintStart_toStartOf="@id/receiveIv"
         app:layout_constraintTop_toBottomOf="@id/receiveIv"
-        tools:text="훈이" />
+        tools:text="훈이"
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"

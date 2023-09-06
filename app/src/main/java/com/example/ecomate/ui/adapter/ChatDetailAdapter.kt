@@ -32,7 +32,7 @@ class ChatDetailAdapter :
             } else {
                 // item.profileImage가 null인 경우 기본 이미지를 로드
                 Glide.with(binding.root.context)
-                    .load(R.drawable.baseline_delete_24) // 기본 이미지 리소스
+                    .load(R.drawable.profile_image_1) // 기본 이미지 리소스
                     .circleCrop()
                     .into(binding.receiveIv)
             }

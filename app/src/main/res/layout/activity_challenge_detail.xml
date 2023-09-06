@@ -79,20 +79,24 @@
 
     <TextView
         android:id="@+id/challengeDetailTitleTv"
-        android:layout_width="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/challengeProgressDes"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="챌린지 제목"
         android:textStyle="bold"
         android:textSize="18sp"
-        tools:text = "App Title"
         android:layout_margin="20dp"
-        android:layout_height="wrap_content"/>
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/challengeProgressDes"/>
 
     <TextView
         android:id="@+id/challengeContent"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:layout_margin="20dp"
+        android:paddingBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/challengeDetailTitleTv"
@@ -110,7 +114,7 @@
         android:id="@+id/challengeDetailInfoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:backgroundTint="@color/gray_3"
         app:cardCornerRadius="8dp"
         app:layout_constraintStart_toStartOf="@id/challengeContent"
@@ -145,7 +149,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/gray_3"
         app:cardCornerRadius="8dp"
         app:layout_constraintStart_toStartOf="@id/challengeContent"

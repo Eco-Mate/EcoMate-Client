@@ -5,6 +5,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -109,6 +110,8 @@ class UserProfileActivity : AppCompatActivity() {
             // 사용자 참여 챌린지 설정
             userProfileViewModel.userChallenges.observe(this@UserProfileActivity) {
                 if (it.size > 0) {
+                    currentChallenge.visibility = View.VISIBLE
+                    challengeEmptyLayout.visibility = View.INVISIBLE
                     challengeNum.text = it.size.toString() + "\n참여 챌린지 수"
                     if (it[0].image != null && it[0].image != "") {
                         Glide.with(this.root.context)
@@ -121,9 +124,10 @@ class UserProfileActivity : AppCompatActivity() {
                         "${((it[0].doneCnt / it[0].goalCnt.toFloat()) * 100).toInt()}% 달성 (${it[0].doneCnt}회/${it[0].goalCnt}회)"
                 } else {
                     challengeNum.text = "0\n참여 챌린지 수"
+                    currentChallenge.visibility = View.INVISIBLE
+                    challengeEmptyLayout.visibility = View.VISIBLE
                 }
             }
-
             // 게시글 수 설정
             userProfileViewModel.userBoards.observe(this@UserProfileActivity) {
                 boardNum.text = it.size.toString() + "건"

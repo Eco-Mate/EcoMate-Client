@@ -17,9 +17,6 @@ class ChallengeDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChallengeDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
         setUI()
     }
 

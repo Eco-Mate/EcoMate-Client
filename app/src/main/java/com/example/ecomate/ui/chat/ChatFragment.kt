@@ -26,31 +26,6 @@ class ChatFragment : Fragment() {
     val chatViewModel: ChatViewModel by viewModels()
     private lateinit var chatRemoveDialog: Dialog
     private lateinit var chatEditDialog: Dialog
-//    var chatList: List<Chat> = mutableListOf(
-//        Chat(
-//            0,
-//            "",
-//            "지구지키기 방범대 1번 방",
-//            mutableListOf(
-//                ChatMember(0,"","짱구"),
-//                ChatMember(1,"","철수"),
-//                ChatMember(2,"","유리"),
-//                ChatMember(3,"","훈이"),
-//                ChatMember(4,"","맹구"),
-//            )),
-//        Chat(
-//            1,
-//            "",
-//            "지구지키기 방범대 2번 방",
-//            mutableListOf(
-//                ChatMember(0,"","짱구"),
-//                ChatMember(1,"","철구"),
-//                ChatMember(2,"","유수"),
-//                ChatMember(3,"","훈리"),
-//                ChatMember(4,"","맹이"),
-//            )),
-//
-//    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
