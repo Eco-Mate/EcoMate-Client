@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 10)
+        if (ApplicationClass.sharedPreferencesUtil.getMemberId() == 1)
             homeViewModel.getAllChallenge()
         else
             homeViewModel.getAllUnChallenges()
@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUi() {
-        if (sharedPreferencesUtil.getMemberId() == 10) {//관리자
+        if (sharedPreferencesUtil.getMemberId() == 1) {//관리자
             binding.challengeEditBtn.visibility = View.VISIBLE
         }
 

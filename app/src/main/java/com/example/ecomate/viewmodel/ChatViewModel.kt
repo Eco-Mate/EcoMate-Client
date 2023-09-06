@@ -1,6 +1,5 @@
 package com.example.ecomate.viewmodel
 
-import android.app.Dialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,6 +29,13 @@ class ChatViewModel : ViewModel() {
         viewModelScope.launch {
             RetrofitUtil.chatApi.modifyRoomName(roomId, roomName)
             hideProgress()
+            getChatList()
+        }
+    }
+
+    fun deleteChat(chatRoomId: Int) {
+        viewModelScope.launch {
+            RetrofitUtil.chatApi.deleteChat(chatRoomId)
             getChatList()
         }
     }
