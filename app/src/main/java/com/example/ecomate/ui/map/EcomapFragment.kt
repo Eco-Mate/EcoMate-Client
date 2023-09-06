@@ -69,6 +69,7 @@ class EcomapFragment : Fragment() {
                 }
             }
             mapView.setCalloutBalloonAdapter(CustomBallonAdapter())
+            mapView.setMapViewEventListener(MapViewEventListener())
         }
     }
 
@@ -81,7 +82,7 @@ class EcomapFragment : Fragment() {
         val uLatitude = userCurrentLocation?.latitude
         val uLongitude = userCurrentLocation?.longitude
 
-//        ecomapViewModel.getSurroundEcoStores(uLatitude!!,uLongitude!!)
+        ecomapViewModel.getSurroundEcoStores(uLatitude!!,uLongitude!!)
         ecomapViewModel.ecostores.observe(viewLifecycleOwner) {
             it.forEach {
                 val marker = MapPOIItem()
@@ -125,6 +126,44 @@ class EcomapFragment : Fragment() {
 
         override fun getPressedCalloutBalloon(poiItem: MapPOIItem?): View {
             return itemBalloonBinding.root
+        }
+    }
+
+    class MapViewEventListener: MapView.MapViewEventListener {
+        override fun onMapViewInitialized(p0: MapView?) {
+
+        }
+
+        override fun onMapViewCenterPointMoved(p0: MapView?, p1: MapPoint?) {
+
+        }
+
+        override fun onMapViewZoomLevelChanged(p0: MapView?, p1: Int) {
+
+        }
+
+        override fun onMapViewSingleTapped(p0: MapView?, p1: MapPoint?) {
+            Log.d("LatLon",p1?.mapPointGeoCoord?.latitude.toString() + "/" + p1?.mapPointGeoCoord?.longitude)
+        }
+
+        override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
+
+        }
+
+        override fun onMapViewLongPressed(p0: MapView?, p1: MapPoint?) {
+
+        }
+
+        override fun onMapViewDragStarted(p0: MapView?, p1: MapPoint?) {
+
+        }
+
+        override fun onMapViewDragEnded(p0: MapView?, p1: MapPoint?) {
+
+        }
+
+        override fun onMapViewMoveFinished(p0: MapView?, p1: MapPoint?) {
+
         }
     }
 }
