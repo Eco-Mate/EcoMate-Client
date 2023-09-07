@@ -1,7 +1,7 @@
 # EcoMate-Client
 지구를 위한 챌린지 달성 프로젝트 `EcoMate`의 클라이언트 Repository 입니다.
 ## 소개
-> 에코메이트와 함꼐하는 슬기로운 에코생활
+> **에코메이트**와 함꼐하는 슬기로운 에코생활
 
 에코메이트는 일상 속에서 작은 변화들을 이끌어내어 환경 보호로의 큰 변화를 만들어 나갈 수 있는 플랫폼을 형성하고자 출시한 서비스입니다.
 에코메이트에서는 일상에서 가볍게 참여할 수 있는 챌린지를 도전하고, 그 과정을 공유하면서 자연스럽게 지속 가능한 삶의 환경을 조성할 수 있습니다. 더불어, 신선한 에코 정보 및 에코 매장을 제시하여 친환경 경제를 촉진하고 환경 친화적인 선택에 도움을 줄 수 있습니다.
@@ -25,7 +25,7 @@ $ git clone https://github.com/Eco-Mate/EcoMate-Client.git
 #### 프로젝트의 디버그 키 해시값 찾기
 - MainActivity.kt의 클래스에 아래 코드 추가 (없으면)
 - Logcat에서 KeyHash를 입력하고 프로젝트의 디버그 키 해시값 찾기
-- 찾은 해시값을 프로젝트 초기 개발자에게 전달 및 Kakao Developers에 해시값 등록 요청
+- 찾은 해시값을 Contributor에게 전달 및 Kakao Developers에 해시값 등록 요청
 ```kotlin
 private fun getHashKey() {
     var packageInfo: PackageInfo? = null
@@ -47,3 +47,9 @@ private fun getHashKey() {
     }
 }
 ```
+
+## Contributors
+|Name|Github|Email|
+|:---|:---|:---|
+|이현섭|[leehandsub](https://github.com/leehandsub)|gustjq@naver.com|
+|허진수|[HJTN](https://github.com/HJTN)|zintn1234@naver.com|
