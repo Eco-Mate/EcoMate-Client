@@ -8,7 +8,7 @@
 
 ## 기술 스택
 
-<img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white"> <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=Android Studio&logoColor=white"> <img src="https://img.shields.io/badge/Retrofit-3DDC84?style=flat-square&logoColor=white"> <img src="https://img.shields.io/badge/OkHttp-2C5BB4?style=flat-square&logoColor=white"> <img src="https://img.shields.io/badge/Glide-007054?style=flat-square&logoColor=white"> <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white">
+<img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white"> <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=Android Studio&logoColor=white"> <img src="https://img.shields.io/badge/Retrofit-D20A0A?style=flat-square&logoColor=white"> <img src="https://img.shields.io/badge/OkHttp-2C5BB4?style=flat-square&logoColor=white"> <img src="https://img.shields.io/badge/Glide-007054?style=flat-square&logoColor=white">
 
 ## 시스템 아키텍쳐
 <center> <img src="https://github.com/Eco-Mate/EcoMate-Server/assets/75007765/8004839c-2b6e-4320-96d8-105d0174aeec" width="600px" height="400px"> </center>
