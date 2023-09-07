@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white"> <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=Android Studio&logoColor=white"> <img src="https://img.shields.io/badge/Retrofit-D20A0A?style=flat-square&logoColor=white"> <img src="https://img.shields.io/badge/OkHttp-2C5BB4?style=flat-square&logoColor=white"> <img src="https://img.shields.io/badge/Glide-007054?style=flat-square&logoColor=white">
 
 ## 시스템 아키텍쳐
-<center> <img src="https://user-images.githubusercontent.com/75007765/266243046-6d28c739-8457-48ca-82f6-7edf9b11c09e.png" width="600px" height="400px"> </center>
+<center> <img src="https://user-images.githubusercontent.com/75007765/266243046-6d28c739-8457-48ca-82f6-7edf9b11c09e.png" width="1000px" height="600px"> </center>
 
 ## 사용 방법
 
