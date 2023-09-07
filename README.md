@@ -19,3 +19,31 @@
 ```shell
 $ git clone https://github.com/Eco-Mate/EcoMate-Client.git
 ```
+
+### Kakao 지도 설정
+
+#### 프로젝트의 디버그 키 해시값 찾기
+- MainActivity.kt의 클래스에 아래 코드 추가 (없으면)
+- Logcat에서 KeyHash를 입력하고 프로젝트의 디버그 키 해시값 찾기
+- 찾은 해시값을 프로젝트 초기 개발자에게 전달 및 Kakao Developers에 해시값 등록 요청
+```kotlin
+private fun getHashKey() {
+    var packageInfo: PackageInfo? = null
+    try {
+        packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
+    } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
+    }
+    if (packageInfo == null)
+        Log.e("KeyHash", "KeyHash:null")
+    for (signature: Signature in packageInfo!!.signatures) {
+        try {
+            var md: MessageDigest = MessageDigest.getInstance("SHA")
+            md.update(signature.toByteArray())
+            Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+        } catch (e: NoSuchAlgorithmException) {
+            Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e)
+        }
+    }
+}
+```
