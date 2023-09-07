@@ -47,6 +47,9 @@ private fun getHashKey() {
     }
 }
 ```
+### FCM 적용 방법
+- [Firebase Console](https://console.firebase.google.com/)에 접속하여 프로젝트를 추가한다.
+- 추가한 프로젝트에 나오는 google-services.json파일을 app모듈에 추가한다.
 
 ## Contributors
 |Name|Github|Email|
